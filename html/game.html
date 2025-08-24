@@ -1013,6 +1013,46 @@
             </div>
         </main>
     </div>
+
+    <!-- Quiz Pages -->
+    <div id="quiz-page" class="hidden">
+        <main class="quiz-container">
+            <div class="quiz-header">
+                <h2 id="quiz-title"><i class="fas fa-brain"></i> Knowledge Challenge</h2>
+            </div>
+
+            <div class="progress-container">
+                <div class="progress-info">
+                    <span id="progress-text"><i class="fas fa-list-ol"></i> Question 1 of 10</span>
+                    <span id="score-display"><i class="fas fa-trophy"></i> Score: <span
+                            id="current-score">0</span></span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-fill"></div>
+                </div>
+            </div>
+
+            <div class="question-card" id="question-card">
+                <div class="question-number" id="question-number">
+                    <i class="fas fa-lightbulb"></i>
+                    Question 1
+                </div>
+                <div class="question" id="question-text"></div>
+                <div class="options" id="options-container"></div>
+            </div>
+
+            <div class="quiz-controls">
+                <button class="next-btn" id="next-btn" disabled>
+                    <span>Next Question</span>
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+                <button class="finish-btn hidden" id="finish-btn" disabled>
+                    <i class="fas fa-flag-checkered"></i>
+                    Complete Challenge
+                </button>
+            </div>
+        </main>
+    </div>
 </body>
 
 </html>
