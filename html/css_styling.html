@@ -1,0 +1,1354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Styling - CodeQuest</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #0ea5e9;
+            --accent: #f59e0b;
+            --accent-dark: #d97706;
+            --success: #10b981;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --gray: #64748b;
+        }
+        
+        * {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: white;
+            overflow-x: hidden;
+        }
+
+        /* Glassmorphism Navigation */
+        .nav-glass {
+            backdrop-filter: blur(20px);
+            background: rgba(15, 23, 42, 0.8);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .nav-glass.scrolled {
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(25px);
+        }
+        
+        .nav-item {
+            position: relative;
+            padding: 12px 20px;
+            border-radius: 12px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
+        }
+        
+        .nav-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(37, 99, 235, 0.2), transparent);
+            transition: left 0.6s ease;
+        }
+        
+        .nav-item:hover::before {
+            left: 100%;
+        }
+        
+        .nav-item:hover {
+            background: rgba(37, 99, 235, 0.1);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.3);
+        }
+
+        /* Enhanced Dropdown */
+        .dropdown {
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-15px) scale(0.9);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .dropdown.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0) scale(1);
+        }
+        
+        .dropdown-item {
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            margin: 4px 8px;
+        }
+        
+        .dropdown-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            transition: left 0.3s ease;
+            z-index: -1;
+        }
+        
+        .dropdown-item:hover::before {
+            left: 0;
+        }
+        
+        .dropdown-item:hover {
+            color: white;
+            transform: translateX(8px);
+            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.4);
+        }
+
+        /* Logo with Animation */
+        .logo {
+            transition: all 0.4s ease;
+        }
+        
+        .logo:hover {
+            transform: scale(1.05) rotate(5deg);
+        }
+        
+        .logo svg {
+            filter: drop-shadow(0 0 10px rgba(245, 158, 11, 0.5));
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 60vh;
+             background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Animated Gradient Text */
+        .gradient-text {
+            background: linear-gradient(45deg, #3b82f6, #60a5fa, #93c5fd);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradientShift 4s ease-in-out infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        /* Enhanced Cards */
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 24px;
+            padding: 3rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 2rem;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .card:hover::before {
+            left: 100%;
+        }
+
+        .card:hover {
+            transform: translateY(-15px) scale(1.02);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(37, 99, 235, 0.5);
+            box-shadow: 0 25px 50px rgba(37, 99, 235, 0.2);
+        }
+
+        /* Modern Buttons */
+        .btn {
+            position: relative;
+            padding: 16px 32px;
+            border-radius: 16px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            overflow: hidden;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+            color: white;
+            box-shadow: 0 8px 32px rgba(245, 158, 11, 0.4);
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--accent-dark) 0%, var(--accent) 100%);
+            transition: left 0.3s ease;
+        }
+
+        .btn-primary:hover::before {
+            left: 0;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 40px rgba(245, 158, 11, 0.5);
+        }
+
+        .btn span {
+            position: relative;
+            z-index: 2;
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(37, 99, 235, 0.5);
+            transform: translateY(-4px);
+            box-shadow: 0 15px 40px rgba(37, 99, 235, 0.3);
+        }
+
+        /* Code Blocks */
+        .code-block {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            border-left: 4px solid var(--primary);
+            border-radius: 16px;
+            padding: 2rem;
+            overflow-x: auto;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            position: relative;
+            margin: 1.5rem 0;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .code-block::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            border-radius: 0 16px 0 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .code-block::after {
+            content: 'CSS';
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+            z-index: 1;
+        }
+
+        .code-block code {
+            color: #e2e8f0;
+        }
+
+        .selector-highlight {
+            color: #60a5fa;
+            font-weight: 600;
+        }
+
+        .property-highlight {
+            color: #34d399;
+            font-weight: 500;
+        }
+
+        .value-highlight {
+            color: #fbbf24;
+            font-weight: 500;
+        }
+
+        .comment-highlight {
+            color: #9ca3af;
+            font-style: italic;
+        }
+
+        /* Interactive Playground */
+        .playground-container {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 24px;
+            padding: 2rem;
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .code-editor {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            border-radius: 16px;
+            padding: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .code-editor textarea {
+            background: transparent;
+            color: #e2e8f0;
+            font-family: 'Courier New', monospace;
+            width: 100%;
+            resize: vertical;
+            border: none;
+            outline: none;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .live-preview {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+            border-radius: 16px;
+            padding: 2rem;
+            min-height: 300px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #1e293b;
+            box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Box Model Visualization */
+        .box-model-demo {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 20px;
+            padding: 3rem;
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .box-model-visual {
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .margin-box {
+            background: rgba(245, 158, 11, 0.2);
+            border: 3px dashed #f59e0b;
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .border-box {
+            background: rgba(59, 130, 246, 0.2);
+            border: 4px solid #3b82f6;
+            border-radius: 12px;
+            padding: 1.5rem;
+        }
+
+        .padding-box {
+            background: rgba(16, 185, 129, 0.2);
+            border: 2px dashed #10b981;
+            border-radius: 8px;
+            padding: 1rem;
+        }
+
+        .content-box {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 1rem;
+            color: white;
+            font-weight: 600;
+        }
+
+        /* Warning/Info Boxes */
+        .info-box {
+            background: rgba(16, 185, 129, 0.1);
+            border-left: 4px solid var(--success);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .warning-box {
+            background: rgba(245, 158, 11, 0.1);
+            border-left: 4px solid var(--accent);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(245, 158, 11, 0.2);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            transform: translateX(-100%);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        }
+        
+        .mobile-menu.show {
+            transform: translateX(0);
+        }
+
+        /* Scroll Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.6s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #1e293b;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+        }
+
+        /* Typography */
+        h1, h2, h3 {
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .card {
+                padding: 2rem;
+                border-radius: 20px;
+            }
+            
+            .code-block {
+                padding: 1.5rem;
+                font-size: 0.8rem;
+            }
+            
+            .hero {
+                min-height: 50vh;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Modern Navigation Header -->
+    <header class="fixed w-full top-0 z-50">
+        <nav class="nav-glass px-4 py-3">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center justify-between h-16">
+                    <!-- Enhanced Logo -->
+                    <div class="flex items-center">
+                        <a href="index.html" class="logo flex items-center space-x-3 group">
+                            <div class="relative">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                                </svg>
+                            </div>
+                            <span class="text-2xl font-bold text-white">CodeQuest</span>
+                        </a>
+                    </div>
+
+                    <!-- Desktop Navigation -->
+                    <div class="hidden md:block">
+                        <div class="ml-10 flex items-baseline space-x-2">
+                            <a href="index.html" class="nav-item text-gray-300 hover:text-white">
+                                Home
+                            </a>
+
+                            <!-- Enhanced Subjects Dropdown -->
+                            <div class="relative group">
+                                <button class="nav-item dropdown-toggle text-gray-300 hover:text-white flex items-center space-x-2">
+                                    <span>Subjects</span>
+                                    <svg class="w-4 h-4 transition-transform duration-200 group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                    </svg>
+                                </button>
+                                
+                                <div class="dropdown absolute left-0 mt-2 w-72 rounded-2xl shadow-2xl">
+                                    <div class="py-3">
+                                        <a href="html_basics.html" class="dropdown-item block px-6 py-4 text-sm text-gray-300 hover:text-white">
+                                            <div class="flex items-center space-x-4">
+                                                <div class="w-3 h-3 bg-orange-400 rounded-full"></div>
+                                                <div>
+                                                    <div class="font-semibold text-base">HTML Basics</div>
+                                                    <div class="text-xs text-gray-400">Structure & Semantic Elements</div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <a href="css_styling.html" class="dropdown-item block px-6 py-4 text-sm text-blue-300 hover:text-white">
+                                            <div class="flex items-center space-x-4">
+                                                <div class="w-3 h-3 bg-blue-400 rounded-full"></div>
+                                                <div>
+                                                    <div class="font-semibold text-base">CSS Styling</div>
+                                                    <div class="text-xs text-gray-400">Design & Advanced Layouts</div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <a href="bootstrap-jquery.html" class="dropdown-item block px-6 py-4 text-sm text-gray-300 hover:text-white">
+                                            <div class="flex items-center space-x-4">
+                                                <div class="w-3 h-3 bg-purple-400 rounded-full"></div>
+                                                <div>
+                                                    <div class="font-semibold text-base">Bootstrap & jQuery</div>
+                                                    <div class="text-xs text-gray-400">Frameworks & Interactivity</div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                           <a href="quize.html" class="nav-item text-gray-300 hover:text-white">
+                                quiz
+                            </a>
+                            <a href="aboutus.html" class="nav-item text-gray-300 hover:text-white">
+                                About Us
+                            </a>
+
+                            <a href="contact.html" class="nav-item text-gray-300 hover:text-white">
+                                Contact
+                            </a>
+
+
+                            <!-- Enhanced CTA Button -->
+                            <button class="btn btn-primary ml-4">
+                                <span>Get Started</span>
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Mobile menu button -->
+                    <div class="md:hidden">
+                        <button id="mobile-menu-btn" class="text-gray-300 hover:text-white p-2 rounded-lg transition-colors duration-200">
+                            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Enhanced Mobile Menu -->
+        <div id="mobile-menu" class="mobile-menu fixed inset-y-0 left-0 z-50 w-full md:hidden">
+            <div class="flex items-center justify-between p-6 border-b border-white/20">
+                <span class="text-2xl font-bold text-white">CodeQuest</span>
+                <button id="close-mobile-menu" class="text-white hover:text-amber-300 p-2 transition-colors duration-200">
+                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+            <div class="px-6 py-6 space-y-4">
+                <a href="index.html" class="block text-white hover:text-amber-300 py-3 text-lg font-medium border-b border-white/10 transition-colors duration-200">Home</a>
+                
+                <div class="border-b border-white/10 pb-4">
+                    <div class="text-white py-3 text-lg font-medium">Subjects</div>
+                    <div class="ml-4 space-y-3">
+                        <a href="html_basics.html" class="block text-gray-300 hover:text-white py-2 transition-colors duration-200">HTML Basics</a>
+                        <a href="css_styling.html" class="block text-blue-300 hover:text-white py-2 transition-colors duration-200">CSS Styling</a>
+                        <a href="bootstrap-jquery.html" class="block text-gray-300 hover:text-white py-2 transition-colors duration-200">Bootstrap & jQuery</a>
+                    </div>
+                </div>
+                
+                <a href="aboutus.html" class="block text-white hover:text-amber-300 py-3 text-lg font-medium border-b border-white/10 transition-colors duration-200">About Us</a>
+                <a href="#" class="block text-white hover:text-amber-300 py-3 text-lg font-medium border-b border-white/10 transition-colors duration-200">Contact</a>
+                
+                <button class="btn btn-primary w-full mt-6">
+                    <span>Get Started</span>
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="pt-16">
+        <!-- Enhanced Hero Section -->
+        <section class="hero">
+            <div class="container mx-auto px-4 hero-content text-center">
+                <div class="max-w-4xl mx-auto">
+                    <h1 class="text-5xl sm:text-6xl md:text-7xl font-bold mb-6 leading-tight">
+                        Master <span class="gradient-text">CSS</span> Styling
+                    </h1>
+                    <p class="text-xl sm:text-2xl max-w-3xl mx-auto mb-10 text-gray-300 leading-relaxed">
+                        Bring your web pages to life with beautiful colors, layouts, and modern design techniques 
+                        that create stunning user experiences.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                        <a href="#content" class="btn btn-primary text-lg">
+                            <span>Start Learning</span>
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </a>
+                        <a href="bootstrap-jquery.html" class="btn btn-secondary text-lg">
+                            <span>Next: Bootstrap & jQuery</span>
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Content Section -->
+        <section id="content" class="py-20 px-4">
+            <div class="container mx-auto max-w-6xl">
+                
+                <!-- What is CSS Section -->
+                <div class="card reveal">
+                    <div class="flex items-center mb-6">
+                        <div class="w-16 h-16 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-2xl flex items-center justify-center mr-4">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zM21 5a2 2 0 00-2-2h-4a2 2 0 00-2 2v12a4 4 0 004 4h4a2 2 0 002-2V5z"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <h2 class="text-3xl font-bold mb-2">What is CSS?</h2>
+                            <p class="text-gray-300">The art of web design</p>
+                        </div>
+                    </div>
+                    
+                    <p class="text-lg text-gray-300 mb-6 leading-relaxed">
+                        CSS stands for <strong class="text-white">Cascading Style Sheets</strong>. It's the language used to describe 
+                        the visual presentation of web pages. While HTML provides structure, CSS adds style, controlling colors, 
+                        fonts, layouts, spacing, and animations.
+                    </p>
+                    
+                    <div class="code-block">
+                        <code>
+                            <span class="comment-highlight">/* This is a CSS comment */</span><br>
+                            <span class="selector-highlight">h1</span> {<br>
+                            <span class="property-highlight">&nbsp;&nbsp;&nbsp;&nbsp;color</span>: <span class="value-highlight">#3b82f6</span>;<br>
+                            <span class="property-highlight">&nbsp;&nbsp;&nbsp;&nbsp;font-size</span>: <span class="value-highlight">2rem</span>;<br>
+                            <span class="property-highlight">&nbsp;&nbsp;&nbsp;&nbsp;font-weight</span>: <span class="value-highlight">bold</span>;<br>
+                            }<br><br>
+                            <span class="selector-highlight">p</span> {<br>
+                            <span class="property-highlight">&nbsp;&nbsp;&nbsp;&nbsp;color</span>: <span class="value-highlight">#64748b</span>;<br>
+                            <span class="property-highlight">&nbsp;&nbsp;&nbsp;&nbsp;line-height</span>: <span class="value-highlight">1.6</span>;<br>
+                            }
+                        </code>
+                    </div>
+                    
+                    <div class="info-box">
+                        <div class="flex items-start">
+                            <svg class="w-6 h-6 text-green-400 mr-3 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            <div>
+                                <p class="font-medium text-white mb-1">Think of it This Way</p>
+                                <p class="text-gray-300">HTML is the skeleton of a house, and CSS is the interior design - choosing paint colors, furniture placement, and decorations.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CSS Selectors Section -->
+                <div class="card reveal">
+                    <div class="flex items-center mb-6">
+                        <div class="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center mr-4">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <h2 class="text-3xl font-bold mb-2">CSS Selectors & Properties</h2>
+                            <p class="text-gray-300">Targeting elements with precision</p>
+                        </div>
+                    </div>
+                    
+                    <p class="text-lg text-gray-300 mb-6 leading-relaxed">
+                        CSS selectors are patterns used to select HTML elements you want to style. Once selected, 
+                        you can apply various properties to change their appearance and behavior.
+                    </p>
+                    
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="text-xl font-semibold mb-3 text-white">Common Selectors</h4>
+                            <div class="code-block">
+                                <code>
+                                    <span class="comment-highlight">/* Element selector */</span><br>
+                                    <span class="selector-highlight">p</span> { <span class="property-highlight">color</span>: <span class="value-highlight">blue</span>; }<br><br>
+                                    <span class="comment-highlight">/* Class selector */</span><br>
+                                    <span class="selector-highlight">.highlight</span> { <span class="property-highlight">background</span>: <span class="value-highlight">yellow</span>; }<br><br>
+                                    <span class="comment-highlight">/* ID selector */</span><br>
+                                    <span class="selector-highlight">#header</span> { <span class="property-highlight">font-size</span>: <span class="value-highlight">24px</span>; }<br><br>
+                                    <span class="comment-highlight">/* Multiple selectors */</span><br>
+                                    <span class="selector-highlight">h1, h2, h3</span> { <span class="property-highlight">font-family</span>: <span class="value-highlight">Arial</span>; }
+                                </code>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-semibold mb-3 text-white">Properties in Action</h4>
+                            <div class="code-block">
+                                <code>
+                                    <span class="selector-highlight">.card</span> {<br>
+                                    <span class="property-highlight">&nbsp;&nbsp;&nbsp;&nbsp;background-color</span>: <span class="value-highlight">#ffffff</span>;<br>
+                                    <span class="property-highlight">&nbsp;&nbsp;&nbsp;&nbsp;border-radius</span>: <span class="value-highlight">12px</span>;<br>
+                                    <span class="property-highlight">&nbsp;&nbsp;&nbsp;&nbsp;box-shadow</span>: <span class="value-highlight">0 4px 6px rgba(0,0,0,0.1)</span>;<br>
+                                    <span class="property-highlight">&nbsp;&nbsp;&nbsp;&nbsp;padding</span>: <span class="value-highlight">20px</span>;<br>
+                                    <span class="property-highlight">&nbsp;&nbsp;&nbsp;&nbsp;margin</span>: <span class="value-highlight">10px</span>;<br>
+                                    <span class="property-highlight">&nbsp;&nbsp;&nbsp;&nbsp;transition</span>: <span class="value-highlight">all 0.3s ease</span>;<br>
+                                    }
+                                </code>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Interactive Playground Section -->
+                <div class="card reveal">
+                    <div class="flex items-center mb-6">
+                        <div class="w-16 h-16 bg-gradient-to-r from-green-500 to-teal-500 rounded-2xl flex items-center justify-center mr-4">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.828 14.828a4 4 0 01-5.656 0M9 10h1m4 0h1m-6 4h.01M19 10a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <h2 class="text-3xl font-bold mb-2">Interactive CSS Playground</h2>
+                            <p class="text-gray-300">Experiment and see results instantly</p>
+                        </div>
+                    </div>
+                    
+                    <p class="text-lg text-gray-300 mb-6 leading-relaxed">
+                        Write CSS code in the editor below and watch your styles come to life in real-time! 
+                        Try changing colors, fonts, sizes, and layouts to see how CSS transforms HTML.
+                    </p>
+                    
+                    <div class="playground-container">
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div class="code-editor">
+                                <h4 class="text-lg font-semibold mb-3 text-white">CSS Editor</h4>
+                                <textarea id="css-editor" rows="15" placeholder="/* Try this CSS code */
+h1 {
+    color: #3b82f6;
+    font-size: 2.5rem;
+    text-align: center;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.demo-card {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    transform: rotate(2deg);
+    transition: all 0.3s ease;
+}
+
+.demo-card:hover {
+    transform: rotate(0deg) scale(1.05);
+}"></textarea>
+                            </div>
+                            <div class="live-preview">
+                                <h4 class="text-lg font-semibold mb-3 text-gray-800">Live Preview</h4>
+                                <div id="preview-content">
+                                    <h1>Welcome to CSS!</h1>
+                                    <div class="demo-card">
+                                        <h3>Interactive Demo Card</h3>
+                                        <p>Hover over me to see the magic!</p>
+                                    </div>
+                                    <p>Try styling this paragraph with different colors and fonts.</p>
+                                    <button style="padding: 10px 20px; border: none; border-radius: 5px; background: #3b82f6; color: white; cursor: pointer;">Click Me!</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="warning-box mt-6">
+                        <div class="flex items-start">
+                            <svg class="w-6 h-6 text-amber-400 mr-3 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.729-.833-2.5 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
+                            </svg>
+                            <div>
+                                <p class="font-medium text-white mb-1">Experiment Freely!</p>
+                                <p class="text-gray-300">Don't be afraid to break things - that's how you learn! Try different values, mix properties, and see what happens.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Box Model Section -->
+                <div class="card reveal">
+                    <div class="flex items-center mb-6">
+                        <div class="w-16 h-16 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-2xl flex items-center justify-center mr-4">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <h2 class="text-3xl font-bold mb-2">Understanding the Box Model</h2>
+                            <p class="text-gray-300">Every element is a box with layers</p>
+                        </div>
+                    </div>
+                    
+                    <p class="text-lg text-gray-300 mb-6 leading-relaxed">
+                        The CSS Box Model is fundamental to web layout. Every HTML element is essentially a rectangular box 
+                        consisting of content, padding, border, and margin. Understanding this concept is crucial for 
+                        controlling spacing and layout.
+                    </p>
+                    
+                    <div class="box-model-demo">
+                        <div class="box-model-visual">
+                            <div class="margin-box">
+                                <div class="text-amber-300 font-semibold mb-2">MARGIN</div>
+                                <div class="border-box">
+                                    <div class="text-blue-300 font-semibold mb-2">BORDER</div>
+                                    <div class="padding-box">
+                                        <div class="text-green-300 font-semibold mb-2">PADDING</div>
+                                        <div class="content-box">
+                                            <div class="text-white font-semibold">CONTENT</div>
+                                            <p class="text-sm mt-2">This is where your actual content lives</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="code-block mt-6">
+                        <code>
+                            <span class="selector-highlight">.box-example</span> {<br>
+                            <span class="comment-highlight">&nbsp;&nbsp;&nbsp;&nbsp;/* Content dimensions */</span><br>
+                            <span class="property-highlight">&nbsp;&nbsp;&nbsp;&nbsp;width</span>: <span class="value-highlight">200px</span>;<br>
+                            <span class="property-highlight">&nbsp;&nbsp;&nbsp;&nbsp;height</span>: <span class="value-highlight">100px</span>;<br><br>
+                            <span class="comment-highlight">&nbsp;&nbsp;&nbsp;&nbsp;/* Padding - space inside the border */</span><br>
+                            <span class="property-highlight">&nbsp;&nbsp;&nbsp;&nbsp;padding</span>: <span class="value-highlight">20px</span>;<br><br>
+                            <span class="comment-highlight">&nbsp;&nbsp;&nbsp;&nbsp;/* Border - the edge of the element */</span><br>
+                            <span class="property-highlight">&nbsp;&nbsp;&nbsp;&nbsp;border</span>: <span class="value-highlight">3px solid #3b82f6</span>;<br><br>
+                            <span class="comment-highlight">&nbsp;&nbsp;&nbsp;&nbsp;/* Margin - space outside the border */</span><br>
+                            <span class="property-highlight">&nbsp;&nbsp;&nbsp;&nbsp;margin</span>: <span class="value-highlight">15px</span>;<br>
+                            }
+                        </code>
+                    </div>
+                    
+                    <div class="info-box">
+                        <div class="flex items-start">
+                            <svg class="w-6 h-6 text-green-400 mr-3 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path>
+                            </svg>
+                            <div>
+                                <p class="font-medium text-white mb-1">Pro Tip</p>
+                                <p class="text-gray-300">Use <code class="bg-gray-800 px-1 py-0.5 rounded">box-sizing: border-box</code> to include padding and border in the element's total width and height calculation.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Flexbox Layout Section -->
+                <div class="card reveal">
+                    <div class="flex items-center mb-6">
+                        <div class="w-16 h-16 bg-gradient-to-r from-pink-500 to-rose-500 rounded-2xl flex items-center justify-center mr-4">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <h2 class="text-3xl font-bold mb-2">Modern Layouts with Flexbox</h2>
+                            <p class="text-gray-300">Flexible and powerful layout system</p>
+                        </div>
+                    </div>
+                    
+                    <p class="text-lg text-gray-300 mb-6 leading-relaxed">
+                        Flexbox (Flexible Box Layout) is a one-dimensional layout method that helps you arrange items 
+                        in rows or columns. It's perfect for creating responsive designs and aligning elements with ease.
+                    </p>
+                    
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <h4 class="text-xl font-semibold mb-4 text-white">Flex Container Properties</h4>
+                            <div class="code-block">
+                                <code>
+                                    <span class="selector-highlight">.container</span> {<br>
+                                    <span class="property-highlight">&nbsp;&nbsp;&nbsp;&nbsp;display</span>: <span class="value-highlight">flex</span>;<br>
+                                    <span class="property-highlight">&nbsp;&nbsp;&nbsp;&nbsp;justify-content</span>: <span class="value-highlight">center</span>;<br>
+                                    <span class="property-highlight">&nbsp;&nbsp;&nbsp;&nbsp;align-items</span>: <span class="value-highlight">center</span>;<br>
+                                    <span class="property-highlight">&nbsp;&nbsp;&nbsp;&nbsp;gap</span>: <span class="value-highlight">20px</span>;<br>
+                                    <span class="property-highlight">&nbsp;&nbsp;&nbsp;&nbsp;flex-direction</span>: <span class="value-highlight">row</span>;<br>
+                                    }
+                                </code>
+                            </div>
+                            
+                            <div class="mt-6 p-4 bg-gradient-to-r from-pink-100 to-rose-100 rounded-lg text-gray-800">
+                                <h5 class="font-semibold mb-2">Try Different Values:</h5>
+                                <ul class="text-sm space-y-1">
+                                    <li><strong>justify-content:</strong> flex-start, center, flex-end, space-between</li>
+                                    <li><strong>align-items:</strong> flex-start, center, flex-end, stretch</li>
+                                    <li><strong>flex-direction:</strong> row, column, row-reverse, column-reverse</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <h4 class="text-xl font-semibold mb-4 text-white">Visual Example</h4>
+                            <div class="p-6 bg-gradient-to-br from-gray-800 to-gray-900 rounded-lg border border-white/10">
+                                <div class="flex justify-center items-center gap-4 p-4 bg-pink-500/20 rounded-lg min-h-[120px]">
+                                    <div class="w-12 h-12 bg-pink-400 rounded-lg flex items-center justify-center text-white font-bold">1</div>
+                                    <div class="w-12 h-12 bg-pink-400 rounded-lg flex items-center justify-center text-white font-bold">2</div>
+                                    <div class="w-12 h-12 bg-pink-400 rounded-lg flex items-center justify-center text-white font-bold">3</div>
+                                </div>
+                                <p class="text-gray-400 text-sm mt-2 text-center">Items centered both horizontally and vertically</p>
+                            </div>
+                            
+                            <div class="mt-4 p-6 bg-gradient-to-br from-gray-800 to-gray-900 rounded-lg border border-white/10">
+                                <div class="flex justify-between items-center gap-4 p-4 bg-blue-500/20 rounded-lg min-h-[120px]">
+                                    <div class="w-12 h-12 bg-blue-400 rounded-lg flex items-center justify-center text-white font-bold">A</div>
+                                    <div class="w-12 h-12 bg-blue-400 rounded-lg flex items-center justify-center text-white font-bold">B</div>
+                                    <div class="w-12 h-12 bg-blue-400 rounded-lg flex items-center justify-center text-white font-bold">C</div>
+                                </div>
+                                <p class="text-gray-400 text-sm mt-2 text-center">Items spaced evenly with space-between</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CSS Grid Section -->
+                <div class="card reveal">
+                    <div class="flex items-center mb-6">
+                        <div class="w-16 h-16 bg-gradient-to-r from-emerald-500 to-teal-500 rounded-2xl flex items-center justify-center mr-4">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <h2 class="text-3xl font-bold mb-2">CSS Grid Layout</h2>
+                            <p class="text-gray-300">Two-dimensional layout mastery</p>
+                        </div>
+                    </div>
+                    
+                    <p class="text-lg text-gray-300 mb-6 leading-relaxed">
+                        CSS Grid Layout is a two-dimensional system that can handle both rows and columns simultaneously. 
+                        It's perfect for creating complex layouts and is considered the most powerful layout system available in CSS.
+                    </p>
+                    
+                    <div class="code-block">
+                        <code>
+                            <span class="selector-highlight">.grid-container</span> {<br>
+                            <span class="property-highlight">&nbsp;&nbsp;&nbsp;&nbsp;display</span>: <span class="value-highlight">grid</span>;<br>
+                            <span class="property-highlight">&nbsp;&nbsp;&nbsp;&nbsp;grid-template-columns</span>: <span class="value-highlight">repeat(3, 1fr)</span>;<br>
+                            <span class="property-highlight">&nbsp;&nbsp;&nbsp;&nbsp;grid-template-rows</span>: <span class="value-highlight">200px 100px</span>;<br>
+                            <span class="property-highlight">&nbsp;&nbsp;&nbsp;&nbsp;gap</span>: <span class="value-highlight">20px</span>;<br>
+                            <span class="property-highlight">&nbsp;&nbsp;&nbsp;&nbsp;padding</span>: <span class="value-highlight">20px</span>;<br>
+                            }<br><br>
+                            <span class="selector-highlight">.grid-item</span> {<br>
+                            <span class="property-highlight">&nbsp;&nbsp;&nbsp;&nbsp;background</span>: <span class="value-highlight">linear-gradient(135deg, #667eea, #764ba2)</span>;<br>
+                            <span class="property-highlight">&nbsp;&nbsp;&nbsp;&nbsp;border-radius</span>: <span class="value-highlight">12px</span>;<br>
+                            <span class="property-highlight">&nbsp;&nbsp;&nbsp;&nbsp;display</span>: <span class="value-highlight">flex</span>;<br>
+                            <span class="property-highlight">&nbsp;&nbsp;&nbsp;&nbsp;align-items</span>: <span class="value-highlight">center</span>;<br>
+                            <span class="property-highlight">&nbsp;&nbsp;&nbsp;&nbsp;justify-content</span>: <span class="value-highlight">center</span>;<br>
+                            <span class="property-highlight">&nbsp;&nbsp;&nbsp;&nbsp;color</span>: <span class="value-highlight">white</span>;<br>
+                            <span class="property-highlight">&nbsp;&nbsp;&nbsp;&nbsp;font-weight</span>: <span class="value-highlight">bold</span>;<br>
+                            }
+                        </code>
+                    </div>
+                    
+                    <div class="mt-6 p-6 bg-gradient-to-br from-gray-800 to-gray-900 rounded-lg border border-white/10">
+                        <h4 class="text-lg font-semibold mb-4 text-white">Grid Example</h4>
+                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; min-height: 200px;">
+                            <div style="background: linear-gradient(135deg, #667eea, #764ba2); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">Item 1</div>
+                            <div style="background: linear-gradient(135deg, #667eea, #764ba2); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">Item 2</div>
+                            <div style="background: linear-gradient(135deg, #667eea, #764ba2); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">Item 3</div>
+                            <div style="background: linear-gradient(135deg, #f093fb, #f5576c); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; grid-column: span 2;">Spanning 2 Columns</div>
+                            <div style="background: linear-gradient(135deg, #4facfe, #00f2fe); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold;">Item 6</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Navigation Buttons -->
+                <div class="text-center mt-12">
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                        <a href="bootstrap-jquery.html" class="btn btn-primary text-lg">
+                            <span>Next: Bootstrap & jQuery</span>
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                            </svg>
+                        </a>
+                        <a href="html_basics.html" class="btn btn-secondary text-lg">
+                            <span>Back to HTML Basics</span>
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Progress Navigation -->
+    <div class="nav-progress">
+        <a href="#content" class="progress-circle">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path>
+            </svg>
+        </a>
+    </div>
+
+    <!-- Enhanced Footer -->
+    <footer class="py-16 px-6 bg-gradient-to-r from-slate-900 to-gray-900 border-t border-white/10">
+        <div class="container mx-auto">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <!-- Company Info -->
+                <div>
+                    <div class="flex items-center space-x-3 mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                        </svg>
+                        <span class="text-xl font-bold text-white">CodeQuest</span>
+                    </div>
+                    <p class="text-gray-400 mb-4">Master web development through interactive learning and hands-on projects.</p>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h3 class="text-lg font-semibold text-white mb-4">Subjects</h3>
+                    <ul class="space-y-2">
+                        <li><a href="html_basics.html" class="text-gray-400 hover:text-white transition-colors">HTML Basics</a></li>
+                        <li><a href="css_styling.html" class="text-blue-300 hover:text-white transition-colors">CSS Styling</a></li>
+                        <li><a href="bootstrap-jquery.html" class="text-gray-400 hover:text-white transition-colors">Bootstrap & jQuery</a></li>
+                    </ul>
+                </div>
+
+                <!-- Company -->
+                <div>
+                    <h3 class="text-lg font-semibold text-white mb-4">Company</h3>
+                    <ul class="space-y-2">
+                        <li><a href="aboutus.html" class="text-gray-400 hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Contact</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Privacy Policy</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Info -->
+                <div>
+                    <h3 class="text-lg font-semibold text-white mb-4">Ready to Learn?</h3>
+                    <p class="text-gray-400 mb-4">Continue your journey with Bootstrap & jQuery!</p>
+                    <a href="bootstrap-jquery.html" class="btn btn-primary">
+                        <span>Continue Learning</span>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Bottom Bar -->
+            <div class="border-t border-gray-700 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400 text-sm">&copy; 2025 CodeQuest. All Rights Reserved.</p>
+                <div class="flex space-x-6 mt-4 md:mt-0">
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.49.75 2.81 1.91 3.56-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07 4.28 4.28 0 0 0 4 2.98 8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21 16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56.84-.6 1.56-1.36 2.14-2.23z"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Enhanced dropdown functionality
+            const dropdownToggle = document.querySelector('.dropdown-toggle');
+            const dropdown = document.querySelector('.dropdown');
+            const dropdownParent = dropdownToggle?.parentElement;
+            
+            if (dropdownToggle && dropdown && dropdownParent) {
+                let hoverTimeout;
+
+                function showDropdown() {
+                    clearTimeout(hoverTimeout);
+                    dropdown.classList.add('show');
+                }
+
+                function hideDropdown() {
+                    hoverTimeout = setTimeout(() => {
+                        dropdown.classList.remove('show');
+                    }, 150);
+                }
+
+                dropdownParent.addEventListener('mouseenter', showDropdown);
+                dropdownParent.addEventListener('mouseleave', hideDropdown);
+                dropdown.addEventListener('mouseenter', showDropdown);
+                dropdown.addEventListener('mouseleave', hideDropdown);
+            }
+
+            // Enhanced mobile menu functionality
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const closeMobileMenu = document.getElementById('close-mobile-menu');
+
+            if (mobileMenuBtn && mobileMenu) {
+                mobileMenuBtn.addEventListener('click', function() {
+                    mobileMenu.classList.add('show');
+                    document.body.style.overflow = 'hidden';
+                });
+            }
+
+            if (closeMobileMenu && mobileMenu) {
+                closeMobileMenu.addEventListener('click', function() {
+                    mobileMenu.classList.remove('show');
+                    document.body.style.overflow = '';
+                });
+            }
+
+            // Close mobile menu when clicking outside
+            if (mobileMenu) {
+                mobileMenu.addEventListener('click', function(e) {
+                    if (e.target === mobileMenu) {
+                        mobileMenu.classList.remove('show');
+                        document.body.style.overflow = '';
+                    }
+                });
+            }
+
+            // Enhanced scroll effects
+            let lastScrollTop = 0;
+            const nav = document.querySelector('.nav-glass');
+            
+            window.addEventListener('scroll', function() {
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                
+                // Add scrolled class for styling
+                if (scrollTop > 50) {
+                    nav?.classList.add('scrolled');
+                } else {
+                    nav?.classList.remove('scrolled');
+                }
+                
+                // Hide/show navigation on scroll
+                if (scrollTop > lastScrollTop && scrollTop > 100) {
+                    nav.style.transform = 'translateY(-100%)';
+                } else {
+                    nav.style.transform = 'translateY(0)';
+                }
+                
+                lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+            });
+
+            // Scroll reveal animation
+            const revealElements = document.querySelectorAll('.reveal');
+            
+            const revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        revealObserver.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            });
+            
+            revealElements.forEach(element => {
+                revealObserver.observe(element);
+            });
+
+            // Interactive CSS Playground
+            const cssEditor = document.getElementById('css-editor');
+            const previewContent = document.getElementById('preview-content');
+
+            if (cssEditor && previewContent) {
+                // Store original content
+                const originalContent = previewContent.innerHTML;
+
+                function updatePreview() {
+                    const cssCode = cssEditor.value;
+                    
+                    // Remove any existing style tags
+                    const existingStyle = previewContent.querySelector('#dynamic-style');
+                    if (existingStyle) {
+                        existingStyle.remove();
+                    }
+
+                    // Create new style tag
+                    const styleTag = document.createElement('style');
+                    styleTag.id = 'dynamic-style';
+                    styleTag.textContent = cssCode;
+                    
+                    // Add the style to the preview
+                    previewContent.appendChild(styleTag);
+                }
+
+                // Update preview on input
+                cssEditor.addEventListener('input', updatePreview);
+                
+                // Initial update
+                updatePreview();
+            }
+
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+
+            // Enhanced button interactions
+            document.querySelectorAll('.btn').forEach(button => {
+                button.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-2px) scale(1.02)';
+                });
+                
+                button.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+
+            // Card hover effects
+            document.querySelectorAll('.card').forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-8px) scale(1.02)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+
+            // Code block interactions
+            document.querySelectorAll('.code-block').forEach(codeBlock => {
+                codeBlock.addEventListener('mouseenter', function() {
+                    this.style.transform = 'scale(1.01)';
+                    this.style.boxShadow = '0 20px 40px rgba(0, 0, 0, 0.4)';
+                });
+                
+                codeBlock.addEventListener('mouseleave', function() {
+                    this.style.transform = 'scale(1)';
+                    this.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.3)';
+                });
+            });
+
+            // Progress circle functionality
+            const progressCircle = document.querySelector('.progress-circle');
+            if (progressCircle) {
+                window.addEventListener('scroll', function() {
+                    const scrolled = window.pageYOffset;
+                    const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+                    const scrollProgress = (scrolled / maxScroll) * 100;
+                    
+                    // Update progress circle appearance based on scroll
+                    if (scrollProgress > 20) {
+                        progressCircle.style.opacity = '1';
+                        progressCircle.style.transform = 'scale(1)';
+                    } else {
+                        progressCircle.style.opacity = '0.7';
+                        progressCircle.style.transform = 'scale(0.9)';
+                    }
+                });
+            }
+
+            // Add particle effect to hero section (lightweight)
+            const hero = document.querySelector('.hero');
+            if (hero) {
+                // Create floating particles
+                for (let i = 0; i < 20; i++) {
+                    const particle = document.createElement('div');
+                    particle.className = 'absolute w-1 h-1 bg-white opacity-20 rounded-full';
+                    particle.style.left = Math.random() * 100 + '%';
+                    particle.style.top = Math.random() * 100 + '%';
+                    particle.style.animationDelay = Math.random() * 20 + 's';
+                    particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                    hero.appendChild(particle);
+                }
+            }
+        });
+    </script>
+</body>
+</html>
