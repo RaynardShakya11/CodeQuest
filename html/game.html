@@ -946,6 +946,73 @@
     <header>
         <button onclick="goBack()">Go Back</button>
     </header>
+
+    <div id="home-page">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <h1><i class="fas fa-code"></i> Master Web Development</h1>
+                <p>Transform your coding journey with interactive quizzes, real-world challenges, and cutting-edge
+                    learning experiences</p>
+                <button class="hero-cta"
+                    onclick="document.querySelector('.intro-card').scrollIntoView({behavior: 'smooth'})">
+                    <i class="fas fa-rocket"></i>
+                    Begin Your Journey
+                </button>
+            </div>
+        </section>
+
+        <!-- Introduction Card -->
+        <main>
+            <div class="intro-card">
+                <h2><i class="fas fa-graduation-cap"></i> Build Your Web Development Foundation</h2>
+                <div class="tech-grid">
+                    <div class="tech-item">
+                        <div class="tech-header">
+                            <div class="tech-icon html-icon">HTML</div>
+                            <h3>Structure & Semantics</h3>
+                        </div>
+                        <p>Master the building blocks of the web with HTML5. Learn semantic markup, accessibility best
+                            practices, and modern document structure that powers every website on the internet.</p>
+                    </div>
+                    <div class="tech-item">
+                        <div class="tech-header">
+                            <div class="tech-icon css-icon">CSS</div>
+                            <h3>Design & Animation</h3>
+                        </div>
+                        <p>Create stunning visual experiences with modern CSS. From responsive layouts to smooth
+                            animations, master the art of bringing your designs to life with style and elegance.</p>
+                    </div>
+                    <div class="tech-item">
+                        <div class="tech-header">
+                            <div class="tech-icon js-icon">JS</div>
+                            <h3>Logic & Interactivity</h3>
+                        </div>
+                        <p>Unlock the power of programming with JavaScript. Build dynamic applications, handle user
+                            interactions, and create the logic that makes modern web experiences possible.</p>
+                    </div>
+                </div>
+
+                <div class="quiz-selection">
+                    <h3><i class="fas fa-brain"></i> Choose Your Challenge</h3>
+                    <div class="selection-container">
+                        <div class="dropdown">
+                            <select id="quiz-selector">
+                                <option value="">🎯 Select Your Learning Path</option>
+                                <option value="html">🏗️ HTML Mastery Challenge</option>
+                                <option value="css">🎨 CSS Design Challenge</option>
+                                <option value="javascript">⚡ JavaScript Logic Challenge</option>
+                            </select>
+                        </div>
+                        <button class="start-btn" id="start-quiz" disabled>
+                            <i class="fas fa-play"></i>
+                            Start Challenge
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
 </body>
 
 </html>
