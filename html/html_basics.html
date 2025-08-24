@@ -1,0 +1,1208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Basics - CodeQuest</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #0ea5e9;
+            --accent: #f59e0b;
+            --accent-dark: #d97706;
+            --success: #10b981;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --gray: #64748b;
+        }
+        
+        * {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: white;
+            overflow-x: hidden;
+        }
+
+        /* Glassmorphism Navigation */
+        .nav-glass {
+            backdrop-filter: blur(20px);
+            background: rgba(15, 23, 42, 0.8);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+        
+        .nav-glass.scrolled {
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(25px);
+        }
+        
+        .nav-item {
+            position: relative;
+            padding: 12px 20px;
+            border-radius: 12px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
+        }
+        
+        .nav-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(37, 99, 235, 0.2), transparent);
+            transition: left 0.6s ease;
+        }
+        
+        .nav-item:hover::before {
+            left: 100%;
+        }
+        
+        .nav-item:hover {
+            background: rgba(37, 99, 235, 0.1);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(37, 99, 235, 0.3);
+        }
+
+        /* Enhanced Dropdown */
+        .dropdown {
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-15px) scale(0.9);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .dropdown.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0) scale(1);
+        }
+        
+        .dropdown-item {
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            margin: 4px 8px;
+        }
+        
+        .dropdown-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            transition: left 0.3s ease;
+            z-index: -1;
+        }
+        
+        .dropdown-item:hover::before {
+            left: 0;
+        }
+        
+        .dropdown-item:hover {
+            color: white;
+            transform: translateX(8px);
+            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.4);
+        }
+
+        /* Logo with Animation */
+        .logo {
+            transition: all 0.4s ease;
+        }
+        
+        .logo:hover {
+            transform: scale(1.05) rotate(5deg);
+        }
+        
+        .logo svg {
+            filter: drop-shadow(0 0 10px rgba(245, 158, 11, 0.5));
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 60vh;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #334155 100%);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Animated Gradient Text */
+        .gradient-text {
+            background: linear-gradient(45deg, #e34f26, #f06529, #ff6b35);
+            background-size: 400% 400%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradientShift 4s ease-in-out infinite;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        /* Enhanced Cards */
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 24px;
+            padding: 3rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 2rem;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .card:hover::before {
+            left: 100%;
+        }
+
+        .card:hover {
+            transform: translateY(-15px) scale(1.02);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(37, 99, 235, 0.5);
+            box-shadow: 0 25px 50px rgba(37, 99, 235, 0.2);
+        }
+
+        /* Modern Buttons */
+        .btn {
+            position: relative;
+            padding: 16px 32px;
+            border-radius: 16px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            overflow: hidden;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+            color: white;
+            box-shadow: 0 8px 32px rgba(245, 158, 11, 0.4);
+        }
+
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--accent-dark) 0%, var(--accent) 100%);
+            transition: left 0.3s ease;
+        }
+
+        .btn-primary:hover::before {
+            left: 0;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 40px rgba(245, 158, 11, 0.5);
+        }
+
+        .btn span {
+            position: relative;
+            z-index: 2;
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(37, 99, 235, 0.5);
+            transform: translateY(-4px);
+            box-shadow: 0 15px 40px rgba(37, 99, 235, 0.3);
+        }
+
+        /* Code Blocks */
+        .code-block {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            border-left: 4px solid var(--accent);
+            border-radius: 16px;
+            padding: 2rem;
+            overflow-x: auto;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            position: relative;
+            margin: 1.5rem 0;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .code-block::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+            border-radius: 0 16px 0 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .code-block::after {
+            content: '</>';
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+            z-index: 1;
+        }
+
+        .code-block code {
+            color: #e2e8f0;
+        }
+
+        .tag-highlight {
+            color: #60a5fa;
+            font-weight: 600;
+        }
+
+        .attribute-highlight {
+            color: #34d399;
+            font-weight: 500;
+        }
+
+        .value-highlight {
+            color: #fbbf24;
+            font-weight: 500;
+        }
+
+        .comment-highlight {
+            color: #9ca3af;
+            font-style: italic;
+        }
+
+        /* Warning/Info Boxes */
+        .info-box {
+            background: rgba(16, 185, 129, 0.1);
+            border-left: 4px solid var(--success);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+
+        .warning-box {
+            background: rgba(245, 158, 11, 0.1);
+            border-left: 4px solid var(--accent);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(245, 158, 11, 0.2);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            transform: translateX(-100%);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        }
+        
+        .mobile-menu.show {
+            transform: translateX(0);
+        }
+
+        /* Section Backgrounds */
+        .section-dark {
+            background: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+        }
+
+        /* Scroll Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.6s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #1e293b;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+        }
+
+        /* Typography */
+        h1, h2, h3 {
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Navigation Progress */
+        .nav-progress {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 50;
+        }
+
+        .progress-circle {
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .progress-circle:hover {
+            transform: scale(1.1);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .card {
+                padding: 2rem;
+                border-radius: 20px;
+            }
+            
+            .code-block {
+                padding: 1.5rem;
+                font-size: 0.8rem;
+            }
+            
+            .hero {
+                min-height: 50vh;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Modern Navigation Header -->
+    <header class="fixed w-full top-0 z-50">
+        <nav class="nav-glass px-4 py-3">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center justify-between h-16">
+                    <!-- Enhanced Logo -->
+                    <div class="flex items-center">
+                        <a href="index.html" class="logo flex items-center space-x-3 group">
+                            <div class="relative">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                                </svg>
+                            </div>
+                            <span class="text-2xl font-bold text-white">CodeQuest</span>
+                        </a>
+                    </div>
+
+                    <!-- Desktop Navigation -->
+                    <div class="hidden md:block">
+                        <div class="ml-10 flex items-baseline space-x-2">
+                            <a href="index.html" class="nav-item text-gray-300 hover:text-white">
+                                Home
+                            </a>
+
+                            <!-- Enhanced Subjects Dropdown -->
+                            <div class="relative group">
+                                <button class="nav-item dropdown-toggle text-gray-300 hover:text-white flex items-center space-x-2">
+                                    <span>Subjects</span>
+                                    <svg class="w-4 h-4 transition-transform duration-200 group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                                    </svg>
+                                </button>
+                                
+                                <div class="dropdown absolute left-0 mt-2 w-72 rounded-2xl shadow-2xl">
+                                    <div class="py-3">
+                                        <a href="html_basics.html" class="dropdown-item block px-6 py-4 text-sm text-amber-300 hover:text-white">
+                                            <div class="flex items-center space-x-4">
+                                                <div class="w-3 h-3 bg-orange-400 rounded-full"></div>
+                                                <div>
+                                                    <div class="font-semibold text-base">HTML Basics</div>
+                                                    <div class="text-xs text-gray-400">Structure & Semantic Elements</div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <a href="css_styling.html" class="dropdown-item block px-6 py-4 text-sm text-gray-300 hover:text-white">
+                                            <div class="flex items-center space-x-4">
+                                                <div class="w-3 h-3 bg-blue-400 rounded-full"></div>
+                                                <div>
+                                                    <div class="font-semibold text-base">CSS Styling</div>
+                                                    <div class="text-xs text-gray-400">Design & Advanced Layouts</div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                        <a href="bootstrap-jquery.html" class="dropdown-item block px-6 py-4 text-sm text-gray-300 hover:text-white">
+                                            <div class="flex items-center space-x-4">
+                                                <div class="w-3 h-3 bg-purple-400 rounded-full"></div>
+                                                <div>
+                                                    <div class="font-semibold text-base">Bootstrap & jQuery</div>
+                                                    <div class="text-xs text-gray-400">Frameworks & Interactivity</div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+ <a href="quize.html" class="nav-item text-gray-300 hover:text-white">
+                                quiz
+                            </a>
+                            <a href="aboutus.html" class="nav-item text-gray-300 hover:text-white">
+                                About Us
+                            </a>
+
+                            <a href="contact.html" class="nav-item text-gray-300 hover:text-white">
+                                Contact
+                            </a>
+
+
+                            <!-- Enhanced CTA Button -->
+                            <button class="btn btn-primary ml-4">
+                                <span>Get Started</span>
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Mobile menu button -->
+                    <div class="md:hidden">
+                        <button id="mobile-menu-btn" class="text-gray-300 hover:text-white p-2 rounded-lg transition-colors duration-200">
+                            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Enhanced Mobile Menu -->
+        <div id="mobile-menu" class="mobile-menu fixed inset-y-0 left-0 z-50 w-full md:hidden">
+            <div class="flex items-center justify-between p-6 border-b border-white/20">
+                <span class="text-2xl font-bold text-white">CodeQuest</span>
+                <button id="close-mobile-menu" class="text-white hover:text-amber-300 p-2 transition-colors duration-200">
+                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+            </div>
+            <div class="px-6 py-6 space-y-4">
+                <a href="index.html" class="block text-white hover:text-amber-300 py-3 text-lg font-medium border-b border-white/10 transition-colors duration-200">Home</a>
+                
+                <div class="border-b border-white/10 pb-4">
+                    <div class="text-white py-3 text-lg font-medium">Subjects</div>
+                    <div class="ml-4 space-y-3">
+                        <a href="html_basics.html" class="block text-amber-300 hover:text-white py-2 transition-colors duration-200">HTML Basics</a>
+                        <a href="css_styling.html" class="block text-gray-300 hover:text-white py-2 transition-colors duration-200">CSS Styling</a>
+                        <a href="bootstrap-jquery.html" class="block text-gray-300 hover:text-white py-2 transition-colors duration-200">Bootstrap & jQuery</a>
+                    </div>
+                </div>
+                
+                <a href="aboutus.html" class="block text-white hover:text-amber-300 py-3 text-lg font-medium border-b border-white/10 transition-colors duration-200">About Us</a>
+                <a href="#" class="block text-white hover:text-amber-300 py-3 text-lg font-medium border-b border-white/10 transition-colors duration-200">Contact</a>
+                
+                <button class="btn btn-primary w-full mt-6">
+                    <span>Get Started</span>
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="pt-16">
+        <!-- Enhanced Hero Section -->
+        <section class="hero">
+            <div class="container mx-auto px-4 hero-content text-center">
+                <div class="max-w-4xl mx-auto">
+                    <h1 class="text-5xl sm:text-6xl md:text-7xl font-bold mb-6 leading-tight">
+                        Master <span class="gradient-text">HTML</span> Basics
+                    </h1>
+                    <p class="text-xl sm:text-2xl max-w-3xl mx-auto mb-10 text-gray-300 leading-relaxed">
+                        Build the foundation of web development with semantic markup, modern HTML5 elements, 
+                        and best practices that power every website.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                        <a href="#content" class="btn btn-primary text-lg">
+                            <span>Start Learning</span>
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </a>
+                        <a href="css_styling.html" class="btn btn-secondary text-lg">
+                            <span>Next: CSS Styling</span>
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Content Section -->
+        <section id="content" class="py-20 px-4">
+            <div class="container mx-auto max-w-6xl">
+                
+                <!-- What is HTML Section -->
+                <div class="card reveal">
+                    <div class="flex items-center mb-6">
+                        <div class="w-16 h-16 bg-gradient-to-r from-orange-500 to-red-500 rounded-2xl flex items-center justify-center mr-4">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <h2 class="text-3xl font-bold mb-2">What is HTML?</h2>
+                            <p class="text-gray-300">The building blocks of the web</p>
+                        </div>
+                    </div>
+                    
+                    <p class="text-lg text-gray-300 mb-6 leading-relaxed">
+                        HTML stands for <strong class="text-white">HyperText Markup Language</strong>. It's the standard language for creating web pages.
+                        HTML uses a series of simple codes, or "tags," to structure your content and give it meaning.
+                    </p>
+                    
+                    <div class="code-block">
+                        <code>
+                            <span class="comment-highlight">&lt;!-- This is a comment, it's not displayed on the page --&gt;</span><br>
+                            <span class="tag-highlight">&lt;h1&gt;</span>Hello, World!<span class="tag-highlight">&lt;/h1&gt;</span><br>
+                            <span class="tag-highlight">&lt;p&gt;</span>This is a paragraph of text.<span class="tag-highlight">&lt;/p&gt;</span>
+                        </code>
+                    </div>
+                    
+                    <div class="info-box">
+                        <div class="flex items-start">
+                            <svg class="w-6 h-6 text-green-400 mr-3 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            <div>
+                                <p class="font-medium text-white mb-1">Pro Tip</p>
+                                <p class="text-gray-300">HTML provides structure and meaning to your content, making it accessible to both users and search engines.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Basic Page Structure -->
+                <div class="card reveal">
+                    <div class="flex items-center mb-6">
+                        <div class="w-16 h-16 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-2xl flex items-center justify-center mr-4">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6l2 2h6a2 2 0 012 2z"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <h2 class="text-3xl font-bold mb-2">Basic Page Structure</h2>
+                            <p class="text-gray-300">Every HTML document follows this pattern</p>
+                        </div>
+                    </div>
+                    
+                    <p class="text-lg text-gray-300 mb-6 leading-relaxed">
+                        Every HTML page has a basic structure. It always starts with a doctype declaration and includes the 
+                        <code class="bg-gray-800 px-2 py-1 rounded text-blue-300">&lt;html&gt;</code>, 
+                        <code class="bg-gray-800 px-2 py-1 rounded text-blue-300">&lt;head&gt;</code>, and 
+                        <code class="bg-gray-800 px-2 py-1 rounded text-blue-300">&lt;body&gt;</code> tags.
+                    </p>
+                    
+                    <div class="code-block">
+                        <code>
+                            <span class="comment-highlight">&lt;!-- Defines the document type --&gt;</span><br>
+                            <span class="tag-highlight">&lt;!DOCTYPE html&gt;</span><br>
+                            <span class="tag-highlight">&lt;html&gt;</span><br>
+                            <span class="tag-highlight">&lt;head&gt;</span><br>
+                            <span class="comment-highlight">&nbsp;&nbsp;&nbsp;&nbsp;&lt;!-- Contains meta-information like the title and links to stylesheets --&gt;</span><br>
+                            <span class="tag-highlight">&nbsp;&nbsp;&nbsp;&nbsp;&lt;title&gt;</span>My Web Page<span class="tag-highlight">&lt;/title&gt;</span><br>
+                            <span class="tag-highlight">&nbsp;&nbsp;&nbsp;&nbsp;&lt;meta</span> <span class="attribute-highlight">charset=</span><span class="value-highlight">"UTF-8"</span><span class="tag-highlight">&gt;</span><br>
+                            <span class="tag-highlight">&nbsp;&nbsp;&nbsp;&nbsp;&lt;meta</span> <span class="attribute-highlight">name=</span><span class="value-highlight">"viewport"</span> <span class="attribute-highlight">content=</span><span class="value-highlight">"width=device-width, initial-scale=1.0"</span><span class="tag-highlight">&gt;</span><br>
+                            <span class="tag-highlight">&lt;/head&gt;</span><br>
+                            <span class="tag-highlight">&lt;body&gt;</span><br>
+                            <span class="comment-highlight">&nbsp;&nbsp;&nbsp;&nbsp;&lt;!-- This is the visible content of your page --&gt;</span><br>
+                            <span class="tag-highlight">&nbsp;&nbsp;&nbsp;&nbsp;&lt;h1&gt;</span>My First Heading<span class="tag-highlight">&lt;/h1&gt;</span><br>
+                            <span class="tag-highlight">&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;</span>My first paragraph.<span class="tag-highlight">&lt;/p&gt;</span><br>
+                            <span class="tag-highlight">&lt;/body&gt;</span><br>
+                            <span class="tag-highlight">&lt;/html&gt;</span>
+                        </code>
+                    </div>
+                </div>
+
+                <!-- HTML Attributes -->
+                <div class="card reveal">
+                    <div class="flex items-center mb-6">
+                        <div class="w-16 h-16 bg-gradient-to-r from-green-500 to-emerald-500 rounded-2xl flex items-center justify-center mr-4">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a1.994 1.994 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <h2 class="text-3xl font-bold mb-2">HTML Attributes</h2>
+                            <p class="text-gray-300">Adding extra information to elements</p>
+                        </div>
+                    </div>
+                    
+                    <p class="text-lg text-gray-300 mb-6 leading-relaxed">
+                        Tags can have <strong class="text-white">"attributes"</strong> that provide extra information about the element. 
+                        Attributes are always placed in the opening tag and follow the pattern: <code class="bg-gray-800 px-2 py-1 rounded text-green-300">name="value"</code>.
+                    </p>
+                    
+                    <div class="code-block">
+                        <code>
+                            <span class="comment-highlight">&lt;!-- The 'src' attribute specifies the image source --&gt;</span><br>
+                            <span class="tag-highlight">&lt;img</span> <span class="attribute-highlight">src=</span><span class="value-highlight">"image.jpg"</span> <span class="attribute-highlight">alt=</span><span class="value-highlight">"A beautiful sunset"</span><span class="tag-highlight">&gt;</span><br><br>
+                            <span class="comment-highlight">&lt;!-- The 'href' attribute specifies the link destination --&gt;</span><br>
+                            <span class="tag-highlight">&lt;a</span> <span class="attribute-highlight">href=</span><span class="value-highlight">"https://www.google.com"</span> <span class="attribute-highlight">target=</span><span class="value-highlight">"_blank"</span><span class="tag-highlight">&gt;</span>Visit Google<span class="tag-highlight">&lt;/a&gt;</span><br><br>
+                            <span class="comment-highlight">&lt;!-- The 'class' and 'id' attributes for styling and identification --&gt;</span><br>
+                            <span class="tag-highlight">&lt;div</span> <span class="attribute-highlight">class=</span><span class="value-highlight">"container"</span> <span class="attribute-highlight">id=</span><span class="value-highlight">"main-content"</span><span class="tag-highlight">&gt;</span>Content here<span class="tag-highlight">&lt;/div&gt;</span>
+                        </code>
+                    </div>
+                    
+                    <div class="warning-box">
+                        <div class="flex items-start">
+                            <svg class="w-6 h-6 text-amber-400 mr-3 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.729-.833-2.5 0L3.732 16.5c-.77.833.192 2.5 1.732 2.5z"></path>
+                            </svg>
+                            <div>
+                                <p class="font-medium text-white mb-1">Important</p>
+                                <p class="text-gray-300">Always use quotes around attribute values, even for single words. This prevents errors and ensures your code is valid.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lists Section -->
+                <div class="card reveal">
+                    <div class="flex items-center mb-6">
+                        <div class="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-2xl flex items-center justify-center mr-4">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <h2 class="text-3xl font-bold mb-2">Lists: Ordered & Unordered</h2>
+                            <p class="text-gray-300">Organizing information effectively</p>
+                        </div>
+                    </div>
+                    
+                    <p class="text-lg text-gray-300 mb-6 leading-relaxed">
+                        Lists are essential for organizing information. Use <code class="bg-gray-800 px-2 py-1 rounded text-purple-300">&lt;ul&gt;</code> for 
+                        unordered (bulleted) lists and <code class="bg-gray-800 px-2 py-1 rounded text-purple-300">&lt;ol&gt;</code> for ordered 
+                        (numbered) lists. Each list item uses the <code class="bg-gray-800 px-2 py-1 rounded text-purple-300">&lt;li&gt;</code> tag.
+                    </p>
+                    
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <h4 class="text-xl font-semibold mb-3 text-white">Unordered List</h4>
+                            <div class="code-block">
+                                <code>
+                                    <span class="tag-highlight">&lt;ul&gt;</span><br>
+                                    <span class="tag-highlight">&nbsp;&nbsp;&nbsp;&nbsp;&lt;li&gt;</span>HTML Fundamentals<span class="tag-highlight">&lt;/li&gt;</span><br>
+                                    <span class="tag-highlight">&nbsp;&nbsp;&nbsp;&nbsp;&lt;li&gt;</span>CSS Styling<span class="tag-highlight">&lt;/li&gt;</span><br>
+                                    <span class="tag-highlight">&nbsp;&nbsp;&nbsp;&nbsp;&lt;li&gt;</span>JavaScript Basics<span class="tag-highlight">&lt;/li&gt;</span><br>
+                                    <span class="tag-highlight">&lt;/ul&gt;</span>
+                                </code>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="text-xl font-semibold mb-3 text-white">Ordered List</h4>
+                            <div class="code-block">
+                                <code>
+                                    <span class="tag-highlight">&lt;ol&gt;</span><br>
+                                    <span class="tag-highlight">&nbsp;&nbsp;&nbsp;&nbsp;&lt;li&gt;</span>Learn HTML structure<span class="tag-highlight">&lt;/li&gt;</span><br>
+                                    <span class="tag-highlight">&nbsp;&nbsp;&nbsp;&nbsp;&lt;li&gt;</span>Add CSS styling<span class="tag-highlight">&lt;/li&gt;</span><br>
+                                    <span class="tag-highlight">&nbsp;&nbsp;&nbsp;&nbsp;&lt;li&gt;</span>Make it interactive<span class="tag-highlight">&lt;/li&gt;</span><br>
+                                    <span class="tag-highlight">&lt;/ol&gt;</span>
+                                </code>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Images and Links -->
+                <div class="card reveal">
+                    <div class="flex items-center mb-6">
+                        <div class="w-16 h-16 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-2xl flex items-center justify-center mr-4">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <h2 class="text-3xl font-bold mb-2">Adding Images and Links</h2>
+                            <p class="text-gray-300">Essential elements for rich web content</p>
+                        </div>
+                    </div>
+                    
+                    <p class="text-lg text-gray-300 mb-6 leading-relaxed">
+                        Images and links are fundamental to creating engaging websites. The <code class="bg-gray-800 px-2 py-1 rounded text-cyan-300">&lt;img&gt;</code> 
+                        tag displays images, while the <code class="bg-gray-800 px-2 py-1 rounded text-cyan-300">&lt;a&gt;</code> tag creates clickable links.
+                    </p>
+                    
+                    <div class="code-block">
+                        <code>
+                            <span class="comment-highlight">&lt;!-- Image with proper attributes --&gt;</span><br>
+                            <span class="tag-highlight">&lt;img</span> <span class="attribute-highlight">src=</span><span class="value-highlight">"https://placehold.co/600x400/3b82f6/FFFFFF?text=Awesome+Website"</span><br>
+                            <span class="attribute-highlight">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;alt=</span><span class="value-highlight">"A beautiful website screenshot"</span><br>
+                            <span class="attribute-highlight">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;width=</span><span class="value-highlight">"600"</span><br>
+                            <span class="attribute-highlight">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;height=</span><span class="value-highlight">"400"</span><span class="tag-highlight">&gt;</span><br><br>
+                            <span class="comment-highlight">&lt;!-- Different types of links --&gt;</span><br>
+                            <span class="tag-highlight">&lt;a</span> <span class="attribute-highlight">href=</span><span class="value-highlight">"https://www.example.com"</span> <span class="attribute-highlight">target=</span><span class="value-highlight">"_blank"</span><span class="tag-highlight">&gt;</span>External Link<span class="tag-highlight">&lt;/a&gt;</span><br>
+                            <span class="tag-highlight">&lt;a</span> <span class="attribute-highlight">href=</span><span class="value-highlight">"about.html"</span><span class="tag-highlight">&gt;</span>Internal Link<span class="tag-highlight">&lt;/a&gt;</span><br>
+                            <span class="tag-highlight">&lt;a</span> <span class="attribute-highlight">href=</span><span class="value-highlight">"mailto:hello@example.com"</span><span class="tag-highlight">&gt;</span>Email Link<span class="tag-highlight">&lt;/a&gt;</span><br>
+                            <span class="tag-highlight">&lt;a</span> <span class="attribute-highlight">href=</span><span class="value-highlight">"#section1"</span><span class="tag-highlight">&gt;</span>Anchor Link<span class="tag-highlight">&lt;/a&gt;</span>
+                        </code>
+                    </div>
+                    
+                    <div class="warning-box">
+                        <div class="flex items-start">
+                            <svg class="w-6 h-6 text-amber-400 mr-3 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 0h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                            </svg>
+                            <div>
+                                <p class="font-medium text-white mb-1">Accessibility Reminder</p>
+                                <p class="text-gray-300">Always provide descriptive <code class="bg-gray-800 px-1 py-0.5 rounded">alt</code> text for images. This helps screen readers and improves SEO. Make your links descriptive too!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Semantic HTML -->
+                <div class="card reveal">
+                    <div class="flex items-center mb-6">
+                        <div class="w-16 h-16 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-2xl flex items-center justify-center mr-4">
+                            <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <h2 class="text-3xl font-bold mb-2">Semantic HTML Elements</h2>
+                            <p class="text-gray-300">Modern HTML5 elements with meaning</p>
+                        </div>
+                    </div>
+                    
+                    <p class="text-lg text-gray-300 mb-6 leading-relaxed">
+                        Semantic elements clearly describe their meaning to both browsers and developers. They improve accessibility, 
+                        SEO, and code maintainability by providing structure and context to your content.
+                    </p>
+                    
+                    <div class="code-block">
+                        <code>
+                            <span class="comment-highlight">&lt;!-- Semantic page structure --&gt;</span><br>
+                            <span class="tag-highlight">&lt;header&gt;</span><br>
+                            <span class="tag-highlight">&nbsp;&nbsp;&nbsp;&nbsp;&lt;nav&gt;</span><br>
+                            <span class="tag-highlight">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;ul&gt;</span><br>
+                            <span class="tag-highlight">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;li&gt;&lt;a</span> <span class="attribute-highlight">href=</span><span class="value-highlight">"#home"</span><span class="tag-highlight">&gt;</span>Home<span class="tag-highlight">&lt;/a&gt;&lt;/li&gt;</span><br>
+                            <span class="tag-highlight">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;li&gt;&lt;a</span> <span class="attribute-highlight">href=</span><span class="value-highlight">"#about"</span><span class="tag-highlight">&gt;</span>About<span class="tag-highlight">&lt;/a&gt;&lt;/li&gt;</span><br>
+                            <span class="tag-highlight">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/ul&gt;</span><br>
+                            <span class="tag-highlight">&nbsp;&nbsp;&nbsp;&nbsp;&lt;/nav&gt;</span><br>
+                            <span class="tag-highlight">&lt;/header&gt;</span><br><br>
+                            <span class="tag-highlight">&lt;main&gt;</span><br>
+                            <span class="tag-highlight">&nbsp;&nbsp;&nbsp;&nbsp;&lt;section</span> <span class="attribute-highlight">id=</span><span class="value-highlight">"hero"</span><span class="tag-highlight">&gt;</span><br>
+                            <span class="tag-highlight">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;h1&gt;</span>Welcome to My Website<span class="tag-highlight">&lt;/h1&gt;</span><br>
+                            <span class="tag-highlight">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;</span>This is the main heading section<span class="tag-highlight">&lt;/p&gt;</span><br>
+                            <span class="tag-highlight">&nbsp;&nbsp;&nbsp;&nbsp;&lt;/section&gt;</span><br><br>
+                            <span class="tag-highlight">&nbsp;&nbsp;&nbsp;&nbsp;&lt;article&gt;</span><br>
+                            <span class="tag-highlight">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;h2&gt;</span>Article Title<span class="tag-highlight">&lt;/h2&gt;</span><br>
+                            <span class="tag-highlight">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;</span>Article content goes here...<span class="tag-highlight">&lt;/p&gt;</span><br>
+                            <span class="tag-highlight">&nbsp;&nbsp;&nbsp;&nbsp;&lt;/article&gt;</span><br>
+                            <span class="tag-highlight">&lt;/main&gt;</span><br><br>
+                            <span class="tag-highlight">&lt;aside&gt;</span><br>
+                            <span class="tag-highlight">&nbsp;&nbsp;&nbsp;&nbsp;&lt;h3&gt;</span>Related Links<span class="tag-highlight">&lt;/h3&gt;</span><br>
+                            <span class="tag-highlight">&nbsp;&nbsp;&nbsp;&nbsp;&lt;ul&gt;</span><br>
+                            <span class="tag-highlight">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;li&gt;&lt;a</span> <span class="attribute-highlight">href=</span><span class="value-highlight">"#"</span><span class="tag-highlight">&gt;</span>Resource 1<span class="tag-highlight">&lt;/a&gt;&lt;/li&gt;</span><br>
+                            <span class="tag-highlight">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;li&gt;&lt;a</span> <span class="attribute-highlight">href=</span><span class="value-highlight">"#"</span><span class="tag-highlight">&gt;</span>Resource 2<span class="tag-highlight">&lt;/a&gt;&lt;/li&gt;</span><br>
+                            <span class="tag-highlight">&nbsp;&nbsp;&nbsp;&nbsp;&lt;/ul&gt;</span><br>
+                            <span class="tag-highlight">&lt;/aside&gt;</span><br><br>
+                            <span class="tag-highlight">&lt;footer&gt;</span><br>
+                            <span class="tag-highlight">&nbsp;&nbsp;&nbsp;&nbsp;&lt;p&gt;</span>&copy; 2025 My Website. All rights reserved.<span class="tag-highlight">&lt;/p&gt;</span><br>
+                            <span class="tag-highlight">&lt;/footer&gt;</span>
+                        </code>
+                    </div>
+                    
+                    <div class="info-box">
+                        <div class="flex items-start">
+                            <svg class="w-6 h-6 text-green-400 mr-3 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path>
+                            </svg>
+                            <div>
+                                <p class="font-medium text-white mb-1">Best Practice</p>
+                                <p class="text-gray-300">Use semantic HTML elements instead of generic <code class="bg-gray-800 px-1 py-0.5 rounded">&lt;div&gt;</code> elements whenever possible. This makes your code more meaningful and accessible.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Navigation Buttons -->
+                <div class="text-center mt-12">
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                        <a href="css_styling.html" class="btn btn-primary text-lg">
+                            <span>Next: CSS Styling</span>
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                            </svg>
+                        </a>
+                        <a href="index.html" class="btn btn-secondary text-lg">
+                            <span>Back to Home</span>
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Progress Navigation -->
+    <div class="nav-progress">
+        <a href="#content" class="progress-circle">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"></path>
+            </svg>
+        </a>
+    </div>
+
+    <!-- Enhanced Footer -->
+    <footer class="py-16 px-6 bg-gradient-to-r from-slate-900 to-gray-900 border-t border-white/10">
+        <div class="container mx-auto">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <!-- Company Info -->
+                <div>
+                    <div class="flex items-center space-x-3 mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                        </svg>
+                        <span class="text-xl font-bold text-white">CodeQuest</span>
+                    </div>
+                    <p class="text-gray-400 mb-4">Master web development through interactive learning and hands-on projects.</p>
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+                    <h3 class="text-lg font-semibold text-white mb-4">Subjects</h3>
+                    <ul class="space-y-2">
+                        <li><a href="html_basics.html" class="text-amber-300 hover:text-white transition-colors">HTML Basics</a></li>
+                        <li><a href="css_styling.html" class="text-gray-400 hover:text-white transition-colors">CSS Styling</a></li>
+                        <li><a href="bootstrap-jquery.html" class="text-gray-400 hover:text-white transition-colors">Bootstrap & jQuery</a></li>
+                    </ul>
+                </div>
+
+                <!-- Company -->
+                <div>
+                    <h3 class="text-lg font-semibold text-white mb-4">Company</h3>
+                    <ul class="space-y-2">
+                        <li><a href="aboutus.html" class="text-gray-400 hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Contact</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Privacy Policy</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Info -->
+                <div>
+                    <h3 class="text-lg font-semibold text-white mb-4">Ready to Learn?</h3>
+                    <p class="text-gray-400 mb-4">Start your web development journey today!</p>
+                    <a href="css_styling.html" class="btn btn-primary">
+                        <span>Continue Learning</span>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Bottom Bar -->
+            <div class="border-t border-gray-700 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400 text-sm">&copy; 2025 CodeQuest. All Rights Reserved.</p>
+                <div class="flex space-x-6 mt-4 md:mt-0">
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.49.75 2.81 1.91 3.56-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21a4.22 4.22 0 0 1-1.93.07 4.28 4.28 0 0 0 4 2.98 8.521 8.521 0 0 1-5.33 1.84c-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21 16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56.84-.6 1.56-1.36 2.14-2.23z"/>
+                        </svg>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Enhanced dropdown functionality
+            const dropdownToggle = document.querySelector('.dropdown-toggle');
+            const dropdown = document.querySelector('.dropdown');
+            const dropdownParent = dropdownToggle?.parentElement;
+            
+            if (dropdownToggle && dropdown && dropdownParent) {
+                let hoverTimeout;
+
+                function showDropdown() {
+                    clearTimeout(hoverTimeout);
+                    dropdown.classList.add('show');
+                }
+
+                function hideDropdown() {
+                    hoverTimeout = setTimeout(() => {
+                        dropdown.classList.remove('show');
+                    }, 150);
+                }
+
+                dropdownParent.addEventListener('mouseenter', showDropdown);
+                dropdownParent.addEventListener('mouseleave', hideDropdown);
+                dropdown.addEventListener('mouseenter', showDropdown);
+                dropdown.addEventListener('mouseleave', hideDropdown);
+            }
+
+            // Enhanced mobile menu functionality
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const closeMobileMenu = document.getElementById('close-mobile-menu');
+
+            if (mobileMenuBtn && mobileMenu) {
+                mobileMenuBtn.addEventListener('click', function() {
+                    mobileMenu.classList.add('show');
+                    document.body.style.overflow = 'hidden';
+                });
+            }
+
+            if (closeMobileMenu && mobileMenu) {
+                closeMobileMenu.addEventListener('click', function() {
+                    mobileMenu.classList.remove('show');
+                    document.body.style.overflow = '';
+                });
+            }
+
+            // Close mobile menu when clicking outside
+            if (mobileMenu) {
+                mobileMenu.addEventListener('click', function(e) {
+                    if (e.target === mobileMenu) {
+                        mobileMenu.classList.remove('show');
+                        document.body.style.overflow = '';
+                    }
+                });
+            }
+
+            // Enhanced scroll effects
+            let lastScrollTop = 0;
+            const nav = document.querySelector('.nav-glass');
+            
+            window.addEventListener('scroll', function() {
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                
+                // Add scrolled class for styling
+                if (scrollTop > 50) {
+                    nav?.classList.add('scrolled');
+                } else {
+                    nav?.classList.remove('scrolled');
+                }
+                
+                // Hide/show navigation on scroll
+                if (scrollTop > lastScrollTop && scrollTop > 100) {
+                    nav.style.transform = 'translateY(-100%)';
+                } else {
+                    nav.style.transform = 'translateY(0)';
+                }
+                
+                lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+            });
+
+            // Scroll reveal animation
+            const revealElements = document.querySelectorAll('.reveal');
+            
+            const revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        revealObserver.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            });
+            
+            revealElements.forEach(element => {
+                revealObserver.observe(element);
+            });
+
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+
+            // Enhanced button interactions
+            document.querySelectorAll('.btn').forEach(button => {
+                button.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-2px) scale(1.02)';
+                });
+                
+                button.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+
+            // Card hover effects
+            document.querySelectorAll('.card').forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-8px) scale(1.02)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+
+            // Code block interactions
+            document.querySelectorAll('.code-block').forEach(codeBlock => {
+                codeBlock.addEventListener('mouseenter', function() {
+                    this.style.transform = 'scale(1.01)';
+                    this.style.boxShadow = '0 20px 40px rgba(0, 0, 0, 0.4)';
+                });
+                
+                codeBlock.addEventListener('mouseleave', function() {
+                    this.style.transform = 'scale(1)';
+                    this.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.3)';
+                });
+            });
+
+            // Progress circle functionality
+            const progressCircle = document.querySelector('.progress-circle');
+            if (progressCircle) {
+                window.addEventListener('scroll', function() {
+                    const scrolled = window.pageYOffset;
+                    const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+                    const scrollProgress = (scrolled / maxScroll) * 100;
+                    
+                    // Update progress circle appearance based on scroll
+                    if (scrollProgress > 20) {
+                        progressCircle.style.opacity = '1';
+                        progressCircle.style.transform = 'scale(1)';
+                    } else {
+                        progressCircle.style.opacity = '0.7';
+                        progressCircle.style.transform = 'scale(0.9)';
+                    }
+                });
+            }
+
+            // Typing effect for code blocks (optional enhancement)
+            const codeBlocks = document.querySelectorAll('.code-block code');
+            codeBlocks.forEach((code, index) => {
+                // Add a subtle glow effect on hover
+                code.parentElement.addEventListener('mouseenter', function() {
+                    this.style.borderLeft = '4px solid #fbbf24';
+                });
+                
+                code.parentElement.addEventListener('mouseleave', function() {
+                    this.style.borderLeft = '4px solid #f59e0b';
+                });
+            });
+
+            // Add particle effect to hero section (lightweight)
+            const hero = document.querySelector('.hero');
+            if (hero) {
+                // Create floating particles
+                for (let i = 0; i < 20; i++) {
+                    const particle = document.createElement('div');
+                    particle.className = 'absolute w-1 h-1 bg-white opacity-20 rounded-full';
+                    particle.style.left = Math.random() * 100 + '%';
+                    particle.style.top = Math.random() * 100 + '%';
+                    particle.style.animationDelay = Math.random() * 20 + 's';
+                    particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                    hero.appendChild(particle);
+                }
+            }
+        });
+    </script>
+</body>
+</html>
