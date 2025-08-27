@@ -311,3 +311,32 @@ function formatJS(js) {
     .replace(/\n\s*\n/g, "\n")
     .trim();
 }
+// Save Project
+function saveProject() {
+  const project = {
+    name: document.getElementById("projectName").value || "Untitled Project",
+    html: document.getElementById("htmlCode").value,
+    css: document.getElementById("cssCode").value,
+    js: document.getElementById("jsCode").value,
+    timestamp: new Date().toISOString(),
+  };
+
+  // Save to localStorage
+  localStorage.setItem("codequest_current_project", JSON.stringify(project));
+
+  // Save to projects list
+  const projects = JSON.parse(
+    localStorage.getItem("codequest_projects") || "[]"
+  );
+  const existingIndex = projects.findIndex((p) => p.name === project.name);
+
+  if (existingIndex !== -1) {
+    projects[existingIndex] = project;
+  } else {
+    projects.push(project);
+  }
+
+  localStorage.setItem("codequest_projects", JSON.stringify(projects));
+
+  updateStatus("✓ Project saved", "success");
+}
