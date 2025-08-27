@@ -389,3 +389,30 @@ function openProject() {
     }
   }
 }
+// Switch Tab
+function switchTab(tab) {
+  // Update active tab
+  document
+    .querySelectorAll(".editor-tab")
+    .forEach((t) => t.classList.remove("active"));
+  event.currentTarget.classList.add("active");
+
+  // Update active editor
+  document
+    .querySelectorAll(".editor-wrapper")
+    .forEach((e) => e.classList.remove("active"));
+  document.getElementById(tab + "Editor").classList.add("active");
+
+  editorState.currentTab = tab;
+
+  // Update footer
+  const fileTypes = { html: "HTML", css: "CSS", js: "JavaScript" };
+  document.getElementById("fileType").textContent = fileTypes[tab];
+}
+
+// Close Tab
+function closeTab(tab) {
+  event.stopPropagation();
+  // In a real implementation, this would handle closing tabs
+  console.log("Close tab:", tab);
+}
