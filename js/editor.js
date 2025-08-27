@@ -893,4 +893,110 @@ function insertSnippet(snippetType) {
   }
 }
 
+// Settings Functions
+function changeTheme(theme) {
+  editorState.settings.theme = theme;
+  document.body.className = "theme-" + theme;
+  updateStatus("Theme changed to " + theme, "success");
+}
+
+function changeFontSize(size) {
+  editorState.settings.fontSize = parseInt(size);
+  document.querySelectorAll(".code-input").forEach((input) => {
+    input.style.fontSize = size + "px";
+  });
+  document.querySelectorAll(".line-numbers").forEach((ln) => {
+    ln.style.fontSize = size + "px";
+  });
+}
+
+function changeTabSize(size) {
+  editorState.settings.tabSize = parseInt(size);
+}
+
+function toggleWordWrap() {
+  editorState.settings.wordWrap = !editorState.settings.wordWrap;
+  const wrap = editorState.settings.wordWrap ? "wrap" : "nowrap";
+  document.querySelectorAll(".code-input").forEach((input) => {
+    input.style.whiteSpace = wrap;
+  });
+}
+
+function toggleLineNumbers() {
+  editorState.settings.lineNumbers = !editorState.settings.lineNumbers;
+  document.querySelectorAll(".line-numbers").forEach((ln) => {
+    ln.style.display = editorState.settings.lineNumbers ? "block" : "none";
+  });
+}
+
+function toggleAutoSave() {
+  editorState.settings.autoSave = !editorState.settings.autoSave;
+  updateStatus(
+    editorState.settings.autoSave ? "Auto-save enabled" : "Auto-save disabled",
+    "info"
+  );
+}
+
+// Preview Functions
+function refreshPreview() {
+  runCode();
+}
+
+function toggleFullscreen() {
+  const preview = document.getElementById("previewFrame");
+  if (!document.fullscreenElement) {
+    preview.requestFullscreen();
+  } else {
+    document.exitFullscreen();
+  }
+}
+
+function openInNewTab() {
+  const html = document.getElementById("htmlCode").value;
+  const css = document.getElementById("cssCode").value;
+  const js = document.getElementById("jsCode").value;
+
+  const newWindow = window.open("", "_blank");
+  newWindow.document.write(`
+        <!DOCTYPE html>
+        <html lang="en">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>Preview - ${
+              document.getElementById("projectName").value
+            }</title>
+            <style>${css}</style>
+        </head>
+        <body>
+            ${html}
+            <script>${js}</script>
+        </body>
+        </html>
+    `);
+}
+
+function setDevice(device) {
+  const preview = document.getElementById("preview");
+  const previewFrame = document.getElementById("previewFrame");
+
+  document
+    .querySelectorAll(".device-btn")
+    .forEach((btn) => btn.classList.remove("active"));
+  event.currentTarget.classList.add("active");
+
+  switch (device) {
+    case "mobile":
+      previewFrame.style.width = "375px";
+      previewFrame.style.margin = "0 auto";
+      break;
+    case "tablet":
+      previewFrame.style.width = "768px";
+      previewFrame.style.margin = "0 auto";
+      break;
+    default:
+      previewFrame.style.width = "100%";
+      previewFrame.style.margin = "0";
+  }
+}
 
