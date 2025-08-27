@@ -546,3 +546,89 @@ function updateRobotPosition() {
 function resetRobot() {
   initRobotGame();
 }
+// Game Notifications
+function showGameNotification(message, type) {
+  const notification = document.createElement("div");
+  notification.className = `game-notification ${type}`;
+  notification.textContent = message;
+
+  const gameContainer = document.getElementById("gameContainer");
+  if (gameContainer) {
+    gameContainer.appendChild(notification);
+
+    setTimeout(() => {
+      notification.remove();
+    }, 2000);
+  }
+}
+
+// End Game
+function endGame(message) {
+  const gameContainer = document.getElementById("gameContainer");
+
+  // Save high score
+  saveHighScore();
+
+  gameContainer.innerHTML = `
+        <div class="game-over">
+            <h2>${message}</h2>
+            <div class="final-score">
+                <h3>Final Score: ${gameState.score}</h3>
+                <p>Level Reached: ${gameState.level}</p>
+            </div>
+            <div class="game-actions">
+                <button onclick="startGame('${gameState.currentGame}')">Play Again</button>
+                <button onclick="closeGame()">Exit</button>
+            </div>
+        </div>
+    `;
+}
+
+// Save Game Progress
+function saveGameProgress() {
+  const progress = {
+    lastGame: gameState.currentGame,
+    totalScore: gameState.score,
+    timestamp: new Date().toISOString(),
+  };
+
+  localStorage.setItem("codequest_game_progress", JSON.stringify(progress));
+
+  // Add XP to user profile
+  if (window.AuthManager && window.AuthManager.currentUser) {
+    window.AuthManager.addXP(Math.floor(gameState.score / 10));
+  }
+}
+
+// High Scores
+function saveHighScore() {
+  if (!gameState.highScores[gameState.currentGame]) {
+    gameState.highScores[gameState.currentGame] = [];
+  }
+
+  gameState.highScores[gameState.currentGame].push({
+    score: gameState.score,
+    level: gameState.level,
+    date: new Date().toISOString(),
+    player: window.AuthManager?.currentUser?.username || "Anonymous",
+  });
+
+  // Sort and keep top 10
+  gameState.highScores[gameState.currentGame].sort((a, b) => b.score - a.score);
+  gameState.highScores[gameState.currentGame] = gameState.highScores[
+    gameState.currentGame
+  ].slice(0, 10);
+
+  localStorage.setItem(
+    "codequest_highscores",
+    JSON.stringify(gameState.highScores)
+  );
+}
+
+function loadHighScores() {
+  // Display high scores in leaderboard section if exists
+  const leaderboard = document.getElementById("gameLeaderboard");
+  if (leaderboard) {
+    // Implementation for displaying high scores
+  }
+}
