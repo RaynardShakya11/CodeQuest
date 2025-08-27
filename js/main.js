@@ -363,3 +363,47 @@ function getLessonsData() {
     ],
   };
 }
+function getChallengesData() {
+  return [
+    { id: 1, title: "Build a Card Component", difficulty: "Easy", xp: 25 },
+    { id: 2, title: "Create a Navigation Menu", difficulty: "Medium", xp: 50 },
+    {
+      id: 3,
+      title: "Interactive Form Validation",
+      difficulty: "Hard",
+      xp: 100,
+    },
+  ];
+}
+
+function getLeaderboardData() {
+  return [
+    { rank: 1, username: "CodeMaster", xp: 2500, badges: 15 },
+    { rank: 2, username: "WebNinja", xp: 2350, badges: 14 },
+    { rank: 3, username: "HTMLHero", xp: 2200, badges: 13 },
+  ];
+}
+
+// Utility Functions
+function debounce(func, wait) {
+  let timeout;
+  return function executedFunction(...args) {
+    const later = () => {
+      clearTimeout(timeout);
+      func(...args);
+    };
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+  };
+}
+
+function throttle(func, limit) {
+  let inThrottle;
+  return function (...args) {
+    if (!inThrottle) {
+      func.apply(this, args);
+      inThrottle = true;
+      setTimeout(() => (inThrottle = false), limit);
+    }
+  };
+}
