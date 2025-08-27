@@ -1,0 +1,214 @@
+/* Editor Page Specific Styles */
+
+/* Editor Container */
+.editor-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--darker);
+  padding-top: 70px; /* Account for navbar */
+}
+
+/* Editor Toolbar */
+.editor-toolbar {
+  background: rgba(15, 23, 42, 0.95);
+  border-bottom: 1px solid rgba(99, 102, 241, 0.2);
+  padding: 0.75rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+}
+
+.toolbar-left,
+.toolbar-right {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.toolbar-btn {
+  padding: 0.5rem 1rem;
+  background: rgba(30, 41, 59, 0.5);
+  border: 1px solid transparent;
+  border-radius: 8px;
+  color: rgba(248, 250, 252, 0.8);
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.toolbar-btn:hover {
+  background: rgba(99, 102, 241, 0.1);
+  border-color: rgba(99, 102, 241, 0.3);
+}
+
+.toolbar-btn.primary {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: white;
+}
+
+.toolbar-btn.primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(99, 102, 241, 0.3);
+}
+
+.toolbar-separator {
+  width: 1px;
+  height: 24px;
+  background: rgba(99, 102, 241, 0.2);
+}
+
+.project-name-input {
+  background: rgba(30, 41, 59, 0.5);
+  border: 1px solid rgba(99, 102, 241, 0.2);
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  color: var(--light);
+  font-size: 1rem;
+  min-width: 200px;
+  transition: var(--transition);
+}
+
+.project-name-input:focus {
+  outline: none;
+  border-color: var(--primary);
+  background: rgba(30, 41, 59, 0.8);
+}
+
+/* Main Editor Area */
+.editor-main {
+  flex: 1;
+  display: flex;
+  overflow: hidden;
+}
+
+/* Sidebar */
+.editor-sidebar {
+  width: 250px;
+  background: rgba(15, 23, 42, 0.8);
+  border-right: 1px solid rgba(99, 102, 241, 0.2);
+  display: flex;
+  flex-direction: column;
+  transition: var(--transition);
+}
+
+.sidebar-tabs {
+  display: flex;
+  border-bottom: 1px solid rgba(99, 102, 241, 0.2);
+}
+
+.sidebar-tab {
+  flex: 1;
+  padding: 0.75rem;
+  background: transparent;
+  border: none;
+  color: rgba(248, 250, 252, 0.6);
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.sidebar-tab:hover {
+  background: rgba(99, 102, 241, 0.1);
+}
+
+.sidebar-tab.active {
+  background: rgba(99, 102, 241, 0.2);
+  color: var(--primary);
+  border-bottom: 2px solid var(--primary);
+}
+
+.sidebar-panel {
+  flex: 1;
+  padding: 1rem;
+  overflow-y: auto;
+  display: none;
+}
+
+.sidebar-panel.active {
+  display: block;
+}
+
+/* File Tree */
+.file-tree {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.file-item {
+  padding: 0.75rem;
+  background: rgba(30, 41, 59, 0.3);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: rgba(248, 250, 252, 0.8);
+}
+
+.file-item:hover {
+  background: rgba(99, 102, 241, 0.1);
+}
+
+.file-item.active {
+  background: rgba(99, 102, 241, 0.2);
+  color: var(--primary);
+}
+
+.add-file-btn {
+  margin-top: 1rem;
+  padding: 0.75rem;
+  background: rgba(99, 102, 241, 0.1);
+  border: 1px dashed rgba(99, 102, 241, 0.3);
+  border-radius: 8px;
+  color: var(--primary);
+  cursor: pointer;
+  transition: var(--transition);
+  text-align: center;
+}
+
+.add-file-btn:hover {
+  background: rgba(99, 102, 241, 0.2);
+  border-style: solid;
+}
+
+/* Snippets */
+.snippets-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.snippet-item {
+  padding: 1rem;
+  background: rgba(30, 41, 59, 0.5);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.snippet-item:hover {
+  background: rgba(99, 102, 241, 0.1);
+  transform: translateX(5px);
+}
+
+.snippet-item h4 {
+  color: var(--light);
+  margin-bottom: 0.25rem;
+  font-size: 0.95rem;
+}
+
+.snippet-item p {
+  color: rgba(248, 250, 252, 0.6);
+  font-size: 0.85rem;
+}
