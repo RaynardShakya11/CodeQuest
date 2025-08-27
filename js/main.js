@@ -124,3 +124,7 @@ function setupEventListeners() {
   if (signupForm) {
     signupForm.addEventListener("submit", handleSignup);
   }
+
+  // Keyboard shortcuts
+  document.addEventListener("keydown", handleKeyboardShortcuts);
+}
