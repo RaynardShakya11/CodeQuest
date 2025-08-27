@@ -253,3 +253,26 @@ const lessonsData = {
     // More lessons...
   ],
 };
+// Initialize Learn Page
+document.addEventListener("DOMContentLoaded", function () {
+  initializeLearnPage();
+  loadProgress();
+  setupTrackSelector();
+  updateProgressDisplay();
+});
+
+// Initialize Learn Page
+function initializeLearnPage() {
+  // Load completed lessons from localStorage
+  const saved = localStorage.getItem("codequest_completed_lessons");
+  if (saved) {
+    learnState.completedLessons = JSON.parse(saved);
+  }
+
+  // Check URL hash for specific track
+  const hash = window.location.hash.substring(1);
+  if (hash && ["html", "css", "javascript"].includes(hash)) {
+    learnState.currentTrack = hash;
+    showTrack(hash);
+  }
+}
