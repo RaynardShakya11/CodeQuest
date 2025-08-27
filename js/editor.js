@@ -1105,3 +1105,30 @@ function toggleComment() {
   textarea.selectionStart = start;
   textarea.selectionEnd = start + commentedText.length;
 }
+// Duplicate Line
+function duplicateLine() {
+  const activeTab = editorState.currentTab;
+  const textarea = document.getElementById(activeTab + "Code");
+
+  if (!textarea) return;
+
+  const text = textarea.value;
+  const lines = text.split("\n");
+  const cursorPos = textarea.selectionStart;
+
+  let charCount = 0;
+  let currentLine = 0;
+
+  for (let i = 0; i < lines.length; i++) {
+    charCount += lines[i].length + 1;
+    if (charCount > cursorPos) {
+      currentLine = i;
+      break;
+    }
+  }
+
+  lines.splice(currentLine + 1, 0, lines[currentLine]);
+  textarea.value = lines.join("\n");
+
+  updateLineNumbers(activeTab + "Code");
+}
