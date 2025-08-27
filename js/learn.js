@@ -291,3 +291,75 @@ function setupTrackSelector() {
     });
   });
 }
+// Filter Courses
+function filterCourses(track) {
+  const sections = document.querySelectorAll(".course-section");
+
+  sections.forEach((section) => {
+    if (track === "all") {
+      section.style.display = "block";
+    } else {
+      const sectionId = section.id;
+      if (sectionId.includes(track)) {
+        section.style.display = "block";
+      } else {
+        section.style.display = "none";
+      }
+    }
+  });
+}
+
+// Show Specific Track
+function showTrack(track) {
+  // Update track selector
+  const trackButtons = document.querySelectorAll(".track-btn");
+  trackButtons.forEach((btn) => {
+    btn.classList.remove("active");
+    if (btn.dataset.track === track) {
+      btn.classList.add("active");
+    }
+  });
+
+  // Filter courses
+  filterCourses(track);
+
+  // Scroll to course section
+  const targetSection = document.getElementById(`${track}-course`);
+  if (targetSection) {
+    targetSection.scrollIntoView({ behavior: "smooth" });
+  }
+}
+
+// Load Progress
+function loadProgress() {
+  // Calculate progress for each track
+  ["html", "css", "javascript"].forEach((track) => {
+    const lessons = lessonsData[track] || [];
+    const completed = lessons.filter((lesson) =>
+      learnState.completedLessons.includes(lesson.id)
+    ).length;
+
+    learnState.progress[track].completed = completed;
+  });
+}
+
+// Update Progress Display
+function updateProgressDisplay() {
+  // Update progress bars and stats for each track
+  Object.keys(learnState.progress).forEach((track) => {
+    const progress = learnState.progress[track];
+    const percentage = (progress.completed / progress.total) * 100;
+
+    // Update progress bar if exists
+    const progressBar = document.querySelector(`.${track}-progress`);
+    if (progressBar) {
+      progressBar.style.width = `${percentage}%`;
+    }
+
+    // Update text displays
+    const progressText = document.querySelector(`#${track}Percent`);
+    if (progressText) {
+      progressText.textContent = `${Math.round(percentage)}%`;
+    }
+  });
+}
