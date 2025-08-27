@@ -164,3 +164,79 @@ function setupKeyboardShortcuts() {
     }
   });
 }
+// Run Code
+function runCode() {
+  try {
+    const html = document.getElementById("htmlCode").value;
+    const css = document.getElementById("cssCode").value;
+    const js = document.getElementById("jsCode").value;
+
+    const preview = document.getElementById("preview");
+
+    // Create the combined HTML
+    const combinedCode = `
+            <!DOCTYPE html>
+            <html lang="en">
+            <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <style>
+                    ${css}
+                </style>
+            </head>
+            <body>
+                ${html}
+                <script>
+                    // Capture console output
+                    const originalLog = console.log;
+                    const originalError = console.error;
+                    const originalWarn = console.warn;
+                    
+                    console.log = function(...args) {
+                        parent.postMessage({
+                            type: 'console',
+                            level: 'log',
+                            message: args.join(' ')
+                        }, '*');
+                        originalLog.apply(console, args);
+                    };
+                    
+                    console.error = function(...args) {
+                        parent.postMessage({
+                            type: 'console',
+                            level: 'error',
+                            message: args.join(' ')
+                        }, '*');
+                        originalError.apply(console, args);
+                    };
+                    
+                    console.warn = function(...args) {
+                        parent.postMessage({
+                            type: 'console',
+                            level: 'warn',
+                            message: args.join(' ')
+                        }, '*');
+                        originalWarn.apply(console, args);
+                    };
+                    
+                    try {
+                        ${js}
+                    } catch(error) {
+                        console.error('Error:', error.message);
+                    }
+                </script>
+            </body>
+            </html>
+        `;
+
+    // Update preview
+    preview.srcdoc = combinedCode;
+
+    // Update status
+    updateStatus("Code executed successfully", "success");
+  } catch (error) {
+    console.error("Error running code:", error);
+    updateStatus("Error: " + error.message, "error");
+    addConsoleMessage("Error: " + error.message, "error");
+  }
+}
