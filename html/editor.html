@@ -327,3 +327,22 @@ setTimeout(() => {
                     </div>
                 </div>
             </div>
+  <!-- Preview Area -->
+            <div class="preview-area">
+                <div class="preview-header">
+                    <div class="preview-controls">
+                        <button class="preview-btn" onclick="refreshPreview()" title="Refresh">🔄</button>
+                        <button class="preview-btn" onclick="toggleFullscreen()" title="Fullscreen">⛶</button>
+                        <button class="preview-btn" onclick="openInNewTab()" title="Open in New Tab">↗</button>
+                    </div>
+                    <div class="preview-device-selector">
+                        <button class="device-btn active" onclick="setDevice('desktop')">💻</button>
+                        <button class="device-btn" onclick="setDevice('tablet')">📱</button>
+                        <button class="device-btn" onclick="setDevice('mobile')">📱</button>
+                    </div>
+                </div>
+                <div class="preview-frame" id="previewFrame">
+                    <iframe id="preview" class="preview-iframe"></iframe>
+                </div>
+            </div>
+        </div>
