@@ -269,3 +269,18 @@ function handleKeyboardShortcuts(e) {
     closeAllModals();
   }
 }
+// Close All Modals
+function closeAllModals() {
+  const modals = document.querySelectorAll(".modal");
+  modals.forEach((modal) => {
+    modal.style.display = "none";
+  });
+}
+
+// Close Specific Modal
+function closeModal(modalId) {
+  const modal = document.getElementById(modalId);
+  if (modal) {
+    modal.style.display = "none";
+  }
+}
