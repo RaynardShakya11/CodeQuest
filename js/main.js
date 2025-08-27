@@ -51,3 +51,51 @@ function initializeAuth() {
     setTimeout(initializeAuth, 100);
   }
 }
+
+// Setup Authentication State Listener
+function setupAuthStateListener() {
+  // Listen for auth state changes from AuthManager
+  if (window.AuthManager) {
+    // Override the updateAuthUI method to also update our local state
+    const originalUpdateAuthUI = window.AuthManager.updateAuthUI;
+    window.AuthManager.updateAuthUI = function () {
+      // Call original method
+      originalUpdateAuthUI.call(this);
+
+      // Sync our local state
+      currentUser = this.currentUser;
+      if (this.currentUser) {
+        localStorage.setItem(
+          "codequest_user",
+          JSON.stringify(this.currentUser)
+        );
+      } else {
+        localStorage.removeItem("codequest_user");
+      }
+    };
+  }
+}
+// Update Authentication UI
+function updateAuthUI() {
+  // Use AuthManager if available, otherwise fall back to basic logic
+  if (
+    typeof window.AuthManager !== "undefined" &&
+    window.AuthManager.updateAuthUI
+  ) {
+    window.AuthManager.updateAuthUI();
+  } else {
+    // Fallback UI update logic
+    const authButtons = document.getElementById("authButtons");
+    const userMenu = document.getElementById("userMenu");
+    const userGreeting = document.getElementById("userGreeting");
+
+    if (currentUser && authButtons && userMenu && userGreeting) {
+      authButtons.style.display = "none";
+      userMenu.style.display = "inline-flex";
+      userGreeting.textContent = `Welcome, ${currentUser.username}!`;
+    } else if (authButtons && userMenu) {
+      authButtons.style.display = "inline-flex";
+      userMenu.style.display = "none";
+    }
+  }
+}
