@@ -632,3 +632,190 @@ function loadHighScores() {
     // Implementation for displaying high scores
   }
 }
+// Daily Challenge Timer
+function startDailyTimer() {
+  updateDailyTimer();
+  setInterval(updateDailyTimer, 1000);
+}
+
+function updateDailyTimer() {
+  const timer = document.getElementById("daily-timer");
+  if (!timer) return;
+
+  const now = new Date();
+  const tomorrow = new Date(now);
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  tomorrow.setHours(0, 0, 0, 0);
+
+  const diff = tomorrow - now;
+  const hours = Math.floor(diff / (1000 * 60 * 60));
+  const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+  const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+  timer.textContent = `${hours.toString().padStart(2, "0")}:${minutes
+    .toString()
+    .padStart(2, "0")}:${seconds.toString().padStart(2, "0")}`;
+}
+
+// Game Styles
+function addGameStyles() {
+  const style = document.createElement("style");
+  style.textContent = `
+        .css-game {
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .game-board {
+            margin: 2rem 0;
+            padding: 2rem;
+            background: rgba(30, 41, 59, 0.8);
+            border-radius: 12px;
+        }
+        
+        .table-preview {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            font-size: 3rem;
+        }
+        
+        .selector-input {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin: 2rem 0;
+        }
+        
+        .selector-input input {
+            padding: 0.75rem 1.5rem;
+            font-size: 1.1rem;
+            border-radius: 8px;
+            border: 2px solid var(--primary);
+            background: rgba(30, 41, 59, 0.8);
+            color: white;
+            min-width: 300px;
+        }
+        
+        .memory-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin: 2rem 0;
+            max-width: 600px;
+            margin: 2rem auto;
+        }
+        
+        .memory-card {
+            aspect-ratio: 1;
+            position: relative;
+            cursor: pointer;
+            transform-style: preserve-3d;
+            transition: transform 0.6s;
+        }
+        
+        .memory-card.flipped {
+            transform: rotateY(180deg);
+        }
+        
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+        
+        .card-front {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            font-size: 2rem;
+        }
+        
+        .card-back {
+            background: rgba(30, 41, 59, 0.9);
+            transform: rotateY(180deg);
+            border: 2px solid var(--primary);
+        }
+        
+        .game-notification {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            z-index: 100;
+            animation: fadeInOut 2s ease;
+        }
+        
+        .game-notification.success {
+            background: var(--success);
+            color: white;
+        }
+        
+        .game-notification.error {
+            background: var(--danger);
+            color: white;
+        }
+        
+        @keyframes fadeInOut {
+            0% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+            20% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+            80% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+            100% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+        }
+        
+        .game-stats {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            font-size: 1.2rem;
+            margin-top: 2rem;
+        }
+        
+        .game-over {
+            text-align: center;
+            padding: 3rem;
+        }
+        
+        .game-over h2 {
+            font-size: 3rem;
+            margin-bottom: 2rem;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .final-score {
+            margin: 2rem 0;
+            font-size: 1.5rem;
+        }
+        
+        .game-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+    `;
+
+  document.head.appendChild(style);
+}
+// Animate Game Cards
+function animateGameCards() {
+  const cards = document.querySelectorAll(".game-card");
+  cards.forEach((card, index) => {
+    setTimeout(() => {
+      card.style.opacity = "1";
+      card.style.transform = "translateY(0)";
+    }, index * 100);
+  });
+}
