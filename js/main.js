@@ -319,3 +319,26 @@ function hideLoader() {
     loader.remove();
   }
 }
+// API Calls (Simulated)
+async function apiCall(endpoint, method = "GET", data = null) {
+  showLoader();
+
+  // Simulate API delay
+  await new Promise((resolve) => setTimeout(resolve, 500));
+
+  hideLoader();
+
+  // Return mock data based on endpoint
+  switch (endpoint) {
+    case "/api/user":
+      return currentUser;
+    case "/api/lessons":
+      return getLessonsData();
+    case "/api/challenges":
+      return getChallengesData();
+    case "/api/leaderboard":
+      return getLeaderboardData();
+    default:
+      return { success: true };
+  }
+}
