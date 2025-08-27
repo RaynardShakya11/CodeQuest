@@ -284,3 +284,9 @@ function closeModal(modalId) {
     modal.style.display = "none";
   }
 }
+// Show Notification
+function showNotification(message, type = "info", duration = 3000) {
+  const notification = document.createElement("div");
+  notification.className = `notification ${type}`;
+  notification.textContent = message;
+  document.body.appendChild(notification);
