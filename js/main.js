@@ -164,3 +164,59 @@ function setupSmoothScroll() {
     });
   });
 }
+// Initialize Tooltips
+function initTooltips() {
+  const tooltips = document.querySelectorAll("[data-tooltip]");
+  tooltips.forEach((element) => {
+    element.addEventListener("mouseenter", showTooltip);
+    element.addEventListener("mouseleave", hideTooltip);
+  });
+}
+
+function showTooltip(e) {
+  const text = e.target.getAttribute("data-tooltip");
+  const tooltip = document.createElement("div");
+  tooltip.className = "tooltip";
+  tooltip.textContent = text;
+  document.body.appendChild(tooltip);
+
+  const rect = e.target.getBoundingClientRect();
+  tooltip.style.left =
+    rect.left + rect.width / 2 - tooltip.offsetWidth / 2 + "px";
+  tooltip.style.top = rect.top - tooltip.offsetHeight - 10 + "px";
+}
+
+function hideTooltip() {
+  const tooltip = document.querySelector(".tooltip");
+  if (tooltip) {
+    tooltip.remove();
+  }
+}
+
+// Page Specific Initialization
+function initializePageSpecific(page) {
+  switch (page) {
+    case "index.html":
+    case "":
+      initHomePage();
+      break;
+    case "learn.html":
+      initLearnPage();
+      break;
+    case "editor.html":
+      initEditorPage();
+      break;
+    case "challenges.html":
+      initChallengesPage();
+      break;
+    case "games.html":
+      initGamesPage();
+      break;
+    case "leaderboard.html":
+      initLeaderboard();
+      break;
+    case "dashboard.html":
+      initDashboard();
+      break;
+  }
+}
