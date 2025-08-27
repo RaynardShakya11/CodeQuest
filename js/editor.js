@@ -710,3 +710,14 @@ function addChallengeStyles() {
   
   document.head.appendChild(style);
 }
+// Show Notification
+function showNotification(message, type = "info") {
+  const notification = document.createElement("div");
+  notification.className = `notification ${type}`;
+  notification.textContent = message;
+  document.body.appendChild(notification);
+  
+  // Show notification
+  setTimeout(() => {
+    notification.classList.add("show");
+  }, 100);
