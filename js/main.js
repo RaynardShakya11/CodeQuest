@@ -290,3 +290,17 @@ function showNotification(message, type = "info", duration = 3000) {
   notification.className = `notification ${type}`;
   notification.textContent = message;
   document.body.appendChild(notification);
+
+  // Animate in
+  setTimeout(() => {
+    notification.style.opacity = "1";
+    notification.style.transform = "translateX(0)";
+  }, 10);
+
+  // Remove after duration
+  setTimeout(() => {
+    notification.style.opacity = "0";
+    notification.style.transform = "translateX(100%)";
+    setTimeout(() => notification.remove(), 300);
+  }, duration);
+}
