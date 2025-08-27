@@ -113,3 +113,14 @@ function setupEventListeners() {
       event.target.style.display = "none";
     }
   });
+
+  // Form submissions
+  const loginForm = document.getElementById("loginForm");
+  if (loginForm) {
+    loginForm.addEventListener("submit", handleLogin);
+  }
+
+  const signupForm = document.getElementById("signupForm");
+  if (signupForm) {
+    signupForm.addEventListener("submit", handleSignup);
+  }
