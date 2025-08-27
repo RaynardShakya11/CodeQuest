@@ -99,3 +99,17 @@ function updateAuthUI() {
     }
   }
 }
+// Setup Event Listeners
+function setupEventListeners() {
+  // Hamburger menu
+  const hamburger = document.getElementById("hamburger");
+  if (hamburger) {
+    hamburger.addEventListener("click", toggleMobileMenu);
+  }
+
+  // Close modals on outside click
+  window.addEventListener("click", function (event) {
+    if (event.target.classList.contains("modal")) {
+      event.target.style.display = "none";
+    }
+  });
