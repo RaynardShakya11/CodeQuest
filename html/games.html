@@ -289,3 +289,76 @@
             </div>
         </div>
     </section>
+        <!-- Daily Challenge -->
+    <section class="daily-challenge-section">
+        <div class="container">
+            <div class="daily-challenge-card">
+                <div class="challenge-header">
+                    <h2>🎯 Daily Challenge</h2>
+                    <div class="timer">
+                        <span>Time Left: </span>
+                        <span id="daily-timer">23:45:30</span>
+                    </div>
+                </div>
+                <div class="challenge-content">
+                    <h3>CSS Box Model Master</h3>
+                    <p>Complete 5 box model challenges without using developer tools. Can you visualize the boxes?</p>
+                    <div class="challenge-rewards">
+                        <span>🏆 150 XP</span>
+                        <span>🎖️ Special Badge</span>
+                        <span>🔥 3-day streak</span>
+                    </div>
+                    <button class="btn btn-warning">Start Daily Challenge</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Multiplayer Games -->
+    <section class="multiplayer-section">
+        <div class="container">
+            <h2 class="section-title">Multiplayer Battles</h2>
+            <p class="section-subtitle">Challenge other players in real-time coding battles</p>
+
+            <div class="multiplayer-grid">
+                <div class="multiplayer-card">
+                    <h3>⚔️ Code Duel</h3>
+                    <p>1v1 coding battles. Solve problems faster than your opponent!</p>
+                    <div class="online-players">
+                        <span class="online-indicator"></span>
+                        <span>234 players online</span>
+                    </div>
+                    <button class="btn btn-danger">Find Match</button>
+                </div>
+
+                <div class="multiplayer-card">
+                    <h3>👥 Team Challenge</h3>
+                    <p>Work together to solve complex coding challenges.</p>
+                    <div class="online-players">
+                        <span class="online-indicator"></span>
+                        <span>156 players online</span>
+                    </div>
+                    <button class="btn btn-info">Join Team</button>
+                </div>
+
+                <div class="multiplayer-card">
+                    <h3>🏆 Tournament</h3>
+                    <p>Weekly tournaments with amazing prizes!</p>
+                    <div class="tournament-timer">
+                        <span>Next tournament in: 2d 14h</span>
+                    </div>
+                    <button class="btn btn-success">Register</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Game Modal (for playing games) -->
+    <div id="gameModal" class="game-modal">
+        <div class="game-modal-content">
+            <button class="close-game" onclick="closeGame()">&times;</button>
+            <div id="gameContainer">
+                <!-- Game content will be loaded here -->
+            </div>
+        </div>
+    </div>
