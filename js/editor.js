@@ -420,3 +420,125 @@ function closeTab(tab) {
   // In a real implementation, this would handle closing tabs
   console.log("Close tab:", tab);
 }
+// Update Line Numbers
+function updateLineNumbers(editorId) {
+  const map = {
+    htmlCode: "htmlLineNumbers",
+    cssCode: "cssLineNumbers",
+    jsCode: "jsLineNumbers",
+  };
+
+  if (!editorId) {
+    updateAllLineNumbers();
+    return;
+  }
+
+  const textarea = document.getElementById(editorId);
+  const lineNumbers = document.getElementById(map[editorId]);
+
+  if (textarea && lineNumbers) {
+    const lines = textarea.value.split("\n");
+    const numbers = [];
+
+    for (let i = 1; i <= lines.length; i++) {
+      numbers.push(i);
+    }
+
+    lineNumbers.innerHTML = numbers.join("<br>");
+
+    // Update cursor position
+    updateCursorPosition(textarea);
+  }
+}
+
+// Update All Line Numbers
+function updateAllLineNumbers() {
+  updateLineNumbers("htmlCode");
+  updateLineNumbers("cssCode");
+  updateLineNumbers("jsCode");
+}
+
+// Sync Line Number Scroll
+function syncLineNumberScroll(editorId) {
+  const map = {
+    htmlCode: "htmlLineNumbers",
+    cssCode: "cssLineNumbers",
+    jsCode: "jsLineNumbers",
+  };
+
+  const textarea = document.getElementById(editorId);
+  const lineNumbers = document.getElementById(map[editorId]);
+
+  if (textarea && lineNumbers) {
+    lineNumbers.scrollTop = textarea.scrollTop;
+  }
+}
+
+// Update Cursor Position
+function updateCursorPosition(textarea) {
+  const text = textarea.value.substring(0, textarea.selectionStart);
+  const lines = text.split("\n");
+  const currentLine = lines.length;
+  const currentColumn = lines[lines.length - 1].length + 1;
+
+  document.getElementById(
+    "cursorPosition"
+  ).textContent = `Line ${currentLine}, Column ${currentColumn}`;
+}
+
+// Initialize Challenge Mode
+function initializeChallengeMode(challenge) {
+  // Update project name
+  document.getElementById("projectName").value = challenge.title;
+  
+  // Load starter code
+  if (challenge.starterCode) {
+    document.getElementById("htmlCode").value = challenge.starterCode.html || "";
+    document.getElementById("cssCode").value = challenge.starterCode.css || "";
+    document.getElementById("jsCode").value = challenge.starterCode.js || "";
+  }
+  
+  // Add challenge instructions panel
+  addChallengeInstructions(challenge);
+  
+  // Update line numbers
+  updateAllLineNumbers();
+  
+  // Run initial preview
+  runCode();
+}
+
+// Add Challenge Instructions
+function addChallengeInstructions(challenge) {
+  const instructionsPanel = document.createElement("div");
+  instructionsPanel.className = "challenge-instructions";
+  instructionsPanel.innerHTML = `
+    <div class="challenge-header">
+      <h3>🎯 ${challenge.title}</h3>
+      <div class="challenge-meta">
+        <span class="difficulty ${challenge.difficulty}">${challenge.difficulty}</span>
+        <span class="xp-reward">🏆 ${challenge.xp} XP</span>
+      </div>
+    </div>
+    <div class="challenge-description">
+      <p>${challenge.description}</p>
+    </div>
+    <div class="challenge-requirements">
+      <h4>Requirements:</h4>
+      <ul>
+        ${challenge.requirements.map(req => `<li>✓ ${req}</li>`).join('')}
+      </ul>
+    </div>
+    <div class="challenge-actions">
+      <button class="btn btn-success" onclick="submitChallenge('${challenge.id || 'unknown'}')">Submit Solution</button>
+      <button class="btn btn-secondary" onclick="viewSolution()">View Solution</button>
+    </div>
+  `;
+  
+  // Insert at the top of the editor
+  const editorContainer = document.querySelector('.editor-container');
+  editorContainer.insertBefore(instructionsPanel, editorContainer.firstChild);
+  
+  // Add styles
+  addChallengeStyles();
+}
