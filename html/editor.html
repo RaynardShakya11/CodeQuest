@@ -63,3 +63,122 @@
                     <span>↷</span>
                 </button>
             </div>
+<div class="toolbar-center">
+                <input type="text" id="projectName" class="project-name-input" placeholder="Untitled Project"
+                    value="My Awesome Project">
+            </div>
+
+            <div class="toolbar-right">
+                <button class="toolbar-btn" onclick="formatCode()" title="Format Code">
+                    <span>✨</span> Format
+                </button>
+                <button class="toolbar-btn" onclick="toggleConsole()" title="Toggle Console">
+                    <span>📋</span> Console
+                </button>
+                <button class="toolbar-btn" onclick="shareProject()" title="Share Project">
+                    <span>🔗</span> Share
+                </button>
+                <button class="toolbar-btn primary" onclick="runCode()" title="Run Code">
+                    <span>▶</span> Run
+                </button>
+            </div>
+        </div>
+
+        <!-- Main Editor Area -->
+        <div class="editor-main">
+            <!-- Sidebar -->
+            <div class="editor-sidebar">
+                <div class="sidebar-tabs">
+                    <button class="sidebar-tab active" onclick="showSidebarPanel('files')">
+                        <span>📁</span> Files
+                    </button>
+                    <button class="sidebar-tab" onclick="showSidebarPanel('snippets')">
+                        <span>📝</span> Snippets
+                    </button>
+                    <button class="sidebar-tab" onclick="showSidebarPanel('settings')">
+                        <span>⚙️</span> Settings
+                    </button>
+                </div>
+
+                <!-- Files Panel -->
+                <div class="sidebar-panel active" id="filesPanel">
+                    <div class="file-tree">
+                        <div class="file-item active" onclick="openFile('index.html')">
+                            <span>📄</span> index.html
+                        </div>
+                        <div class="file-item" onclick="openFile('styles.css')">
+                            <span>🎨</span> styles.css
+                        </div>
+                        <div class="file-item" onclick="openFile('script.js')">
+                            <span>⚡</span> script.js
+                        </div>
+                    </div>
+                    <button class="add-file-btn" onclick="addNewFile()">+ Add File</button>
+                </div>
+
+                <!-- Snippets Panel -->
+                <div class="sidebar-panel" id="snippetsPanel">
+                    <div class="snippets-list">
+                        <div class="snippet-item" onclick="insertSnippet('html-boilerplate')">
+                            <h4>HTML Boilerplate</h4>
+                            <p>Basic HTML5 structure</p>
+                        </div>
+                        <div class="snippet-item" onclick="insertSnippet('flexbox-center')">
+                            <h4>Flexbox Center</h4>
+                            <p>Center content with flexbox</p>
+                        </div>
+                        <div class="snippet-item" onclick="insertSnippet('fetch-api')">
+                            <h4>Fetch API</h4>
+                            <p>Basic fetch request</p>
+                        </div>
+                        <div class="snippet-item" onclick="insertSnippet('event-listener')">
+                            <h4>Event Listener</h4>
+                            <p>Add event listener</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Settings Panel -->
+                <div class="sidebar-panel" id="settingsPanel">
+                    <div class="settings-list">
+                        <div class="setting-item">
+                            <label>Theme</label>
+                            <select id="themeSelect" onchange="changeTheme(this.value)">
+                                <option value="dark">Dark</option>
+                                <option value="light">Light</option>
+                                <option value="dracula">Dracula</option>
+                                <option value="monokai">Monokai</option>
+                            </select>
+                        </div>
+                        <div class="setting-item">
+                            <label>Font Size</label>
+                            <input type="range" min="12" max="24" value="14" onchange="changeFontSize(this.value)">
+                        </div>
+                        <div class="setting-item">
+                            <label>Tab Size</label>
+                            <select id="tabSize" onchange="changeTabSize(this.value)">
+                                <option value="2">2 spaces</option>
+                                <option value="4" selected>4 spaces</option>
+                            </select>
+                        </div>
+                        <div class="setting-item">
+                            <label>
+                                <input type="checkbox" id="wordWrap" onchange="toggleWordWrap()">
+                                Word Wrap
+                            </label>
+                        </div>
+                        <div class="setting-item">
+                            <label>
+                                <input type="checkbox" id="lineNumbers" checked onchange="toggleLineNumbers()">
+                                Line Numbers
+                            </label>
+                        </div>
+                        <div class="setting-item">
+                            <label>
+                                <input type="checkbox" id="autoSave" onchange="toggleAutoSave()">
+                                Auto Save
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div
