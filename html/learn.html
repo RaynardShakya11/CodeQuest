@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learn - CodeQuest</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/learn-styles.css">
+</head>
+<body>
+    <div class="bg-animation"></div>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="../index.html" class="logo">⚡CodeQuest</a>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="nav-links" id="navLinks">
+                <a href="../index.html" class="nav-link">Home</a>
+                <a href="learn.html" class="nav-link active">Learn</a>
+                <a href="editor.html" class="nav-link">Code Editor</a>
+                <a href="challenges.html" class="nav-link">Challenges</a>
+                <a href="games.html" class="nav-link">Games</a>
+                <a href="leaderboard.html" class="nav-link">Leaderboard</a>
+                <a href="about.html" class="nav-link">About</a>
+                <span id="authButtons">
+                    <button class="btn btn-secondary" onclick="showLogin()">Login</button>
+                    <button class="btn btn-primary" onclick="showSignup()">Sign Up</button>
+                </span>
+                <span id="userMenu" style="display: none;">
+                    <span class="nav-link" id="userGreeting">Welcome!</span>
+                    <a href="dashboard.html" class="btn btn-secondary">Dashboard</a>
+                    <button class="btn btn-danger" onclick="logout()">Logout</button>
+                </span>
+            </div>
+        </div>
+    </nav>
+        <!-- Learning Hero -->
+    <section class="learn-hero">
+        <div class="container">
+            <h1 class="page-title">Master Web Development</h1>
+            <p class="page-subtitle">Comprehensive courses with hands-on practice and real-world projects</p>
+
+            <!-- Track Selector -->
+            <div class="track-selector">
+                <button class="track-btn active" data-track="all">All Courses</button>
+                <button class="track-btn" data-track="html">HTML</button>
+                <button class="track-btn" data-track="css">CSS</button>
+                <button class="track-btn" data-track="javascript">JavaScript</button>
+                <button class="track-btn" data-track="projects">Projects</button>
+            </div>
+        </div>
+    </section>
+        <!-- HTML Course Section -->
+    <section class="course-section" id="html-course">
+        <div class="container">
+            <div class="course-header">
+                <div class="course-icon">🌐</div>
+                <div class="course-info">
+                    <h2>HTML Fundamentals</h2>
+                    <p>Build the foundation of web development with semantic HTML5</p>
+                    <div class="course-meta">
+                        <span>📚 45 Lessons</span>
+                        <span>⏱️ 8 Hours</span>
+                        <span>🎯 12 Projects</span>
+                        <span>🏆 Certificate</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- HTML Modules -->
+            <div class="modules-grid">
+                <!-- Module 1: Getting Started -->
+                <div class="module-card">
+                    <div class="module-header">
+                        <h3>Module 1: Getting Started</h3>
+                        <span class="module-badge">Beginner</span>
+                    </div>
+                    <div class="lessons-list">
+                        <div class="lesson-item" onclick="startLesson('html-1', 'html')">
+                            <span class="lesson-icon">📖</span>
+                            <div class="lesson-content">
+                                <h4>Introduction to HTML</h4>
+                                <p>What is HTML and why it matters</p>
+                                <span class="lesson-duration">15 min</span>
+                            </div>
+                            <span class="lesson-xp">+10 XP</span>
+                        </div>
+                        <div class="lesson-item" onclick="startLesson('html-2', 'html')">
+                            <span class="lesson-icon">💻</span>
+                            <div class="lesson-content">
+                                <h4>Your First HTML Page</h4>
+                                <p>Create a basic HTML document structure</p>
+                                <span class="lesson-duration">20 min</span>
+                                <span class="lesson-xp">+15 XP</span>
+                            </div>
+                        </div>
+                        <div class="lesson-item" onclick="startLesson('html-3', 'html')">
+                            <span class="lesson-icon">🏷️</span>
+                            <div class="lesson-content">
+                                <h4>HTML Tags & Elements</h4>
+                                <p>Understanding opening and closing tags</p>
+                                <span class="lesson-duration">25 min</span>
+                            </div>
+                            <span class="lesson-xp">+15 XP</span>
+                        </div>
+                        <div class="lesson-item locked" onclick="startLesson('html-4', 'html')">
+                            <span class="lesson-icon">🔒</span>
+                            <div class="lesson-content">
+                                <h4>HTML Attributes</h4>
+                                <p>Adding properties to HTML elements</p>
+                                <span class="lesson-duration">20 min</span>
+                            </div>
+                            <span class="lesson-xp">+20 XP</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Module 2: Text Content -->
+                <div class="module-card">
+                    <div class="module-header">
+                        <h3>Module 2: Text & Typography</h3>
+                        <span class="module-badge">Beginner</span>
+                    </div>
+                    <div class="lessons-list">
+                        <div class="lesson-item" onclick="startLesson('html-6', 'html')">
+                            <span class="lesson-icon">📝</span>
+                            <div class="lesson-content">
+                                <h4>Headings & Paragraphs</h4>
+                                <p>Structure your content with h1-h6 and p tags</p>
+                                <span class="lesson-duration">20 min</span>
+                            </div>
+                            <span class="lesson-xp">+15 XP</span>
+                        </div>
+                        <div class="lesson-item" onclick="startLesson('html-7', 'html')">
+                            <span class="lesson-icon">✨</span>
+                            <div class="lesson-content">
+                                <h4>Text Formatting</h4>
+                                <p>Bold, italic, underline, and more</p>
+                                <span class="lesson-duration">15 min</span>
+                            </div>
+                            <span class="lesson-xp">+15 XP</span>
+                        </div>
+                        <div class="lesson-item" onclick="startLesson('html-8', 'html')">
+                            <span class="lesson-icon">💭</span>
+                            <div class="lesson-content">
+                                <h4>Quotes & Citations</h4>
+                                <p>Blockquotes, citations, and abbreviations</p>
+                                <span class="lesson-duration">20 min</span>
+                            </div>
+                            <span class="lesson-xp">+20 XP</span>
+                        </div>
+                        <div class="lesson-item" onclick="startLesson('html-9', 'html')">
+                            <span class="lesson-icon">🎯</span>
+                            <div class="lesson-content">
+                                <h4>Project: Blog Post</h4>
+                                <p>Build a formatted blog post layout</p>
+                                <span class="lesson-duration">30 min</span>
+                            </div>
+                            <span class="lesson-xp">+50 XP</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Module 3: Lists & Links -->
+                <div class="module-card">
+                    <div class="module-header">
+                        <h3>Module 3: Lists & Navigation</h3>
+                        <span class="module-badge">Beginner</span>
+                    </div>
+                    <div class="lessons-list">
+                        <div class="lesson-item">
+                            <span class="lesson-icon">📋</span>
+                            <div class="lesson-content">
+                                <h4>Ordered & Unordered Lists</h4>
+                                <p>Create numbered and bullet lists</p>
+                                <span class="lesson-duration">20 min</span>
+                            </div>
+                            <span class="lesson-xp">+15 XP</span>
+                        </div>
+                        <div class="lesson-item">
+                            <span class="lesson-icon">🔗</span>
+                            <div class="lesson-content">
+                                <h4>Hyperlinks & Anchors</h4>
+                                <p>Connect pages and create navigation</p>
+                                <span class="lesson-duration">25 min</span>
+                            </div>
+                            <span class="lesson-xp">+20 XP</span>
+                        </div>
+                        <div class="lesson-item">
+                            <span class="lesson-icon">🧭</span>
+                            <div class="lesson-content">
+                                <h4>Navigation Menus</h4>
+                                <p>Build accessible navigation structures</p>
+                                <span class="lesson-duration">30 min</span>
+                            </div>
+                            <span class="lesson-xp">+25 XP</span>
+                        </div>
+                        <div class="lesson-item">
+                            <span class="lesson-icon">🎯</span>
+                            <div class="lesson-content">
+                                <h4>Project: Restaurant Menu</h4>
+                                <p>Create a complete restaurant menu page</p>
+                                <span class="lesson-duration">45 min</span>
+                            </div>
+                            <span class="lesson-xp">+60 XP</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Module 4: Media -->
+                <div class="module-card">
+                    <div class="module-header">
+                        <h3>Module 4: Images & Media</h3>
+                        <span class="module-badge">Intermediate</span>
+                    </div>
+                    <div class="lessons-list">
+                        <div class="lesson-item">
+                            <span class="lesson-icon">🖼️</span>
+                            <div class="lesson-content">
+                                <h4>Working with Images</h4>
+                                <p>img tag, alt text, and optimization</p>
+                                <span class="lesson-duration">25 min</span>
+                            </div>
+                            <span class="lesson-xp">+20 XP</span>
+                        </div>
+                        <div class="lesson-item">
+                            <span class="lesson-icon">🎬</span>
+                            <div class="lesson-content">
+                                <h4>Video & Audio</h4>
+                                <p>Embed multimedia content</p>
+                                <span class="lesson-duration">30 min</span>
+                            </div>
+                            <span class="lesson-xp">+25 XP</span>
+                        </div>
+                        <div class="lesson-item">
+                            <span class="lesson-icon">📊</span>
+                            <div class="lesson-content">
+                                <h4>SVG Graphics</h4>
+                                <p>Scalable vector graphics in HTML</p>
+                                <span class="lesson-duration">35 min</span>
+                            </div>
+                            <span class="lesson-xp">+30 XP</span>
+                        </div>
+                        <div class="lesson-item">
+                            <span class="lesson-icon">🎯</span>
+                            <div class="lesson-content">
+                                <h4>Project: Photo Gallery</h4>
+                                <p>Build an interactive photo gallery</p>
+                                <span class="lesson-duration">60 min</span>
+                            </div>
+                            <span class="lesson-xp">+75 XP</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Module 5: Forms -->
+                <div class="module-card">
+                    <div class="module-header">
+                        <h3>Module 5: Forms & Input</h3>
+                        <span class="module-badge">Intermediate</span>
+                    </div>
+                    <div class="lessons-list">
+                        <div class="lesson-item">
+                            <span class="lesson-icon">📝</span>
+                            <div class="lesson-content">
+                                <h4>Form Basics</h4>
+                                <p>Form structure and basic inputs</p>
+                                <span class="lesson-duration">30 min</span>
+                            </div>
+                            <span class="lesson-xp">+25 XP</span>
+                        </div>
+                        <div class="lesson-item">
+                            <span class="lesson-icon">✅</span>
+                            <div class="lesson-content">
+                                <h4>Input Types & Validation</h4>
+                                <p>HTML5 input types and validation</p>
+                                <span class="lesson-duration">35 min</span>
+                            </div>
+                            <span class="lesson-xp">+30 XP</span>
+                        </div>
+                        <div class="lesson-item">
+                            <span class="lesson-icon">📋</span>
+                            <div class="lesson-content">
+                                <h4>Select, Textarea & More</h4>
+                                <p>Advanced form elements</p>
+                                <span class="lesson-duration">30 min</span>
+                            </div>
+                            <span class="lesson-xp">+25 XP</span>
+                        </div>
+                        <div class="lesson-item">
+                            <span class="lesson-icon">🎯</span>
+                            <div class="lesson-content">
+                                <h4>Project: Contact Form</h4>
+                                <p>Create a complete contact form</p>
+                                <span class="lesson-duration">45 min</span>
+                            </div>
+                            <span class="lesson-xp">+70 XP</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Module 6: Semantic HTML -->
+                <div class="module-card">
+                    <div class="module-header">
+                        <h3>Module 6: Semantic HTML5</h3>
+                        <span class="module-badge">Advanced</span>
+                    </div>
+                    <div class="lessons-list">
+                        <div class="lesson-item">
+                            <span class="lesson-icon">🏗️</span>
+                            <div class="lesson-content">
+                                <h4>Semantic Elements</h4>
+                                <p>header, nav, main, section, article, footer</p>
+                                <span class="lesson-duration">35 min</span>
+                            </div>
+                            <span class="lesson-xp">+30 XP</span>
+                        </div>
+                        <div class="lesson-item">
+                            <span class="lesson-icon">♿</span>
+                            <div class="lesson-content">
+                                <h4>Accessibility (a11y)</h4>
+                                <p>ARIA labels and semantic markup</p>
+                                <span class="lesson-duration">40 min</span>
+                            </div>
+                            <span class="lesson-xp">+35 XP</span>
+                        </div>
+                        <div class="lesson-item">
+                            <span class="lesson-icon">🔍</span>
+                            <div class="lesson-content">
+                                <h4>SEO Best Practices</h4>
+                                <p>Optimize HTML for search engines</p>
+                                <span class="lesson-duration">30 min</span>
+                            </div>
+                            <span class="lesson-xp">+30 XP</span>
+                        </div>
+                        <div class="lesson-item">
+                            <span class="lesson-icon">🎯</span>
+                            <div class="lesson-content">
+                                <h4>Final Project: Portfolio Site</h4>
+                                <p>Build a complete portfolio website</p>
+                                <span class="lesson-duration">120 min</span>
+                            </div>
+                            <span class="lesson-xp">+150 XP</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+        <!-- CSS Course Section -->
+    <section class="course-section" id="css-course">
+        <div class="container">
+            <div class="course-header">
+                <div class="course-icon">🎨</div>
+                <div class="course-info">
+                    <h2>CSS Mastery</h2>
+                    <p>Style beautiful, responsive websites with modern CSS</p>
+                    <div class="course-meta">
+                        <span>📚 52 Lessons</span>
+                        <span>⏱️ 10 Hours</span>
+                        <span>🎯 15 Projects</span>
+                        <span>🏆 Certificate</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CSS Modules Preview -->
+            <div class="modules-grid">
+                <div class="module-card">
+                    <div class="module-header">
+                        <h3>CSS Basics</h3>
+                        <span class="module-badge">Beginner</span>
+                    </div>
+                    <p class="module-description">Selectors, properties, values, and the cascade</p>
+                    <button onclick="startLesson('css-1', 'css')" class="btn btn-primary">Start Module</button>
+                </div>
+
+                <div class="module-card">
+                    <div class="module-header">
+                        <h3>Box Model & Layout</h3>
+                        <span class="module-badge">Beginner</span>
+                    </div>
+                    <p class="module-description">Margins, padding, borders, and positioning</p>
+                    <button onclick="startLesson('css-5', 'css')" class="btn btn-primary">Start Module</button>
+                </div>
+
+                <div class="module-card">
+                    <div class="module-header">
+                        <h3>Flexbox</h3>
+                        <span class="module-badge">Intermediate</span>
+                    </div>
+                    <p class="module-description">Master flexible box layouts</p>
+                    <button onclick="startLesson('css-8', 'css')" class="btn btn-primary">Start Module</button>
+                </div>
+
+                <div class="module-card">
+                    <div class="module-header">
+                        <h3>CSS Grid</h3>
+                        <span class="module-badge">Intermediate</span>
+                    </div>
+                    <p class="module-description">Create complex grid-based layouts</p>
+                    <button onclick="startLesson('css-10', 'css')" class="btn btn-primary">Start Module</button>
+                </div>
+
+                <div class="module-card">
+                    <div class="module-header">
+                        <h3>Animations & Transitions</h3>
+                        <span class="module-badge">Advanced</span>
+                    </div>
+                    <p class="module-description">Bring your designs to life with motion</p>
+                    <button onclick="startLesson('css-12', 'css')" class="btn btn-primary">Start Module</button>
+                </div>
+
+                <div class="module-card">
+                    <div class="module-header">
+                        <h3>Responsive Design</h3>
+                        <span class="module-badge">Advanced</span>
+                    </div>
+                    <p class="module-description">Build mobile-first responsive websites</p>
+                    <button onclick="startLesson('css-15', 'css')" class="btn btn-primary">Start Module</button>
+                </div>
+            </div>
+        </div>
+    </section>
+        <!-- JavaScript Course Section -->
+    <section class="course-section" id="javascript-course">
+        <div class="container">
+            <div class="course-header">
+                <div class="course-icon">⚡</div>
+                <div class="course-info">
+                    <h2>JavaScript Programming</h2>
+                    <p>From fundamentals to advanced concepts and modern ES6+</p>
+                    <div class="course-meta">
+                        <span>📚 68 Lessons</span>
+                        <span>⏱️ 15 Hours</span>
+                        <span>🎯 20 Projects</span>
+                        <span>🏆 Certificate</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- JavaScript Modules Preview -->
+            <div class="modules-grid">
+                <div class="module-card">
+                    <div class="module-header">
+                        <h3>JavaScript Basics</h3>
+                        <span class="module-badge">Beginner</span>
+                    </div>
+                    <p class="module-description">Variables, data types, operators, and control flow</p>
+                    <button onclick="startLesson('js-1', 'javascript')" class="btn btn-primary">Start Module</button>
+                </div>
+
+                <div class="module-card">
+                    <div class="module-header">
+                        <h3>Functions & Scope</h3>
+                        <span class="module-badge">Beginner</span>
+                    </div>
+                    <p class="module-description">Function declarations, expressions, arrow functions</p>
+                    <button onclick="startLesson('js-8', 'javascript')" class="btn btn-primary">Start Module</button>
+                </div>
+
+                <div class="module-card">
+                    <div class="module-header">
+                        <h3>Arrays & Objects</h3>
+                        <span class="module-badge">Intermediate</span>
+                    </div>
+                    <p class="module-description">Working with complex data structures</p>
+                    <button onclick="startLesson('js-12', 'javascript')" class="btn btn-primary">Start Module</button>
+                </div>
+
+                <div class="module-card">
+                    <div class="module-header">
+                        <h3>DOM Manipulation</h3>
+                        <span class="module-badge">Intermediate</span>
+                    </div>
+                    <p class="module-description">Select, modify, and create HTML elements</p>
+                    <button onclick="startLesson('js-18', 'javascript')" class="btn btn-primary">Start Module</button>
+                </div>
+
+                <div class="module-card">
+                    <div class="module-header">
+                        <h3>Async JavaScript</h3>
+                        <span class="module-badge">Advanced</span>
+                    </div>
+                    <p class="module-description">Promises, async/await, and API calls</p>
+                    <button onclick="startLesson('js-25', 'javascript')" class="btn btn-primary">Start Module</button>
+                </div>
+
+                <div class="module-card">
+                    <div class="module-header">
+                        <h3>Modern ES6+</h3>
+                        <span class="module-badge">Advanced</span>
+                    </div>
+                    <p class="module-description">Destructuring, modules, classes, and more</p>
+                    <button onclick="startLesson('js-30', 'javascript')" class="btn btn-primary">Start Module</button>
+                </div>
+            </div>
+        </div>
+    </section>
+     <!-- Projects Section -->
+    <section class="course-section" id="projects-course">
+        <div class="container">
+            <h2 class="section-title">Build Real Projects</h2>
+            <p class="section-subtitle">Apply your skills with hands-on projects</p>
+
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-image">
+                        <span class="project-icon">🎨</span>
+                    </div>
+                    <div class="project-content">
+                        <h3>Personal Portfolio</h3>
+                        <p>Build a stunning portfolio to showcase your work</p>
+                        <div class="project-tech">
+                            <span>HTML</span>
+                            <span>CSS</span>
+                            <span>JavaScript</span>
+                        </div>
+                        <div class="project-meta">
+                            <span>⏱️ 3 hours</span>
+                            <span>🏆 100 XP</span>
+                        </div>
+                        <button onclick="startProject('portfolio')" class="btn btn-primary">Start Project</button>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">
+                        <span class="project-icon">🛒</span>
+                    </div>
+                    <div class="project-content">
+                        <h3>E-Commerce Landing</h3>
+                        <p>Create a modern product landing page</p>
+                        <div class="project-tech">
+                            <span>HTML</span>
+                            <span>CSS</span>
+                            <span>JavaScript</span>
+                        </div>
+                        <div class="project-meta">
+                            <span>⏱️ 4 hours</span>
+                            <span>🏆 150 XP</span>
+                        </div>
+                        <button onclick="startProject('ecommerce')" class="btn btn-primary">Start Project</button>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">
+                        <span class="project-icon">📱</span>
+                    </div>
+                    <div class="project-content">
+                        <h3>Weather App</h3>
+                        <p>Build a weather app with API integration</p>
+                        <div class="project-tech">
+                            <span>HTML</span>
+                            <span>CSS</span>
+                            <span>JavaScript</span>
+                            <span>API</span>
+                        </div>
+                        <div class="project-meta">
+                            <span>⏱️ 5 hours</span>
+                            <span>🏆 200 XP</span>
+                        </div>
+                        <button onclick="startProject('weather')" class="btn btn-primary">Start Project</button>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-image">
+                        <span class="project-icon">🎮</span>
+                    </div>
+                    <div class="project-content">
+                        <h3>JavaScript Game</h3>
+                        <p>Create an interactive browser game</p>
+                        <div class="project-tech">
+                            <span>HTML5 Canvas</span>
+                            <span>JavaScript</span>
+                        </div>
+                        <div class="project-meta">
+                            <span>⏱️ 6 hours</span>
+                            <span>🏆 250 XP</span>
+                        </div>
+                        <button onclick="startProject('game')" class="btn btn-primary">Start Project</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Learning Resources -->
+    <section class="resources-section">
+        <div class="container">
+            <h2 class="section-title">Additional Resources</h2>
+            <div class="resources-grid">
+                <div class="resource-card">
+                    <span class="resource-icon">📚</span>
+                    <h3>Documentation</h3>
+                    <p>Comprehensive guides and references</p>
+                    <a href="#">Browse Docs →</a>
+                </div>
+                <div class="resource-card">
+                    <span class="resource-icon">🎥</span>
+                    <h3>Video Tutorials</h3>
+                    <p>Visual learning with expert instructors</p>
+                    <a href="#">Watch Videos →</a>
+                </div>
+                <div class="resource-card">
+                    <span class="resource-icon">📝</span>
+                    <h3>Cheat Sheets</h3>
+                    <p>Quick reference guides for all topics</p>
+                    <a href="#">Get Sheets →</a>
+                </div>
+                <div class="resource-card">
+                    <span class="resource-icon">💬</span>
+                    <h3>Community Forum</h3>
+                    <p>Get help from fellow learners</p>
+                    <a href="#">Join Forum →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>CodeQuest</h3>
+                <p>Learn. Play. Conquer the Web.</p>
+                <div class="social-links">
+                    <a href="#" aria-label="Twitter">🐦</a>
+                    <a href="#" aria-label="GitHub">🐙</a>
+                    <a href="#" aria-label="Discord">💬</a>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h3>Learn</h3>
+                <div class="footer-links">
+                    <a href="#html-course">HTML Course</a>
+                    <a href="#css-course">CSS Course</a>
+                    <a href="#javascript-course">JavaScript Course</a>
+                    <a href="#projects-course">Projects</a>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h3>Community</h3>
+                <div class="footer-links">
+                    <a href="leaderboard.html">Leaderboard</a>
+                    <a href="#">Forums</a>
+                    <a href="#">Discord</a>
+                    <a href="#">Blog</a>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h3>Support</h3>
+                <div class="footer-links">
+                    <a href="#">Help Center</a>
+                    <a href="#">Contact Us</a>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 CodeQuest. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <button class="close" onclick="closeModal('loginModal')">&times;</button>
+            <h2>Login to CodeQuest</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail">Email</label>
+                    <input type="email" id="loginEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Login</button>
+            </form>
+            <p class="form-footer">
+                Don't have an account? <a href="#" onclick="showSignup(); closeModal('loginModal')">Sign up</a>
+            </p>
+        </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div id="signupModal" class="modal">
+        <div class="modal-content">
+            <button class="close" onclick="closeModal('signupModal')">&times;</button>
+            <h2>Join CodeQuest</h2>
+            <form id="signupForm">
+                <div class="form-group">
+                    <label for="signupUsername">Username</label>
+                    <input type="text" id="signupUsername" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupEmail">Email</label>
+                    <input type="email" id="signupEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupPassword">Password</label>
+                    <input type="password" id="signupPassword" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Create Account</button>
+            </form>
+            <p class="form-footer">
+                Already have an account? <a href="#" onclick="showLogin(); closeModal('signupModal')">Login</a>
+            </p>
+        </div>
+    </div>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/learn.js"></script>
+</body>
+
+</html>

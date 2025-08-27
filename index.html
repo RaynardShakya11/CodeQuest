@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeQuest - Learn. Play. Conquer the Web.</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/animations.css">
+</head>
+
+<body>
+    <div class="bg-animation"></div>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">⚡CodeQuest</a>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="nav-links" id="navLinks">
+                <a href="index.html" class="nav-link active">Home</a>
+                <a href="html/learn.html" class="nav-link">Learn</a>
+                <a href="html/editor.html" class="nav-link">Code Editor</a>
+                <a href="html/challenges.html" class="nav-link">Challenges</a>
+                <a href="html/games.html" class="nav-link">Games</a>
+                <a href="html/leaderboard.html" class="nav-link">Leaderboard</a>
+                <a href="html/about.html" class="nav-link">About</a>
+                <span id="authButtons">
+                    <button class="btn btn-secondary" onclick="showLogin()">Login</button>
+                    <button class="btn btn-primary" onclick="showSignup()">Sign Up</button>
+                </span>
+                <span id="userMenu" style="display: none;">
+                    <span class="nav-link" id="userGreeting">Welcome!</span>
+                    <a href="html/dashboard.html" class="btn btn-secondary">Dashboard</a>
+                    <button class="btn btn-danger" onclick="logout()">Logout</button>
+                </span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1 class="hero-title">Learn. Play.<br>Conquer the Web.</h1>
+                <p class="hero-subtitle">Master HTML, CSS & JavaScript through gamified challenges and real-time coding
+                    battles.</p>
+
+                <div class="hero-features">
+                    <div class="feature-badge">🎮 Gamified</div>
+                    <div class="feature-badge">⚡ Interactive</div>
+                    <div class="feature-badge">🏆 Competitive</div>
+                    <div class="feature-badge">📚 Comprehensive</div>
+                </div>
+
+                <div class="hero-cta">
+                    <button class="btn btn-primary" onclick="showSignup()">Start Free Trial</button>
+                    <a href="html/learn.html" class="btn btn-secondary">Explore Courses</a>
+                </div>
+
+                <div class="stats-row">
+                    <div class="stat-item">
+                        <span class="stat-number">10K+</span>
+                        <span class="stat-label">Active Learners</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">500+</span>
+                        <span class="stat-label">Lessons</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">100+</span>
+                        <span class="stat-label">Challenges</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hero-visual">
+                <div class="code-preview-window">
+                    <div class="window-header">
+                        <div class="window-controls">
+                            <span class="control red"></span>
+                            <span class="control yellow"></span>
+                            <span class="control green"></span>
+                        </div>
+                        <div class="window-title">Live Preview</div>
+                    </div>
+                    <div class="code-preview-content">
+                        <pre><code class="language-javascript"><span class="keyword">function</span> <span class="function">startLearning</span>() {
+  <span class="keyword">const</span> <span class="variable">skills</span> = [<span class="string">'HTML'</span>, <span class="string">'CSS'</span>, <span class="string">'JavaScript'</span>];
+  <span class="keyword">const</span> <span class="variable">future</span> = <span class="string">'Bright'</span>;
+  
+  <span class="keyword">return</span> <span class="variable">skills</span>.<span class="method">map</span>(<span class="variable">skill</span> => 
+    <span class="template">`Master ${skill} with CodeQuest!`</span>
+  );
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section">
+        <div class="container">
+            <h2 class="section-title">Why Choose CodeQuest?</h2>
+            <p class="section-subtitle">Everything you need to become a web development expert</p>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">💻</div>
+                    <h3 class="feature-title">Live Code Editor</h3>
+                    <p class="feature-description">Write and test code instantly with our powerful browser-based editor.
+                        No setup required!</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🎮</div>
+                    <h3 class="feature-title">Gamified Learning</h3>
+                    <p class="feature-description">Earn XP, unlock achievements, and compete with friends as you master
+                        web development.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3 class="feature-title">Interactive Challenges</h3>
+                    <p class="feature-description">Solve real-world problems with instant feedback and guided solutions.
+                    </p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3 class="feature-title">Progress Tracking</h3>
+                    <p class="feature-description">Monitor your learning journey with detailed analytics and milestone
+                        tracking.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🤖</div>
+                    <h3 class="feature-title">AI-Powered Hints</h3>
+                    <p class="feature-description">Get smart suggestions and personalized learning paths based on your
+                        progress.</p>
+                </div>
+
+                <div class="feature-card">
+                    <div class="feature-icon">🏆</div>
+                    <h3 class="feature-title">Certificates</h3>
+                    <p class="feature-description">Earn verified certificates to showcase your skills to employers.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Learning Paths Preview -->
+    <section class="learning-paths">
+        <div class="container">
+            <h2 class="section-title">Choose Your Learning Path</h2>
+            <p class="section-subtitle">Structured courses designed for your success</p>
+
+            <div class="paths-grid">
+                <div class="path-card html-path">
+                    <div class="path-header">
+                        <span class="path-icon">🌐</span>
+                        <h3>HTML Mastery</h3>
+                    </div>
+                    <p class="path-description">Build the foundation with semantic HTML5, forms, media elements, and
+                        accessibility.</p>
+                    <div class="path-stats">
+                        <span>📚 45 Lessons</span>
+                        <span>⏱️ 8 Hours</span>
+                    </div>
+                    <a href="html/learn.html#html" class="btn btn-primary">Start Learning</a>
+                </div>
+
+                <div class="path-card css-path">
+                    <div class="path-header">
+                        <span class="path-icon">🎨</span>
+                        <h3>CSS Styling</h3>
+                    </div>
+                    <p class="path-description">Master modern CSS with Flexbox, Grid, animations, and responsive design.
+                    </p>
+                    <div class="path-stats">
+                        <span>📚 52 Lessons</span>
+                        <span>⏱️ 10 Hours</span>
+                    </div>
+                    <a href="html/learn.html#css" class="btn btn-primary">Start Learning</a>
+                </div>
+
+                <div class="path-card js-path">
+                    <div class="path-header">
+                        <span class="path-icon">⚡</span>
+                        <h3>JavaScript Pro</h3>
+                    </div>
+                    <p class="path-description">From basics to advanced concepts including ES6+, async programming, and
+                        DOM.</p>
+                    <div class="path-stats">
+                        <span>📚 68 Lessons</span>
+                        <span>⏱️ 15 Hours</span>
+                    </div>
+                    <a href="learn.html#javascript" class="btn btn-primary">Start Learning</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <div class="container">
+            <h2 class="section-title">What Our Students Say</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                    <p>"CodeQuest made learning web development fun! The gamification kept me motivated throughout."</p>
+                    <div class="testimonial-author">
+                        <img src="https://via.placeholder.com/50" alt="Student">
+                        <div>
+                            <strong>Sarah Chen</strong>
+                            <span>Web Developer</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                    <p>"The interactive challenges and real-time feedback helped me learn faster than any other
+                        platform."</p>
+                    <div class="testimonial-author">
+                        <img src="https://via.placeholder.com/50" alt="Student">
+                        <div>
+                            <strong>Mike Johnson</strong>
+                            <span>Full Stack Developer</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                    <p>"From zero to hero in 3 months! The structured curriculum and games made all the difference."</p>
+                    <div class="testimonial-author">
+                        <img src="https://via.placeholder.com/50" alt="Student">
+                        <div>
+                            <strong>Emily Rodriguez</strong>
+                            <span>Frontend Engineer</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>Ready to Start Your Coding Journey?</h2>
+            <p>Join thousands of learners mastering web development the fun way!</p>
+            <div class="cta-buttons">
+                <button class="btn btn-primary btn-large" onclick="showSignup()">Get Started Free</button>
+                <a href="learn.html" class="btn btn-secondary btn-large">Browse Courses</a>
+            </div>
+        </div>
+    </section>
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>CodeQuest</h3>
+                <p>Learn. Play. Conquer the Web.</p>
+                <div class="social-links">
+                    <a href="#" aria-label="Twitter">🐦</a>
+                    <a href="#" aria-label="GitHub">🐙</a>
+                    <a href="#" aria-label="Discord">💬</a>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h3>Learn</h3>
+                <div class="footer-links">
+                    <a href="html/learn.html#html">HTML Course</a>
+                    <a href="html/learn.html#css">CSS Course</a>
+                    <a href="html/learn.html#javascript">JavaScript Course</a>
+                    <a href="html/challenges.html">Challenges</a>
+                    <a href="html/games.html">Coding Games</a>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h3>Community</h3>
+                <div class="footer-links">
+                    <a href="html/leaderboard.html">Leaderboard</a>
+                    <a href="#">Forums</a>
+                    <a href="#">Discord</a>
+                    <a href="#">Blog</a>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h3>Support</h3>
+                <div class="footer-links">
+                    <a href="#">Help Center</a>
+                    <a href="#">Contact Us</a>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 CodeQuest. All rights reserved.</p>
+        </div>
+    </footer>
+    <!-- Modals -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <button class="close" onclick="closeModal('loginModal')">&times;</button>
+            <h2>Welcome Back!</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail">Email</label>
+                    <input type="email" id="loginEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Sign In</button>
+            </form>
+            <p class="switch-form">Don't have an account? <a onclick="switchToSignup()">Sign up</a></p>
+        </div>
+    </div>
+    <div id="signupModal" class="modal">
+        <div class="modal-content">
+            <button class="close" onclick="closeModal('signupModal')">&times;</button>
+            <h2>Join CodeQuest!</h2>
+            <form id="signupForm">
+                <div class="form-group">
+                    <label for="signupUsername">Username</label>
+                    <input type="text" id="signupUsername" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupEmail">Email</label>
+                    <input type="email" id="signupEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupPassword">Password</label>
+                    <input type="password" id="signupPassword" minlength="8" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Create Account</button>
+            </form>
+            <p class="switch-form">Already have an account? <a onclick="switchToLogin()">Sign in</a></p>
+        </div>
+    </div>
+    <script src="script/particles.js"></script>
+    <script src="scriptauth.js"></script>
+    <script src="script/main.js"></script>
+</body>
+
+</html>
