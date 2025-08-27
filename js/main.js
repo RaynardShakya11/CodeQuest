@@ -220,3 +220,8 @@ function initializePageSpecific(page) {
       break;
   }
 }
+/ Home Page Initialization
+function initHomePage() {
+  // Add any home page specific initialization
+  animateStats();
+}
