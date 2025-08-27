@@ -407,3 +407,33 @@ function throttle(func, limit) {
     }
   };
 }
+// Export functions for use in other files
+window.CodeQuest = {
+  showNotification,
+  showLoader,
+  hideLoader,
+  apiCall,
+  closeModal,
+  showLogin: () => {
+    if (typeof window.AuthManager !== 'undefined' && window.AuthManager.showLogin) {
+      window.AuthManager.showLogin();
+    } else {
+      const loginModal = document.getElementById("loginModal");
+      if (loginModal) {
+        loginModal.style.display = "block";
+      }
+    }
+  },
+  showSignup: () => {
+    if (typeof window.AuthManager !== 'undefined' && window.AuthManager.showSignup) {
+      window.AuthManager.showSignup();
+    } else {
+      const signupModal = document.getElementById("signupModal");
+      if (signupModal) {
+        signupModal.style.display = "block";
+      }
+    }
+  },
+  currentUser: () => currentUser,
+  isLoggedIn: () => currentUser !== null,
+};
