@@ -363,3 +363,47 @@ setTimeout(() => {
             </div>
         </div>
     </div>
+
+    <!-- Quick Actions -->
+    <div class="quick-actions">
+        <button class="quick-action-btn" onclick="showShortcuts()" title="Keyboard Shortcuts">
+            ⌨️
+        </button>
+        <button class="quick-action-btn" onclick="showHelp()" title="Help">
+            ❓
+        </button>
+    </div>
+
+    <!-- Shortcuts Modal -->
+    <div id="shortcutsModal" class="modal">
+        <div class="modal-content">
+            <button class="close" onclick="closeModal('shortcutsModal')">&times;</button>
+            <h2>Keyboard Shortcuts</h2>
+            <div class="shortcuts-list">
+                <div class="shortcut-item">
+                    <span class="shortcut-keys">Ctrl/Cmd + S</span>
+                    <span class="shortcut-desc">Save project</span>
+                </div>
+                <div class="shortcut-item">
+                    <span class="shortcut-keys">Ctrl/Cmd + Enter</span>
+                    <span class="shortcut-desc">Run code</span>
+                </div>
+                <div class="shortcut-item">
+                    <span class="shortcut-keys">Ctrl/Cmd + /</span>
+                    <span class="shortcut-desc">Toggle comment</span>
+                </div>
+                <div class="shortcut-item">
+                    <span class="shortcut-keys">Ctrl/Cmd + D</span>
+                    <span class="shortcut-desc">Duplicate line</span>
+                </div>
+                <div class="shortcut-item">
+                    <span class="shortcut-keys">Alt + Shift + F</span>
+                    <span class="shortcut-desc">Format code</span>
+                </div>
+                <div class="shortcut-item">
+                    <span class="shortcut-keys">F11</span>
+                    <span class="shortcut-desc">Toggle fullscreen</span>
+                </div>
+            </div>
+        </div>
+    </div>
