@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Coding Games - CodeQuest</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/games-styles.css">
+</head>
+
+<body>
+    <div class="bg-animation"></div>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="../index.html" class="logo">⚡CodeQuest</a>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="nav-links" id="navLinks">
+                <a href="../index.html" class="nav-link">Home</a>
+                <a href="learn.html" class="nav-link">Learn</a>
+                <a href="editor.html" class="nav-link">Code Editor</a>
+                <a href="challenges.html" class="nav-link">Challenges</a>
+                <a href="games.html" class="nav-link active">Games</a>
+                <a href="leaderboard.html" class="nav-link">Leaderboard</a>
+                <a href="about.html" class="nav-link">About</a>
+                <span id="authButtons">
+                    <button class="btn btn-secondary" onclick="showLogin()">Login</button>
+                    <button class="btn btn-primary" onclick="showSignup()">Sign Up</button>
+                </span>
+                <span id="userMenu" style="display: none;">
+                    <span class="nav-link" id="userGreeting">Welcome!</span>
+                    <a href="dashboard.html" class="btn btn-secondary">Dashboard</a>
+                    <button class="btn btn-danger" onclick="logout()">Logout</button>
+                </span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Games Hero -->
+    <section class="games-hero">
+        <div class="container">
+            <h1 class="page-title">Learn by Playing</h1>
+            <p class="page-subtitle">Master coding concepts through fun, interactive games</p>
+
+            <div class="game-categories">
+                <button class="category-btn active" data-category="all">All Games</button>
+                <button class="category-btn" data-category="html">HTML</button>
+                <button class="category-btn" data-category="css">CSS</button>
+                <button class="category-btn" data-category="javascript">JavaScript</button>
+                <button class="category-btn" data-category="logic">Logic</button>
+            </div>
+        </div>
+    </section>
+        <!-- Featured Games -->
+    <section class="featured-games">
+        <div class="container">
+            <h2 class="section-title">Featured Games</h2>
+
+            <!-- CSS Diner Game -->
+            <div class="game-feature">
+                <div class="game-preview">
+                    <div class="game-screen">
+                        <div class="css-diner-preview">
+                            <div class="plate">🍽️</div>
+                            <div class="apple">🍎</div>
+                            <div class="orange">🍊</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="game-info">
+                    <h3>CSS Selector Diner</h3>
+                    <p>Master CSS selectors by selecting the correct items on the table. Progress through 32 levels of
+                        increasing difficulty!</p>
+                    <div class="game-stats">
+                        <span>🎮 32 Levels</span>
+                        <span>⏱️ 45 min</span>
+                        <span>🏆 100 XP</span>
+                    </div>
+                    <button class="btn btn-primary" onclick="startGame('css-diner')">Play Now</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Games Grid -->
+    <section class="games-section">
+        <div class="container">
+            <div class="games-grid">
+
+                <!-- Game 1: HTML Tag Memory -->
+                <div class="game-card" data-category="html">
+                    <div class="game-thumbnail">
+                        <span class="game-emoji">🧠</span>
+                    </div>
+                    <div class="game-content">
+                        <h3>HTML Tag Memory</h3>
+                        <p>Match HTML tags with their descriptions in this memory game. Learn tag purposes while
+                            improving your memory!</p>
+                        <div class="game-meta">
+                            <span class="difficulty easy">Easy</span>
+                            <span class="xp-reward">+30 XP</span>
+                        </div>
+                        <button class="btn btn-primary" onclick="playGame('html-memory')">Play</button>
+                    </div>
+                </div>
+
+                <!-- Game 2: CSS Flexbox Froggy -->
+                <div class="game-card" data-category="css">
+                    <div class="game-thumbnail">
+                        <span class="game-emoji">🐸</span>
+                    </div>
+                    <div class="game-content">
+                        <h3>Flexbox Froggy</h3>
+                        <p>Help the frogs reach their lily pads using CSS flexbox properties. Master layout with fun!
+                        </p>
+                        <div class="game-meta">
+                            <span class="difficulty medium">Medium</span>
+                            <span class="xp-reward">+50 XP</span>
+                        </div>
+                        <button class="btn btn-primary" onclick="playGame('flexbox-froggy')">Play</button>
+                    </div>
+                </div>
+
+                <!-- Game 3: JavaScript Robot -->
+                <div class="game-card" data-category="javascript">
+                    <div class="game-thumbnail">
+                        <span class="game-emoji">🤖</span>
+                    </div>
+                    <div class="game-content">
+                        <h3>Code Robot</h3>
+                        <p>Program a robot using JavaScript commands to navigate mazes and collect gems.</p>
+                        <div class="game-meta">
+                            <span class="difficulty medium">Medium</span>
+                            <span class="xp-reward">+60 XP</span>
+                        </div>
+                        <button class="btn btn-primary" onclick="playGame('code-robot')">Play</button>
+                    </div>
+                </div>
+
+                <!-- Game 4: CSS Grid Garden -->
+                <div class="game-card" data-category="css">
+                    <div class="game-thumbnail">
+                        <span class="game-emoji">🌻</span>
+                    </div>
+                    <div class="game-content">
+                        <h3>Grid Garden</h3>
+                        <p>Water your garden using CSS Grid! Learn grid properties by growing carrots.</p>
+                        <div class="game-meta">
+                            <span class="difficulty medium">Medium</span>
+                            <span class="xp-reward">+55 XP</span>
+                        </div>
+                        <button class="btn btn-primary" onclick="playGame('grid-garden')">Play</button>
+                    </div>
+                </div>
+
+                <!-- Game 5: JavaScript Typing -->
+                <div class="game-card" data-category="javascript">
+                    <div class="game-thumbnail">
+                        <span class="game-emoji">⌨️</span>
+                    </div>
+                    <div class="game-content">
+                        <h3>Code Typer</h3>
+                        <p>Improve your coding speed by typing JavaScript snippets. Race against time!</p>
+                        <div class="game-meta">
+                            <span class="difficulty easy">Easy</span>
+                            <span class="xp-reward">+25 XP</span>
+                        </div>
+                        <button class="btn btn-primary" onclick="playGame('code-typer')">Play</button>
+                    </div>
+                </div>
+
+                <!-- Game 6: CSS Color Match -->
+                <div class="game-card" data-category="css">
+                    <div class="game-thumbnail">
+                        <span class="game-emoji">🎨</span>
+                    </div>
+                    <div class="game-content">
+                        <h3>Color Code Match</h3>
+                        <p>Match CSS color codes with their visual representation. Master hex, RGB, and HSL!</p>
+                        <div class="game-meta">
+                            <span class="difficulty easy">Easy</span>
+                            <span class="xp-reward">+30 XP</span>
+                        </div>
+                        <button class="btn btn-primary" onclick="playGame('color-match')">Play</button>
+                    </div>
+                </div>
+
+                <!-- Game 7: HTML Structure Builder -->
+                <div class="game-card" data-category="html">
+                    <div class="game-thumbnail">
+                        <span class="game-emoji">🏗️</span>
+                    </div>
+                    <div class="game-content">
+                        <h3>HTML Builder</h3>
+                        <p>Drag and drop HTML elements to build webpage structures. Learn semantic HTML!</p>
+                        <div class="game-meta">
+                            <span class="difficulty medium">Medium</span>
+                            <span class="xp-reward">+45 XP</span>
+                        </div>
+                        <button class="btn btn-primary" onclick="playGame('html-builder')">Play</button>
+                    </div>
+                </div>
+
+                <!-- Game 8: JavaScript Debugger -->
+                <div class="game-card" data-category="javascript">
+                    <div class="game-thumbnail">
+                        <span class="game-emoji">🐛</span>
+                    </div>
+                    <div class="game-content">
+                        <h3>Bug Hunter</h3>
+                        <p>Find and fix bugs in JavaScript code. Improve your debugging skills!</p>
+                        <div class="game-meta">
+                            <span class="difficulty hard">Hard</span>
+                            <span class="xp-reward">+75 XP</span>
+                        </div>
+                        <button class="btn btn-primary" onclick="playGame('bug-hunter')">Play</button>
+                    </div>
+                </div>
+
+                <!-- Game 9: CSS Animation Studio -->
+                <div class="game-card" data-category="css">
+                    <div class="game-thumbnail">
+                        <span class="game-emoji">✨</span>
+                    </div>
+                    <div class="game-content">
+                        <h3>Animation Studio</h3>
+                        <p>Create CSS animations by adjusting keyframes and timing functions visually.</p>
+                        <div class="game-meta">
+                            <span class="difficulty hard">Hard</span>
+                            <span class="xp-reward">+80 XP</span>
+                        </div>
+                        <button class="btn btn-primary" onclick="playGame('animation-studio')">Play</button>
+                    </div>
+                </div>
+
+                <!-- Game 10: Algorithm Puzzle -->
+                <div class="game-card" data-category="logic">
+                    <div class="game-thumbnail">
+                        <span class="game-emoji">🧩</span>
+                    </div>
+                    <div class="game-content">
+                        <h3>Algorithm Puzzles</h3>
+                        <p>Solve programming logic puzzles to unlock new levels. Think like a programmer!</p>
+                        <div class="game-meta">
+                            <span class="difficulty hard">Hard</span>
+                            <span class="xp-reward">+90 XP</span>
+                        </div>
+                        <button class="btn btn-primary" onclick="playGame('algorithm-puzzles')">Play</button>
+                    </div>
+                </div>
+
+                <!-- Game 11: Binary Challenge -->
+                <div class="game-card" data-category="logic">
+                    <div class="game-thumbnail">
+                        <span class="game-emoji">💻</span>
+                    </div>
+                    <div class="game-content">
+                        <h3>Binary Blast</h3>
+                        <p>Convert between binary, decimal, and hexadecimal in this fast-paced game.</p>
+                        <div class="game-meta">
+                            <span class="difficulty medium">Medium</span>
+                            <span class="xp-reward">+40 XP</span>
+                        </div>
+                        <button class="btn btn-primary" onclick="playGame('binary-blast')">Play</button>
+                    </div>
+                </div>
+
+                <!-- Game 12: Code Golf -->
+                <div class="game-card" data-category="javascript">
+                    <div class="game-thumbnail">
+                        <span class="game-emoji">⛳</span>
+                    </div>
+                    <div class="game-content">
+                        <h3>Code Golf</h3>
+                        <p>Write the shortest possible code to solve challenges. Every character counts!</p>
+                        <div class="game-meta">
+                            <span class="difficulty expert">Expert</span>
+                            <span class="xp-reward">+100 XP</span>
+                        </div>
+                        <button class="btn btn-primary" onclick="playGame('code-golf')">Play</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+        <!-- Daily Challenge -->
+    <section class="daily-challenge-section">
+        <div class="container">
+            <div class="daily-challenge-card">
+                <div class="challenge-header">
+                    <h2>🎯 Daily Challenge</h2>
+                    <div class="timer">
+                        <span>Time Left: </span>
+                        <span id="daily-timer">23:45:30</span>
+                    </div>
+                </div>
+                <div class="challenge-content">
+                    <h3>CSS Box Model Master</h3>
+                    <p>Complete 5 box model challenges without using developer tools. Can you visualize the boxes?</p>
+                    <div class="challenge-rewards">
+                        <span>🏆 150 XP</span>
+                        <span>🎖️ Special Badge</span>
+                        <span>🔥 3-day streak</span>
+                    </div>
+                    <button class="btn btn-warning">Start Daily Challenge</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Multiplayer Games -->
+    <section class="multiplayer-section">
+        <div class="container">
+            <h2 class="section-title">Multiplayer Battles</h2>
+            <p class="section-subtitle">Challenge other players in real-time coding battles</p>
+
+            <div class="multiplayer-grid">
+                <div class="multiplayer-card">
+                    <h3>⚔️ Code Duel</h3>
+                    <p>1v1 coding battles. Solve problems faster than your opponent!</p>
+                    <div class="online-players">
+                        <span class="online-indicator"></span>
+                        <span>234 players online</span>
+                    </div>
+                    <button class="btn btn-danger">Find Match</button>
+                </div>
+
+                <div class="multiplayer-card">
+                    <h3>👥 Team Challenge</h3>
+                    <p>Work together to solve complex coding challenges.</p>
+                    <div class="online-players">
+                        <span class="online-indicator"></span>
+                        <span>156 players online</span>
+                    </div>
+                    <button class="btn btn-info">Join Team</button>
+                </div>
+
+                <div class="multiplayer-card">
+                    <h3>🏆 Tournament</h3>
+                    <p>Weekly tournaments with amazing prizes!</p>
+                    <div class="tournament-timer">
+                        <span>Next tournament in: 2d 14h</span>
+                    </div>
+                    <button class="btn btn-success">Register</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Game Modal (for playing games) -->
+    <div id="gameModal" class="game-modal">
+        <div class="game-modal-content">
+            <button class="close-game" onclick="closeGame()">&times;</button>
+            <div id="gameContainer">
+                <!-- Game content will be loaded here -->
+            </div>
+        </div>
+    </div>
+        <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>CodeQuest</h3>
+                <p>Learn. Play. Conquer the Web.</p>
+                <div class="social-links">
+                    <a href="#" aria-label="Twitter">🐦</a>
+                    <a href="#" aria-label="GitHub">🐙</a>
+                    <a href="#" aria-label="Discord">💬</a>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h3>Games</h3>
+                <div class="footer-links">
+                    <a href="#" onclick="filterGames('html')">HTML Games</a>
+                    <a href="#" onclick="filterGames('css')">CSS Games</a>
+                    <a href="#" onclick="filterGames('javascript')">JavaScript Games</a>
+                    <a href="#" onclick="filterGames('logic')">Logic Games</a>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h3>Community</h3>
+                <div class="footer-links">
+                    <a href="leaderboard.html">Leaderboard</a>
+                    <a href="#">Forums</a>
+                    <a href="#">Discord</a>
+                    <a href="#">Blog</a>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h3>Support</h3>
+                <div class="footer-links">
+                    <a href="#">Help Center</a>
+                    <a href="#">Contact Us</a>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 CodeQuest. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <button class="close" onclick="closeModal('loginModal')">&times;</button>
+            <h2>Login to CodeQuest</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail">Email</label>
+                    <input type="email" id="loginEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Login</button>
+            </form>
+            <p class="form-footer">
+                Don't have an account? <a href="#" onclick="showSignup(); closeModal('loginModal')">Sign up</a>
+            </p>
+        </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div id="signupModal" class="modal">
+        <div class="modal-content">
+            <button class="close" onclick="closeModal('signupModal')">&times;</button>
+            <h2>Join CodeQuest</h2>
+            <form id="signupForm">
+                <div class="form-group">
+                    <label for="signupUsername">Username</label>
+                    <input type="text" id="signupUsername" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupEmail">Email</label>
+                    <input type="email" id="signupEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupPassword">Password</label>
+                    <input type="password" id="signupPassword" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Create Account</button>
+            </form>
+            <p class="form-footer">
+                Already have an account? <a href="#" onclick="showLogin(); closeModal('signupModal')">Login</a>
+            </p>
+        </div>
+    </div>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/games.js"></script>
+</body>
+
+</html>

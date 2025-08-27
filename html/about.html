@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - CodeQuest</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/animations.css">
+</head>
+
+<body>
+    <div class="bg-animation"></div>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="../index.html" class="logo">⚡CodeQuest</a>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="nav-links" id="navLinks">
+                <a href="../index.html" class="nav-link">Home</a>
+                <a href="learn.html" class="nav-link">Learn</a>
+                <a href="editor.html" class="nav-link">Code Editor</a>
+                <a href="challenges.html" class="nav-link">Challenges</a>
+                <a href="games.html" class="nav-link">Games</a>
+                <a href="leaderboard.html" class="nav-link">Leaderboard</a>
+                <a href="about.html" class="nav-link active">About</a>
+                <span id="authButtons">
+                    <button class="btn btn-secondary" onclick="showLogin()">Login</button>
+                    <button class="btn btn-primary" onclick="showSignup()">Sign Up</button>
+                </span>
+                <span id="userMenu" style="display: none;">
+                    <span class="nav-link" id="userGreeting">Welcome!</span>
+                    <a href="dashboard.html" class="btn btn-secondary">Dashboard</a>
+                    <button class="btn btn-danger" onclick="logout()">Logout</button>
+                </span>
+            </div>
+        </div>
+    </nav>
+    <!-- About Hero -->
+    <section class="hero" style="min-height: 60vh;">
+        <div class="container">
+            <h1 class="page-title">About CodeQuest</h1>
+            <p class="page-subtitle">Revolutionizing web development education through gamification</p>
+        </div>
+    </section>
+    <!-- Mission Section -->
+    <section class="mission-section">
+        <div class="container">
+            <div class="mission-content">
+                <div class="mission-text">
+                    <h2>Our Mission</h2>
+                    <p>At CodeQuest, we believe that learning to code should be an adventure. Our mission is to make web
+                        development education accessible, engaging, and fun for everyone, regardless of their background
+                        or experience level.</p>
+                    <p>We combine cutting-edge educational techniques with game design principles to create an immersive
+                        learning experience that keeps you motivated and excited to learn more.</p>
+                    <div class="mission-values">
+                        <div class="value-item">
+                            <span class="value-icon">🎯</span>
+                            <h3>Goal-Oriented</h3>
+                            <p>Clear learning objectives and progress tracking</p>
+                        </div>
+                        <div class="value-item">
+                            <span class="value-icon">🤝</span>
+                            <h3>Community-Driven</h3>
+                            <p>Learn together with a supportive community</p>
+                        </div>
+                        <div class="value-item">
+                            <span class="value-icon">🚀</span>
+                            <h3>Innovation</h3>
+                            <p>Always improving with the latest technologies</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="mission-image">
+                    <div class="mission-graphic">
+                        <div class="floating-icon" style="animation-delay: 0s;">🌐</div>
+                        <div class="floating-icon" style="animation-delay: 1s;">🎨</div>
+                        <div class="floating-icon" style="animation-delay: 2s;">⚡</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+        <!-- Team Section -->
+    <section class="team-section">
+        <div class="container">
+            <h2 class="section-title">Meet Our Team</h2>
+            <p class="section-subtitle">Passionate educators and developers dedicated to your success</p>
+
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="member-avatar">👨‍💻</div>
+                    <h3>Raynard Shakya</h3>
+                    <p class="member-role">Founder & CEO</p>
+                    <p>Full-stack developer with 10+ years of experience and a passion for education technology.</p>
+                    <div class="member-socials">
+                        <a href="#" aria-label="LinkedIn">💼</a>
+                        <a href="#" aria-label="GitHub">🐙</a>
+                        <a href="#" aria-label="Personal Website">🌐</a>
+                    </div>
+                </div>
+
+                <div class="team-member">
+                    <div class="member-avatar">👩‍🎨</div>
+                    <h3>Khrishman Khadka</h3>
+                    <p class="member-role">Head of Design</p>
+                    <p>UX/UI expert focused on creating intuitive and beautiful learning experiences.</p>
+                    <div class="member-socials">
+                        <a href="#" aria-label="LinkedIn">💼</a>
+                        <a href="#" aria-label="GitHub">🐙</a>
+                        <a href="#" aria-label="Personal Website">🌐</a>
+                    </div>
+                </div>
+
+                <div class="team-member">
+                    <div class="member-avatar">👨‍🏫</div>
+                    <h3>Pravesh Khanal</h3>
+                    <p class="member-role">Lead Educator</p>
+                    <p>Former CS professor with expertise in curriculum development and pedagogy.</p>
+                    <div class="member-socials">
+                        <a href="#" aria-label="LinkedIn">💼</a>
+                        <a href="#" aria-label="GitHub">🐙</a>
+                        <a href="#" aria-label="Personal Website">🌐</a>
+                    </div>
+                </div>
+
+                <div class="team-member">
+                    <div class="member-avatar">👩‍💻</div>
+                    <h3>Sharansh Shrestha</h3>
+                    <p class="member-role">Senior Developer</p>
+                    <p>Frontend specialist passionate about creating interactive learning tools.</p>
+                    <div class="member-socials">
+                        <a href="#" aria-label="LinkedIn">💼</a>
+                        <a href="#" aria-label="GitHub">🐙</a>
+                        <a href="#" aria-label="Personal Website">🌐</a>
+                    </div>
+                </div>
+
+                <div class="team-member">
+                    <div class="member-avatar">👨‍🎮</div>
+                    <h3>Naitik Rijal</h3>
+                    <p class="member-role">Game Designer</p>
+                    <p>Creates engaging gamification elements that make learning addictive.</p>
+                    <div class="member-socials">
+                        <a href="#" aria-label="LinkedIn">💼</a>
+                        <a href="#" aria-label="GitHub">🐙</a>
+                        <a href="#" aria-label="Personal Website">🌐</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Platform Stats -->
+    <section class="platform-stats">
+        <div class="container">
+            <h2 class="section-title">Our Impact</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-number" data-target="50000">0</span>
+                    <span class="stat-label">Active Learners</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number" data-target="165">0</span>
+                    <span class="stat-label">Lessons Available</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number" data-target="1000000">0</span>
+                    <span class="stat-label">Lines of Code Written</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number" data-target="98">0</span>
+                    <span class="stat-label">% Satisfaction Rate</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<!-- Why CodeQuest -->
+    <section class="why-section">
+        <div class="container">
+            <h2 class="section-title">Why Choose CodeQuest?</h2>
+
+            <div class="why-grid">
+                <div class="why-card">
+                    <span class="why-icon">🎮</span>
+                    <h3>Gamified Learning</h3>
+                    <p>Turn coding education into an exciting adventure with points, badges, and leaderboards.</p>
+                </div>
+                <div class="why-card">
+                    <span class="why-icon">⚡</span>
+                    <h3>Real-Time Feedback</h3>
+                    <p>Get instant feedback on your code with our live preview and error detection system.</p>
+                </div>
+                <div class="why-card">
+                    <span class="why-icon">📱</span>
+                    <h3>Learn Anywhere</h3>
+                    <p>Access your courses and projects from any device, anytime, anywhere.</p>
+                </div>
+                <div class="why-card">
+                    <span class="why-icon">👥</span>
+                    <h3>Community Support</h3>
+                    <p>Join a vibrant community of learners and get help when you need it.</p>
+                </div>
+                <div class="why-card">
+                    <span class="why-icon">🏆</span>
+                    <h3>Certificates</h3>
+                    <p>Earn verified certificates to showcase your skills to employers.</p>
+                </div>
+                <div class="why-card">
+                    <span class="why-icon">💡</span>
+                    <h3>Project-Based</h3>
+                    <p>Build real-world projects that you can add to your portfolio.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+<!-- Contact Section -->
+    <section class="contact-section">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            <p class="section-subtitle">Have questions? We'd love to hear from you!</p>
+
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <span class="contact-icon">📧</span>
+                        <div>
+                            <h4>Email</h4>
+                            <p>hello@codequest.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-icon">💬</span>
+                        <div>
+                            <h4>Discord</h4>
+                            <p>Join our community server</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <span class="contact-icon">🐦</span>
+                        <div>
+                            <h4>Twitter</h4>
+                            <p>@CodeQuestLearn</p>
+                        </div>
+                    </div>
+                </div>
+
+                <form class="contact-form">
+                    <div class="form-group">
+                        <input type="text" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" placeholder="Your Email" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea rows="5" placeholder="Your Message" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+ <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>CodeQuest</h3>
+                <p>Learn. Play. Conquer the Web.</p>
+                <div class="social-links">
+                    <a href="#" aria-label="Twitter">🐦</a>
+                    <a href="#" aria-label="GitHub">🐙</a>
+                    <a href="#" aria-label="Discord">💬</a>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h3>Learn</h3>
+                <div class="footer-links">
+                    <a href="learn.html">Courses</a>
+                    <a href="challenges.html">Challenges</a>
+                    <a href="games.html">Games</a>
+                    <a href="editor.html">Code Editor</a>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h3>Community</h3>
+                <div class="footer-links">
+                    <a href="leaderboard.html">Leaderboard</a>
+                    <a href="#">Forums</a>
+                    <a href="#">Discord</a>
+                    <a href="#">Blog</a>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h3>Support</h3>
+                <div class="footer-links">
+                    <a href="#">Help Center</a>
+                    <a href="#">Contact Us</a>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 CodeQuest. All rights reserved.</p>
+        </div>
+    </footer>
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <button class="close" onclick="closeModal('loginModal')">&times;</button>
+            <h2>Login to CodeQuest</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail">Email</label>
+                    <input type="email" id="loginEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Login</button>
+            </form>
+            <p class="form-footer">
+                Don't have an account? <a href="#" onclick="showSignup(); closeModal('loginModal')">Sign up</a>
+            </p>
+        </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div id="signupModal" class="modal">
+        <div class="modal-content">
+            <button class="close" onclick="closeModal('signupModal')">&times;</button>
+            <h2>Join CodeQuest</h2>
+            <form id="signupForm">
+                <div class="form-group">
+                    <label for="signupUsername">Username</label>
+                    <input type="text" id="signupUsername" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupEmail">Email</label>
+                    <input type="email" id="signupEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupPassword">Password</label>
+                    <input type="password" id="signupPassword" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Create Account</button>
+            </form>
+            <p class="form-footer">
+                Already have an account? <a href="#" onclick="showLogin(); closeModal('signupModal')">Login</a>
+            </p>
+        </div>
+    </div>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/auth.js"></script>
+    <script>
+        // Animate stats on scroll
+        const animateStats = () => {
+            const stats = document.querySelectorAll('.stat-number');
+            stats.forEach(stat => {
+                const target = parseInt(stat.dataset.target);
+                const increment = target / 100;
+                let current = 0;
+
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        current = target;
+                        clearInterval(timer);
+                    }
+                    stat.textContent = Math.floor(current).toLocaleString();
+                }, 20);
+            });
+        };
+
+        // Trigger animation when stats section is in view
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateStats();
+                    observer.unobserve(entry.target);
+                }
+            });
+        });
+
+        const statsSection = document.querySelector('.platform-stats');
+        if (statsSection) {
+            observer.observe(statsSection);
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaderboard - CodeQuest</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/animations.css">
+</head>
+
+<body>
+    <div class="bg-animation"></div>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="../index.html" class="logo">⚡CodeQuest</a>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="nav-links" id="navLinks">
+                <a href="../index.html" class="nav-link">Home</a>
+                <a href="learn.html" class="nav-link">Learn</a>
+                <a href="editor.html" class="nav-link">Code Editor</a>
+                <a href="challenges.html" class="nav-link">Challenges</a>
+                <a href="games.html" class="nav-link">Games</a>
+                <a href="leaderboard.html" class="nav-link active">Leaderboard</a>
+                <a href="about.html" class="nav-link">About</a>
+                <span id="authButtons">
+                    <button class="btn btn-secondary" onclick="showLogin()">Login</button>
+                    <button class="btn btn-primary" onclick="showSignup()">Sign Up</button>
+                </span>
+                <span id="userMenu" style="display: none;">
+                    <span class="nav-link" id="userGreeting">Welcome!</span>
+                    <a href="dashboard.html" class="btn btn-secondary">Dashboard</a>
+                    <button class="btn btn-danger" onclick="logout()">Logout</button>
+                </span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Leaderboard Hero -->
+    <section class="leaderboard-hero">
+        <div class="container">
+            <h1 class="page-title">Leaderboard</h1>
+            <p class="page-subtitle">See how you rank against other learners worldwide</p>
+
+            <!-- Leaderboard Filters -->
+            <div class="leaderboard-filters">
+                <button class="filter-btn active" onclick="filterLeaderboard('global')">🌍 Global</button>
+                <button class="filter-btn" onclick="filterLeaderboard('weekly')">📅 This Week</button>
+                <button class="filter-btn" onclick="filterLeaderboard('monthly')">📆 This Month</button>
+                <button class="filter-btn" onclick="filterLeaderboard('friends')">👥 Friends</button>
+                <button class="filter-btn" onclick="filterLeaderboard('country')">🏳️ My Country</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Top 3 Winners -->
+    <section class="top-winners">
+        <div class="container">
+            <div class="winners-podium">
+                <div class="winner second-place">
+                    <div class="winner-rank">🥈</div>
+                    <div class="winner-avatar">JD</div>
+                    <h3>John Doe</h3>
+                    <p class="winner-level">Level 42</p>
+                    <p class="winner-xp">48,500 XP</p>
+                    <div class="winner-badges">
+                        <span title="HTML Master">🌐</span>
+                        <span title="CSS Expert">🎨</span>
+                        <span title="JS Ninja">⚡</span>
+                    </div>
+                </div>
+
+                <div class="winner first-place">
+                    <div class="winner-rank">🥇</div>
+                    <div class="winner-avatar">SC</div>
+                    <h3>Khrishman Khadka</h3>
+                    <p class="winner-level">Level 45</p>
+                    <p class="winner-xp">52,300 XP</p>
+                    <div class="winner-badges">
+                        <span title="HTML Master">🌐</span>
+                        <span title="CSS Expert">🎨</span>
+                        <span title="JS Ninja">⚡</span>
+                        <span title="Challenge Champion">🏆</span>
+                    </div>
+                </div>
+
+                <div class="winner third-place">
+                    <div class="winner-rank">🥉</div>
+                    <div class="winner-avatar">MJ</div>
+                    <h3>Mike Johnson</h3>
+                    <p class="winner-level">Level 40</p>
+                    <p class="winner-xp">45,200 XP</p>
+                    <div class="winner-badges">
+                        <span title="HTML Master">🌐</span>
+                        <span title="CSS Expert">🎨</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Category Leaderboards -->
+    <section class="category-leaderboards">
+        <div class="container">
+            <div class="leaderboard-categories">
+                <button class="category-tab active" onclick="showLeaderboardCategory('overall')">Overall</button>
+                <button class="category-tab" onclick="showLeaderboardCategory('html')">HTML</button>
+                <button class="category-tab" onclick="showLeaderboardCategory('css')">CSS</button>
+                <button class="category-tab" onclick="showLeaderboardCategory('javascript')">JavaScript</button>
+                <button class="category-tab" onclick="showLeaderboardCategory('challenges')">Challenges</button>
+                <button class="category-tab" onclick="showLeaderboardCategory('games')">Games</button>
+            </div>
+
+            <!-- Main Leaderboard Table -->
+            <div class="leaderboard-table" id="leaderboardTable">
+                <div class="table-header">
+                    <span>Rank</span>
+                    <span>Player</span>
+                    <span>Level</span>
+                    <span>XP</span>
+                    <span>Streak</span>
+                    <span>Badges</span>
+                </div>
+
+                <!-- Current User Position (if not in top) -->
+                <div class="user-position" id="userPosition" style="display: none;">
+                    <span class="rank">247</span>
+                    <span class="player">
+                        <span class="player-avatar">YOU</span>
+                        <span class="player-name">Your Name</span>
+                    </span>
+                    <span class="level">Level 5</span>
+                    <span class="xp">1,250 XP</span>
+                    <span class="streak">🔥 3</span>
+                    <span class="badges">2</span>
+                </div>
+
+                <!-- Leaderboard Rows -->
+                <div class="leaderboard-row">
+                    <span class="rank">4</span>
+                    <span class="player">
+                        <span class="player-avatar">AL</span>
+                        <span class="player-name">Alice Lee</span>
+                    </span>
+                    <span class="level">Level 38</span>
+                    <span class="xp">42,100 XP</span>
+                    <span class="streak">🔥 45</span>
+                    <span class="badges">15</span>
+                </div>
+
+                <div class="leaderboard-row">
+                    <span class="rank">5</span>
+                    <span class="player">
+                        <span class="player-avatar">RP</span>
+                        <span class="player-name">Robert Park</span>
+                    </span>
+                    <span class="level">Level 36</span>
+                    <span class="xp">38,900 XP</span>
+                    <span class="streak">🔥 23</span>
+                    <span class="badges">14</span>
+                </div>
+
+                <div class="leaderboard-row">
+                    <span class="rank">6</span>
+                    <span class="player">
+                        <span class="player-avatar">EW</span>
+                        <span class="player-name">Emma Wilson</span>
+                    </span>
+                    <span class="level">Level 35</span>
+                    <span class="xp">37,500 XP</span>
+                    <span class="streak">🔥 67</span>
+                    <span class="badges">13</span>
+                </div>
+
+                <div class="leaderboard-row">
+                    <span class="rank">7</span>
+                    <span class="player">
+                        <span class="player-avatar">DK</span>
+                        <span class="player-name">David Kim</span>
+                    </span>
+                    <span class="level">Level 34</span>
+                    <span class="xp">35,200 XP</span>
+                    <span class="streak">🔥 12</span>
+                    <span class="badges">12</span>
+                </div>
+
+                <div class="leaderboard-row">
+                    <span class="rank">8</span>
+                    <span class="player">
+                        <span class="player-avatar">OG</span>
+                        <span class="player-name">Olivia Garcia</span>
+                    </span>
+                    <span class="level">Level 33</span>
+                    <span class="xp">33,800 XP</span>
+                    <span class="streak">🔥 89</span>
+                    <span class="badges">11</span>
+                </div>
+
+                <div class="leaderboard-row">
+                    <span class="rank">9</span>
+                    <span class="player">
+                        <span class="player-avatar">CT</span>
+                        <span class="player-name">Chris Taylor</span>
+                    </span>
+                    <span class="level">Level 32</span>
+                    <span class="xp">31,500 XP</span>
+                    <span class="streak">🔥 34</span>
+                    <span class="badges">10</span>
+                </div>
+
+                <div class="leaderboard-row">
+                    <span class="rank">10</span>
+                    <span class="player">
+                        <span class="player-avatar">SM</span>
+                        <span class="player-name">Sophia Martinez</span>
+                    </span>
+                    <span class="level">Level 30</span>
+                    <span class="xp">29,300 XP</span>
+                    <span class="streak">🔥 56</span>
+                    <span class="badges">10</span>
+                </div>
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination">
+                <button class="page-btn" onclick="changePage('prev')">←</button>
+                <span class="page-numbers">
+                    <button class="page-number active">1</button>
+                    <button class="page-number">2</button>
+                    <button class="page-number">3</button>
+                    <span>...</span>
+                    <button class="page-number">25</button>
+                </span>
+                <button class="page-btn" onclick="changePage('next')">→</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Achievement Leaders -->
+    <section class="achievement-leaders">
+        <div class="container">
+            <h2 class="section-title">Achievement Leaders</h2>
+
+            <div class="achievement-categories">
+                <div class="achievement-category">
+                    <h3>🔥 Longest Streak</h3>
+                    <div class="achievement-leader">
+                        <span class="leader-avatar">TH</span>
+                        <div class="leader-info">
+                            <p class="leader-name">Tom Hardy</p>
+                            <p class="leader-stat">365 days</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="achievement-category">
+                    <h3>⚡ Fastest Learner</h3>
+                    <div class="achievement-leader">
+                        <span class="leader-avatar">AN</span>
+                        <div class="leader-info">
+                            <p class="leader-name">Anna Nelson</p>
+                            <p class="leader-stat">Level 50 in 30 days</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="achievement-category">
+                    <h3>🎯 Challenge Master</h3>
+                    <div class="achievement-leader">
+                        <span class="leader-avatar">JW</span>
+                        <div class="leader-info">
+                            <p class="leader-name">Jack Wilson</p>
+                            <p class="leader-stat">500 challenges</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="achievement-category">
+                    <h3>🎮 Game Champion</h3>
+                    <div class="achievement-leader">
+                        <span class="leader-avatar">LB</span>
+                        <div class="leader-info">
+                            <p class="leader-name">Lisa Brown</p>
+                            <p class="leader-stat">10,000 points</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hall of Fame -->
+    <section class="hall-of-fame">
+        <div class="container">
+            <h2 class="section-title">Hall of Fame</h2>
+            <p class="section-subtitle">All-time greatest CodeQuest achievers</p>
+
+            <div class="fame-grid">
+                <div class="fame-card">
+                    <div class="fame-badge">👑</div>
+                    <h3>Eternal Champion</h3>
+                    <p>First to reach Level 100</p>
+                    <div class="fame-winner">
+                        <span class="fame-avatar">MK</span>
+                        <span>Michael King</span>
+                    </div>
+                </div>
+
+                <div class="fame-card">
+                    <div class="fame-badge">🌟</div>
+                    <h3>Perfect Score</h3>
+                    <p>100% completion rate</p>
+                    <div class="fame-winner">
+                        <span class="fame-avatar">JL</span>
+                        <span>Jennifer Lopez</span>
+                    </div>
+                </div>
+
+                <div class="fame-card">
+                    <div class="fame-badge">💎</div>
+                    <h3>Code Genius</h3>
+                    <p>Solved all expert challenges</p>
+                    <div class="fame-winner">
+                        <span class="fame-avatar">RD</span>
+                        <span>Ryan Davis</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>CodeQuest</h3>
+                <p>Learn. Play. Conquer the Web.</p>
+                <div class="social-links">
+                    <a href="#" aria-label="Twitter">🐦</a>
+                    <a href="#" aria-label="GitHub">🐙</a>
+                    <a href="#" aria-label="Discord">💬</a>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h3>Learn</h3>
+                <div class="footer-links">
+                    <a href="learn.html">Courses</a>
+                    <a href="challenges.html">Challenges</a>
+                    <a href="games.html">Games</a>
+                    <a href="editor.html">Code Editor</a>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h3>Community</h3>
+                <div class="footer-links">
+                    <a href="leaderboard.html">Leaderboard</a>
+                    <a href="#">Forums</a>
+                    <a href="#">Discord</a>
+                    <a href="#">Blog</a>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h3>Support</h3>
+                <div class="footer-links">
+                    <a href="#">Help Center</a>
+                    <a href="#">Contact Us</a>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 CodeQuest. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <style>
+        /* Leaderboard Specific Styles */
+        .leaderboard-hero {
+            padding: 8rem 2rem 4rem;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(236, 72, 153, 0.1));
+        }
+
+        .leaderboard-filters {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 0.75rem 1.5rem;
+            background: rgba(30, 41, 59, 0.5);
+            border: 2px solid transparent;
+            border-radius: 50px;
+            color: rgba(248, 250, 252, 0.8);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .filter-btn:hover {
+            background: rgba(99, 102, 241, 0.1);
+            border-color: rgba(99, 102, 241, 0.3);
+        }
+
+        .filter-btn.active {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+        }
+
+        /* Top Winners Podium */
+        .top-winners {
+            padding: 4rem 2rem;
+        }
+
+        .winners-podium {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            gap: 2rem;
+            margin: 0 auto;
+            max-width: 800px;
+        }
+
+        .winner {
+            background: rgba(30, 41, 59, 0.8);
+            border: 2px solid rgba(99, 102, 241, 0.3);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .winner:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(99, 102, 241, 0.3);
+        }
+
+        .first-place {
+            padding: 3rem 2rem;
+            background: linear-gradient(135deg, rgba(255, 215, 0, 0.1), rgba(99, 102, 241, 0.1));
+            border-color: #ffd700;
+        }
+
+        .winner-rank {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .winner-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 1.5rem;
+            color: white;
+            font-weight: bold;
+        }
+
+        .winner h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .winner-level {
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .winner-xp {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--warning);
+            margin-bottom: 1rem;
+        }
+
+        .winner-badges {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        /* Leaderboard Table */
+        .leaderboard-categories {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .category-tab {
+            padding: 0.5rem 1rem;
+            background: transparent;
+            border: none;
+            border-bottom: 2px solid transparent;
+            color: rgba(248, 250, 252, 0.7);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .category-tab:hover {
+            color: var(--primary);
+        }
+
+        .category-tab.active {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
+        }
+
+        .leaderboard-table {
+            background: rgba(30, 41, 59, 0.5);
+            border-radius: 16px;
+            overflow: hidden;
+            margin-bottom: 2rem;
+        }
+
+        .table-header {
+            display: grid;
+            grid-template-columns: 60px 2fr 100px 120px 80px 80px;
+            padding: 1rem;
+            background: rgba(15, 23, 42, 0.8);
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .leaderboard-row,
+        .user-position {
+            display: grid;
+            grid-template-columns: 60px 2fr 100px 120px 80px 80px;
+            padding: 1rem;
+            border-bottom: 1px solid rgba(99, 102, 241, 0.1);
+            align-items: center;
+            transition: all 0.3s;
+        }
+
+        .leaderboard-row:hover {
+            background: rgba(99, 102, 241, 0.05);
+        }
+
+        .user-position {
+            background: rgba(99, 102, 241, 0.1);
+            border: 2px solid var(--primary);
+        }
+
+        .player {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .player-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+
+        /* Achievement Leaders */
+        .achievement-categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .achievement-category {
+            background: rgba(30, 41, 59, 0.5);
+            border-radius: 12px;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .achievement-leader {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .leader-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        /* Hall of Fame */
+        .hall-of-fame {
+            background: rgba(99, 102, 241, 0.05);
+            padding: 4rem 2rem;
+        }
+
+        .fame-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .fame-card {
+            background: rgba(30, 41, 59, 0.8);
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.3s;
+        }
+
+        .fame-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.2);
+        }
+
+        .fame-badge {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .fame-winner {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .fame-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ffd700, #ff8c00);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .page-btn {
+            padding: 0.5rem 1rem;
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            border-radius: 8px;
+            color: var(--primary);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .page-btn:hover {
+            background: rgba(99, 102, 241, 0.2);
+        }
+
+        .page-numbers {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .page-number {
+            padding: 0.5rem 0.75rem;
+            background: transparent;
+            border: 1px solid transparent;
+            border-radius: 8px;
+            color: rgba(248, 250, 252, 0.7);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .page-number:hover {
+            border-color: rgba(99, 102, 241, 0.3);
+        }
+
+        .page-number.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .winners-podium {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .table-header,
+            .leaderboard-row,
+            .user-position {
+                grid-template-columns: 40px 1fr 60px 80px;
+            }
+
+            .table-header span:nth-child(5),
+            .table-header span:nth-child(6),
+            .leaderboard-row span:nth-child(5),
+            .leaderboard-row span:nth-child(6),
+            .user-position span:nth-child(5),
+            .user-position span:nth-child(6) {
+                display: none;
+            }
+        }
+    </style>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <button class="close" onclick="closeModal('loginModal')">&times;</button>
+            <h2>Login to CodeQuest</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail">Email</label>
+                    <input type="email" id="loginEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Login</button>
+            </form>
+            <p class="form-footer">
+                Don't have an account? <a href="#" onclick="showSignup(); closeModal('loginModal')">Sign up</a>
+            </p>
+        </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div id="signupModal" class="modal">
+        <div class="modal-content">
+            <button class="close" onclick="closeModal('signupModal')">&times;</button>
+            <h2>Join CodeQuest</h2>
+            <form id="signupForm">
+                <div class="form-group">
+                    <label for="signupUsername">Username</label>
+                    <input type="text" id="signupUsername" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupEmail">Email</label>
+                    <input type="email" id="signupEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupPassword">Password</label>
+                    <input type="password" id="signupPassword" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Create Account</button>
+            </form>
+            <p class="form-footer">
+                Already have an account? <a href="#" onclick="showLogin(); closeModal('signupModal')">Login</a>
+            </p>
+        </div>
+    </div>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/leaderboard.js"></script>
+</body>
+
+</html>
