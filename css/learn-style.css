@@ -24,3 +24,33 @@
   color: rgba(248, 250, 252, 0.7);
   margin-bottom: 3rem;
 }
+
+/* Track Selector */
+.track-selector {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.track-btn {
+  padding: 0.75rem 1.5rem;
+  background: rgba(30, 41, 59, 0.5);
+  border: 2px solid transparent;
+  border-radius: 50px;
+  color: rgba(248, 250, 252, 0.8);
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.track-btn:hover {
+  background: rgba(99, 102, 241, 0.1);
+  border-color: rgba(99, 102, 241, 0.3);
+}
+
+.track-btn.active {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: white;
+  border-color: transparent;
+}
