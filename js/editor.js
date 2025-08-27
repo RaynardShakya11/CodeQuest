@@ -542,3 +542,365 @@ function addChallengeInstructions(challenge) {
   // Add styles
   addChallengeStyles();
 }
+
+
+
+
+
+
+
+// Submit Challenge
+function submitChallenge(challengeId) {
+  const html = document.getElementById("htmlCode").value;
+  const css = document.getElementById("cssCode").value;
+  const js = document.getElementById("jsCode").value;
+  
+  // Basic validation (in a real app, this would be more sophisticated)
+  if (!html.trim() || !css.trim()) {
+    showNotification("Please complete both HTML and CSS sections", "warning");
+    return;
+  }
+  
+  // Check if user is logged in
+  const user = window.AuthManager?.currentUser;
+  if (!user) {
+    showNotification("Please log in to submit your solution", "warning");
+    return;
+  }
+  
+  // Mark challenge as completed
+  if (window.challengeFunctions && window.challengeFunctions.completeChallenge) {
+    window.challengeFunctions.completeChallenge(challengeId, 100); // Default XP
+  }
+  
+  // Show success message
+  showNotification("🎉 Challenge completed! +100 XP earned", "success");
+  
+  // Remove challenge mode after a delay
+  setTimeout(() => {
+    const instructions = document.querySelector('.challenge-instructions');
+    if (instructions) {
+      instructions.remove();
+    }
+    // Reset to normal editor mode
+    document.getElementById("projectName").value = "My Project";
+  }, 3000);
+}
+
+// View Solution
+function viewSolution() {
+  const challengeData = sessionStorage.getItem("current_challenge");
+  if (challengeData) {
+    const challenge = JSON.parse(challengeData);
+    if (challenge.solution) {
+      // Load solution code
+      document.getElementById("htmlCode").value = challenge.solution.html || "";
+      document.getElementById("cssCode").value = challenge.solution.css || "";
+      document.getElementById("jsCode").value = challenge.solution.js || "";
+      
+      // Update line numbers and preview
+      updateAllLineNumbers();
+      runCode();
+      
+      showNotification("Solution loaded! Study the code to learn", "info");
+    } else {
+      showNotification("No solution available for this challenge", "info");
+    }
+  }
+}
+
+// Add Challenge Styles
+function addChallengeStyles() {
+  const style = document.createElement("style");
+  style.textContent = `
+    .challenge-instructions {
+      background: rgba(15, 23, 42, 0.95);
+      border: 2px solid rgba(99, 102, 241, 0.5);
+      border-radius: 15px;
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+      backdrop-filter: blur(10px);
+    }
+    
+    .challenge-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+    
+    .challenge-header h3 {
+      color: #f8fafc;
+      margin: 0;
+    }
+    
+    .challenge-meta {
+      display: flex;
+      gap: 1rem;
+    }
+    
+    .difficulty {
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      text-transform: capitalize;
+    }
+    
+    .difficulty.beginner { background: #10b981; color: white; }
+    .difficulty.intermediate { background: #f59e0b; color: white; }
+    .difficulty.advanced { background: #ef4444; color: white; }
+    .difficulty.expert { background: #8b5cf6; color: white; }
+    
+    .xp-reward {
+      color: #fbbf24;
+      font-weight: 600;
+    }
+    
+    .challenge-description {
+      color: #cbd5e1;
+      margin-bottom: 1rem;
+      line-height: 1.6;
+    }
+    
+    .challenge-requirements h4 {
+      color: #f8fafc;
+      margin-bottom: 0.5rem;
+    }
+    
+    .challenge-requirements ul {
+      color: #cbd5e1;
+      margin-left: 1.5rem;
+    }
+    
+    .challenge-requirements li {
+      margin-bottom: 0.25rem;
+    }
+    
+    .challenge-actions {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    
+    .notification {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: #333;
+      color: white;
+      padding: 1rem 1.5rem;
+      border-radius: 8px;
+      z-index: 10000;
+      transform: translateX(100%);
+      transition: transform 0.3s ease;
+      max-width: 300px;
+    }
+    
+    .notification.show {
+      transform: translateX(0);
+    }
+    
+    .notification.success {
+      background: #10b981;
+    }
+    
+    .notification.warning {
+      background: #f59e0b;
+    }
+    
+    .notification.error {
+      background: #ef4444;
+    }
+    
+    .notification.info {
+      background: #3b82f6;
+    }
+  `;
+  
+  document.head.appendChild(style);
+}
+
+// Show Notification
+function showNotification(message, type = "info") {
+  const notification = document.createElement("div");
+  notification.className = `notification ${type}`;
+  notification.textContent = message;
+  document.body.appendChild(notification);
+  
+  // Show notification
+  setTimeout(() => {
+    notification.classList.add("show");
+  }, 100);
+  
+  // Hide and remove after 3 seconds
+  setTimeout(() => {
+    notification.classList.remove("show");
+    setTimeout(() => {
+      if (notification.parentNode) {
+        notification.remove();
+      }
+    }, 300);
+  }, 3000);
+}
+
+// Console Functions
+function initializeConsole() {
+  // Listen for messages from iframe
+  window.addEventListener("message", function (e) {
+    if (e.data && e.data.type === "console") {
+      addConsoleMessage(e.data.message, e.data.level);
+    }
+  });
+}
+
+function toggleConsole() {
+  const consolePanel = document.getElementById("consolePanel");
+  consolePanel.classList.toggle("active");
+}
+
+function clearConsole() {
+  const consoleContent = document.getElementById("consoleContent");
+  consoleContent.innerHTML =
+    '<div class="console-line"><span class="console-time">' +
+    getCurrentTime() +
+    '</span><span class="console-message">Console cleared</span></div>';
+}
+
+function addConsoleMessage(message, level = "log") {
+  const consoleContent = document.getElementById("consoleContent");
+  const consoleLine = document.createElement("div");
+  consoleLine.className = "console-line";
+
+  const levelClass =
+    level === "error"
+      ? "console-error"
+      : level === "warn"
+      ? "console-warning"
+      : "console-message";
+
+  consoleLine.innerHTML = `
+        <span class="console-time">${getCurrentTime()}</span>
+        <span class="${levelClass}">${escapeHtml(message)}</span>
+    `;
+
+  consoleContent.appendChild(consoleLine);
+  consoleContent.scrollTop = consoleContent.scrollHeight;
+}
+
+// Utility Functions
+function getCurrentTime() {
+  const now = new Date();
+  return now.toTimeString().split(" ")[0];
+}
+
+function escapeHtml(text) {
+  const div = document.createElement("div");
+  div.textContent = text;
+  return div.innerHTML;
+}
+
+function updateStatus(message, type = "info") {
+  const saveStatus = document.getElementById("saveStatus");
+  if (saveStatus) {
+    saveStatus.textContent = message;
+    setTimeout(() => {
+      saveStatus.textContent = "✓ All changes saved";
+    }, 3000);
+  }
+}
+
+// History Management
+function saveToHistory(editorId) {
+  const content = document.getElementById(editorId).value;
+  const historyKey = editorId.replace("Code", "");
+
+  if (!editorState.history[historyKey]) {
+    editorState.history[historyKey] = [];
+  }
+
+  editorState.history[historyKey].push(content);
+  editorState.historyIndex[historyKey] =
+    editorState.history[historyKey].length - 1;
+
+  // Limit history to 50 entries
+  if (editorState.history[historyKey].length > 50) {
+    editorState.history[historyKey].shift();
+    editorState.historyIndex[historyKey]--;
+  }
+}
+
+function undoAction() {
+  const tab = editorState.currentTab;
+  const history = editorState.history[tab];
+
+  if (history && editorState.historyIndex[tab] > 0) {
+    editorState.historyIndex[tab]--;
+    const content = history[editorState.historyIndex[tab]];
+    document.getElementById(tab + "Code").value = content;
+    updateLineNumbers(tab + "Code");
+  }
+}
+
+function redoAction() {
+  const tab = editorState.currentTab;
+  const history = editorState.history[tab];
+
+  if (history && editorState.historyIndex[tab] < history.length - 1) {
+    editorState.historyIndex[tab]++;
+    const content = history[editorState.historyIndex[tab]];
+    document.getElementById(tab + "Code").value = content;
+    updateLineNumbers(tab + "Code");
+  }
+}
+
+// Snippets
+function insertSnippet(snippetType) {
+  const snippets = {
+    "html-boilerplate": `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>`,
+    "flexbox-center": `.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}`,
+    "fetch-api": `fetch('https://api.example.com/data')
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });`,
+    "event-listener": `document.addEventListener('DOMContentLoaded', function() {
+    // Your code here
+});`,
+  };
+
+  const activeTab = editorState.currentTab;
+  const textarea = document.getElementById(activeTab + "Code");
+
+  if (textarea && snippets[snippetType]) {
+    const start = textarea.selectionStart;
+    const end = textarea.selectionEnd;
+    const text = textarea.value;
+
+    textarea.value =
+      text.substring(0, start) + snippets[snippetType] + text.substring(end);
+    textarea.selectionStart = textarea.selectionEnd =
+      start + snippets[snippetType].length;
+
+    updateLineNumbers(activeTab + "Code");
+    textarea.focus();
+  }
+}
