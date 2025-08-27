@@ -31,3 +31,23 @@ function initializeApp() {
   const currentPage = window.location.pathname.split("/").pop() || "index.html";
   initializePageSpecific(currentPage);
 }
+// Initialize Authentication System
+function initializeAuth() {
+  // Wait for AuthManager to be available
+  if (typeof window.AuthManager !== "undefined") {
+    // Initialize AuthManager with current user
+    if (currentUser) {
+      window.AuthManager.currentUser = currentUser;
+      window.AuthManager.isLoggedIn = true;
+    }
+
+    // Update UI immediately
+    window.AuthManager.updateAuthUI();
+
+    // Set up listener for auth state changes
+    setupAuthStateListener();
+  } else {
+    // If AuthManager isn't loaded yet, wait a bit and try again
+    setTimeout(initializeAuth, 100);
+  }
+}
