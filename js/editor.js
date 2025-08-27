@@ -313,3 +313,110 @@ function formatJS(js) {
     .replace(/\n\s*\n/g, "\n")
     .trim();
 }
+// Save Project
+function saveProject() {
+  const project = {
+    name: document.getElementById("projectName").value || "Untitled Project",
+    html: document.getElementById("htmlCode").value,
+    css: document.getElementById("cssCode").value,
+    js: document.getElementById("jsCode").value,
+    timestamp: new Date().toISOString(),
+  };
+
+  // Save to localStorage
+  localStorage.setItem("codequest_current_project", JSON.stringify(project));
+
+  // Save to projects list
+  const projects = JSON.parse(
+    localStorage.getItem("codequest_projects") || "[]"
+  );
+  const existingIndex = projects.findIndex((p) => p.name === project.name);
+
+  if (existingIndex !== -1) {
+    projects[existingIndex] = project;
+  } else {
+    projects.push(project);
+  }
+
+  localStorage.setItem("codequest_projects", JSON.stringify(projects));
+
+  updateStatus("✓ Project saved", "success");
+}
+
+// Create New Project
+function createNewProject() {
+  if (confirm("Create a new project? Unsaved changes will be lost.")) {
+    document.getElementById("projectName").value = "Untitled Project";
+    document.getElementById("htmlCode").value =
+      '<!DOCTYPE html>\n<html lang="en">\n<head>\n    <meta charset="UTF-8">\n    <meta name="viewport" content="width=device-width, initial-scale=1.0">\n    <title>New Project</title>\n</head>\n<body>\n    <h1>Hello World!</h1>\n</body>\n</html>';
+    document.getElementById("cssCode").value =
+      "* {\n    margin: 0;\n    padding: 0;\n    box-sizing: border-box;\n}\n\nbody {\n    font-family: Arial, sans-serif;\n    padding: 2rem;\n}";
+    document.getElementById("jsCode").value =
+      '// Start coding here\nconsole.log("Hello, CodeQuest!");';
+
+    updateAllLineNumbers();
+    runCode();
+    updateStatus("New project created", "success");
+  }
+}
+
+// Open Project
+function openProject() {
+  const projects = JSON.parse(
+    localStorage.getItem("codequest_projects") || "[]"
+  );
+
+  if (projects.length === 0) {
+    alert("No saved projects found.");
+    return;
+  }
+
+  const projectNames = projects.map((p) => p.name).join("\n");
+  const projectName = prompt(
+    `Enter project name to open:\n\nAvailable projects:\n${projectNames}`
+  );
+
+  if (projectName) {
+    const project = projects.find((p) => p.name === projectName);
+    if (project) {
+      document.getElementById("projectName").value = project.name;
+      document.getElementById("htmlCode").value = project.html || "";
+      document.getElementById("cssCode").value = project.css || "";
+      document.getElementById("jsCode").value = project.js || "";
+
+      updateAllLineNumbers();
+      runCode();
+      updateStatus(`Project "${project.name}" loaded`, "success");
+    } else {
+      alert("Project not found.");
+    }
+  }
+}
+
+// Switch Tab
+function switchTab(tab) {
+  // Update active tab
+  document
+    .querySelectorAll(".editor-tab")
+    .forEach((t) => t.classList.remove("active"));
+  event.currentTarget.classList.add("active");
+
+  // Update active editor
+  document
+    .querySelectorAll(".editor-wrapper")
+    .forEach((e) => e.classList.remove("active"));
+  document.getElementById(tab + "Editor").classList.add("active");
+
+  editorState.currentTab = tab;
+
+  // Update footer
+  const fileTypes = { html: "HTML", css: "CSS", js: "JavaScript" };
+  document.getElementById("fileType").textContent = fileTypes[tab];
+}
+
+// Close Tab
+function closeTab(tab) {
+  event.stopPropagation();
+  // In a real implementation, this would handle closing tabs
+  console.log("Close tab:", tab);
+}
