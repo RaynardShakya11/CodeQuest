@@ -240,3 +240,74 @@ function runCode() {
     addConsoleMessage("Error: " + error.message, "error");
   }
 }
+// Format Code
+function formatCode() {
+  const activeTab = editorState.currentTab;
+  let codeElement;
+
+  if (activeTab === "html") {
+    codeElement = document.getElementById("htmlCode");
+    codeElement.value = formatHTML(codeElement.value);
+  } else if (activeTab === "css") {
+    codeElement = document.getElementById("cssCode");
+    codeElement.value = formatCSS(codeElement.value);
+  } else if (activeTab === "js") {
+    codeElement = document.getElementById("jsCode");
+    codeElement.value = formatJS(codeElement.value);
+  }
+
+  updateLineNumbers();
+  updateStatus("Code formatted", "success");
+}
+
+// Format HTML
+function formatHTML(html) {
+  // Basic HTML formatting
+  let formatted = html.replace(/></g, ">\n<").replace(/(\r\n|\n|\r)/gm, "\n");
+
+  // Indentation
+  let indent = 0;
+  const lines = formatted.split("\n");
+  const formattedLines = [];
+
+  lines.forEach((line) => {
+    const trimmed = line.trim();
+    if (trimmed.startsWith("</")) {
+      indent = Math.max(0, indent - 1);
+    }
+
+    formattedLines.push("    ".repeat(indent) + trimmed);
+
+    if (
+      trimmed.startsWith("<") &&
+      !trimmed.startsWith("</") &&
+      !trimmed.endsWith("/>") &&
+      !trimmed.includes("</")
+    ) {
+      indent++;
+    }
+  });
+
+  return formattedLines.join("\n");
+}
+
+// Format CSS
+function formatCSS(css) {
+  return css
+    .replace(/\s*{\s*/g, " {\n    ")
+    .replace(/;\s*/g, ";\n    ")
+    .replace(/\s*}\s*/g, "\n}\n\n")
+    .replace(/\n\s*\n/g, "\n")
+    .trim();
+}
+
+// Format JavaScript
+function formatJS(js) {
+  // Basic JS formatting
+  return js
+    .replace(/\s*{\s*/g, " {\n    ")
+    .replace(/;\s*/g, ";\n    ")
+    .replace(/\s*}\s*/g, "\n}\n")
+    .replace(/\n\s*\n/g, "\n")
+    .trim();
+}
