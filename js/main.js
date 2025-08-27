@@ -13,3 +13,21 @@ document.addEventListener("DOMContentLoaded", function () {
 
   updateAuthUI();
 });
+
+// Initialize Application
+function initializeApp() {
+  // Check for saved user session
+  if (currentUser) {
+    console.log("Welcome back,", currentUser.username);
+  }
+
+  // Initialize tooltips
+  initTooltips();
+
+  // Setup smooth scrolling
+  setupSmoothScroll();
+
+  // Check current page and initialize specific features
+  const currentPage = window.location.pathname.split("/").pop() || "index.html";
+  initializePageSpecific(currentPage);
+}
