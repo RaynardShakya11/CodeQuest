@@ -363,3 +363,138 @@ function updateProgressDisplay() {
     }
   });
 }
+
+// Start Lesson
+function startLesson(lessonId, track) {
+  // Check if user is logged in
+  const user = window.AuthManager?.currentUser;
+  if (!user) {
+    if (window.CodeQuest && window.CodeQuest.showLogin) {
+      window.CodeQuest.showLogin();
+    }
+    return;
+  }
+
+  // Find lesson data
+  const lesson = lessonsData[track]?.find((l) => l.id === lessonId);
+  if (!lesson) {
+    showNotification("Lesson not found", "error");
+    return;
+  }
+
+  // Check prerequisites
+  if (!checkPrerequisites(lessonId, track)) {
+    showNotification("Complete previous lessons first!", "warning");
+    return;
+  }
+
+  // Start lesson
+  openLessonModal(lesson, track);
+}
+
+// Check Prerequisites
+function checkPrerequisites(lessonId, track) {
+  const lessons = lessonsData[track] || [];
+  const lessonIndex = lessons.findIndex((l) => l.id === lessonId);
+
+  // Check if previous lesson is completed
+  if (lessonIndex > 0) {
+    const previousLesson = lessons[lessonIndex - 1];
+    if (!learnState.completedLessons.includes(previousLesson.id)) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
+// Open Lesson Modal
+function openLessonModal(lesson, track) {
+  // Create lesson modal
+  const modal = document.createElement("div");
+  modal.className = "lesson-modal";
+  modal.innerHTML = `
+        <div class="lesson-modal-content">
+            <button class="close-lesson" onclick="closeLessonModal()">&times;</button>
+            <div class="lesson-header">
+                <h2>${lesson.title}</h2>
+                <div class="lesson-meta">
+                    <span>⏱️ ${lesson.duration} min</span>
+                    <span>🏆 ${lesson.xp} XP</span>
+                    <span class="difficulty ${lesson.difficulty}">${lesson.difficulty}</span>
+                </div>
+            </div>
+            <div class="lesson-body">
+                <div class="lesson-content" id="lessonContent">
+                    <!-- Lesson content would be loaded here -->
+                    <p>Loading lesson content...</p>
+                </div>
+                <div class="lesson-actions">
+                    <button class="btn btn-secondary" onclick="previousLesson()">Previous</button>
+                    <button class="btn btn-primary" onclick="completeLesson('${lesson.id}', '${track}', ${lesson.xp})">Complete Lesson</button>
+                    <button class="btn btn-secondary" onclick="nextLesson()">Next</button>
+                </div>
+            </div>
+            <div class="lesson-progress-bar">
+                <div class="lesson-progress-fill" id="lessonProgress" style="width: 0%"></div>
+            </div>
+        </div>
+    `;
+
+  document.body.appendChild(modal);
+
+  // Load lesson content
+  loadLessonContent(lesson.id);
+
+  // Show modal
+  setTimeout(() => {
+    modal.classList.add("show");
+  }, 100);
+}
+
+// Load Lesson Content
+function loadLessonContent(lessonId) {
+  // In a real app, this would fetch lesson content from backend
+  const content = getLessonContent(lessonId);
+
+  const contentElement = document.getElementById("lessonContent");
+  if (contentElement) {
+    contentElement.innerHTML = content;
+
+    // Add syntax highlighting if code examples
+    highlightCode();
+  }
+}
+
+// Get Lesson Content (Mock)
+function getLessonContent(lessonId) {
+  // Mock lesson content
+  const content = {
+    "html-1": `
+            <h3>Welcome to HTML!</h3>
+            <p>HTML (HyperText Markup Language) is the standard markup language for creating web pages.</p>
+            <h4>What is HTML?</h4>
+            <ul>
+                <li>HTML stands for Hyper Text Markup Language</li>
+                <li>HTML is the standard markup language for creating Web pages</li>
+                <li>HTML describes the structure of a Web page</li>
+                <li>HTML consists of a series of elements</li>
+            </ul>
+            <h4>Basic Structure</h4>
+            <pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Page Title&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;This is a Heading&lt;/h1&gt;
+    &lt;p&gt;This is a paragraph.&lt;/p&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+            <h4>Try It Yourself</h4>
+            <p>Click the "Complete Lesson" button when you're ready to move on!</p>
+        `,
+  };
+
+  return content[lessonId] || "<p>Lesson content coming soon!</p>";
+}
