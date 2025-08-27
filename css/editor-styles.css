@@ -514,3 +514,97 @@
   transform: scale(1.1);
   box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4);
 }
+/* Editor Footer */
+.editor-footer {
+  background: rgba(15, 23, 42, 0.95);
+  border-top: 1px solid rgba(99, 102, 241, 0.2);
+  padding: 0.5rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: rgba(248, 250, 252, 0.6);
+  font-size: 0.85rem;
+}
+
+.footer-left,
+.footer-right {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.separator {
+  color: rgba(99, 102, 241, 0.3);
+}
+
+/* Shortcuts Modal */
+.shortcuts-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.shortcut-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 0.75rem;
+  background: rgba(99, 102, 241, 0.05);
+  border-radius: 8px;
+}
+
+.shortcut-keys {
+  font-family: monospace;
+  background: rgba(99, 102, 241, 0.2);
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  color: var(--primary);
+}
+
+.shortcut-desc {
+  color: rgba(248, 250, 252, 0.8);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .editor-sidebar {
+    width: 200px;
+  }
+
+  .preview-area {
+    width: 40%;
+  }
+}
+
+@media (max-width: 768px) {
+  .editor-main {
+    flex-direction: column;
+  }
+
+  .editor-sidebar {
+    width: 100%;
+    height: 200px;
+    border-right: none;
+    border-bottom: 1px solid rgba(99, 102, 241, 0.2);
+  }
+
+  .code-area {
+    height: 50%;
+  }
+
+  .preview-area {
+    width: 100%;
+    height: 50%;
+    border-left: none;
+    border-top: 1px solid rgba(99, 102, 241, 0.2);
+  }
+
+  .toolbar-center {
+    display: none;
+  }
+
+  .quick-actions {
+    bottom: 1rem;
+    right: 1rem;
+  }
+}
