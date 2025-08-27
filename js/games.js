@@ -809,3 +809,13 @@ function addGameStyles() {
 
   document.head.appendChild(style);
 }
+// Animate Game Cards
+function animateGameCards() {
+  const cards = document.querySelectorAll(".game-card");
+  cards.forEach((card, index) => {
+    setTimeout(() => {
+      card.style.opacity = "1";
+      card.style.transform = "translateY(0)";
+    }, index * 100);
+  });
+}
