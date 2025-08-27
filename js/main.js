@@ -220,7 +220,7 @@ function initializePageSpecific(page) {
       break;
   }
 }
-/ Home Page Initialization
+// Home Page Initialization
 function initHomePage() {
   // Add any home page specific initialization
   animateStats();
@@ -415,7 +415,10 @@ window.CodeQuest = {
   apiCall,
   closeModal,
   showLogin: () => {
-    if (typeof window.AuthManager !== 'undefined' && window.AuthManager.showLogin) {
+    if (
+      typeof window.AuthManager !== "undefined" &&
+      window.AuthManager.showLogin
+    ) {
       window.AuthManager.showLogin();
     } else {
       const loginModal = document.getElementById("loginModal");
@@ -425,7 +428,10 @@ window.CodeQuest = {
     }
   },
   showSignup: () => {
-    if (typeof window.AuthManager !== 'undefined' && window.AuthManager.showSignup) {
+    if (
+      typeof window.AuthManager !== "undefined" &&
+      window.AuthManager.showSignup
+    ) {
       window.AuthManager.showSignup();
     } else {
       const signupModal = document.getElementById("signupModal");
@@ -437,3 +443,13 @@ window.CodeQuest = {
   currentUser: () => currentUser,
   isLoggedIn: () => currentUser !== null,
 };
+// Periodic authentication check
+setInterval(() => {
+  if (
+    typeof window.AuthManager !== "undefined" &&
+    window.AuthManager.currentUser !== currentUser
+  ) {
+    currentUser = window.AuthManager.currentUser;
+    updateAuthUI();
+  }
+}, 1000);
