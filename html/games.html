@@ -57,3 +57,235 @@
             </div>
         </div>
     </section>
+        <!-- Featured Games -->
+    <section class="featured-games">
+        <div class="container">
+            <h2 class="section-title">Featured Games</h2>
+
+            <!-- CSS Diner Game -->
+            <div class="game-feature">
+                <div class="game-preview">
+                    <div class="game-screen">
+                        <div class="css-diner-preview">
+                            <div class="plate">🍽️</div>
+                            <div class="apple">🍎</div>
+                            <div class="orange">🍊</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="game-info">
+                    <h3>CSS Selector Diner</h3>
+                    <p>Master CSS selectors by selecting the correct items on the table. Progress through 32 levels of
+                        increasing difficulty!</p>
+                    <div class="game-stats">
+                        <span>🎮 32 Levels</span>
+                        <span>⏱️ 45 min</span>
+                        <span>🏆 100 XP</span>
+                    </div>
+                    <button class="btn btn-primary" onclick="startGame('css-diner')">Play Now</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Games Grid -->
+    <section class="games-section">
+        <div class="container">
+            <div class="games-grid">
+
+                <!-- Game 1: HTML Tag Memory -->
+                <div class="game-card" data-category="html">
+                    <div class="game-thumbnail">
+                        <span class="game-emoji">🧠</span>
+                    </div>
+                    <div class="game-content">
+                        <h3>HTML Tag Memory</h3>
+                        <p>Match HTML tags with their descriptions in this memory game. Learn tag purposes while
+                            improving your memory!</p>
+                        <div class="game-meta">
+                            <span class="difficulty easy">Easy</span>
+                            <span class="xp-reward">+30 XP</span>
+                        </div>
+                        <button class="btn btn-primary" onclick="playGame('html-memory')">Play</button>
+                    </div>
+                </div>
+
+                <!-- Game 2: CSS Flexbox Froggy -->
+                <div class="game-card" data-category="css">
+                    <div class="game-thumbnail">
+                        <span class="game-emoji">🐸</span>
+                    </div>
+                    <div class="game-content">
+                        <h3>Flexbox Froggy</h3>
+                        <p>Help the frogs reach their lily pads using CSS flexbox properties. Master layout with fun!
+                        </p>
+                        <div class="game-meta">
+                            <span class="difficulty medium">Medium</span>
+                            <span class="xp-reward">+50 XP</span>
+                        </div>
+                        <button class="btn btn-primary" onclick="playGame('flexbox-froggy')">Play</button>
+                    </div>
+                </div>
+
+                <!-- Game 3: JavaScript Robot -->
+                <div class="game-card" data-category="javascript">
+                    <div class="game-thumbnail">
+                        <span class="game-emoji">🤖</span>
+                    </div>
+                    <div class="game-content">
+                        <h3>Code Robot</h3>
+                        <p>Program a robot using JavaScript commands to navigate mazes and collect gems.</p>
+                        <div class="game-meta">
+                            <span class="difficulty medium">Medium</span>
+                            <span class="xp-reward">+60 XP</span>
+                        </div>
+                        <button class="btn btn-primary" onclick="playGame('code-robot')">Play</button>
+                    </div>
+                </div>
+
+                <!-- Game 4: CSS Grid Garden -->
+                <div class="game-card" data-category="css">
+                    <div class="game-thumbnail">
+                        <span class="game-emoji">🌻</span>
+                    </div>
+                    <div class="game-content">
+                        <h3>Grid Garden</h3>
+                        <p>Water your garden using CSS Grid! Learn grid properties by growing carrots.</p>
+                        <div class="game-meta">
+                            <span class="difficulty medium">Medium</span>
+                            <span class="xp-reward">+55 XP</span>
+                        </div>
+                        <button class="btn btn-primary" onclick="playGame('grid-garden')">Play</button>
+                    </div>
+                </div>
+
+                <!-- Game 5: JavaScript Typing -->
+                <div class="game-card" data-category="javascript">
+                    <div class="game-thumbnail">
+                        <span class="game-emoji">⌨️</span>
+                    </div>
+                    <div class="game-content">
+                        <h3>Code Typer</h3>
+                        <p>Improve your coding speed by typing JavaScript snippets. Race against time!</p>
+                        <div class="game-meta">
+                            <span class="difficulty easy">Easy</span>
+                            <span class="xp-reward">+25 XP</span>
+                        </div>
+                        <button class="btn btn-primary" onclick="playGame('code-typer')">Play</button>
+                    </div>
+                </div>
+
+                <!-- Game 6: CSS Color Match -->
+                <div class="game-card" data-category="css">
+                    <div class="game-thumbnail">
+                        <span class="game-emoji">🎨</span>
+                    </div>
+                    <div class="game-content">
+                        <h3>Color Code Match</h3>
+                        <p>Match CSS color codes with their visual representation. Master hex, RGB, and HSL!</p>
+                        <div class="game-meta">
+                            <span class="difficulty easy">Easy</span>
+                            <span class="xp-reward">+30 XP</span>
+                        </div>
+                        <button class="btn btn-primary" onclick="playGame('color-match')">Play</button>
+                    </div>
+                </div>
+
+                <!-- Game 7: HTML Structure Builder -->
+                <div class="game-card" data-category="html">
+                    <div class="game-thumbnail">
+                        <span class="game-emoji">🏗️</span>
+                    </div>
+                    <div class="game-content">
+                        <h3>HTML Builder</h3>
+                        <p>Drag and drop HTML elements to build webpage structures. Learn semantic HTML!</p>
+                        <div class="game-meta">
+                            <span class="difficulty medium">Medium</span>
+                            <span class="xp-reward">+45 XP</span>
+                        </div>
+                        <button class="btn btn-primary" onclick="playGame('html-builder')">Play</button>
+                    </div>
+                </div>
+
+                <!-- Game 8: JavaScript Debugger -->
+                <div class="game-card" data-category="javascript">
+                    <div class="game-thumbnail">
+                        <span class="game-emoji">🐛</span>
+                    </div>
+                    <div class="game-content">
+                        <h3>Bug Hunter</h3>
+                        <p>Find and fix bugs in JavaScript code. Improve your debugging skills!</p>
+                        <div class="game-meta">
+                            <span class="difficulty hard">Hard</span>
+                            <span class="xp-reward">+75 XP</span>
+                        </div>
+                        <button class="btn btn-primary" onclick="playGame('bug-hunter')">Play</button>
+                    </div>
+                </div>
+
+                <!-- Game 9: CSS Animation Studio -->
+                <div class="game-card" data-category="css">
+                    <div class="game-thumbnail">
+                        <span class="game-emoji">✨</span>
+                    </div>
+                    <div class="game-content">
+                        <h3>Animation Studio</h3>
+                        <p>Create CSS animations by adjusting keyframes and timing functions visually.</p>
+                        <div class="game-meta">
+                            <span class="difficulty hard">Hard</span>
+                            <span class="xp-reward">+80 XP</span>
+                        </div>
+                        <button class="btn btn-primary" onclick="playGame('animation-studio')">Play</button>
+                    </div>
+                </div>
+
+                <!-- Game 10: Algorithm Puzzle -->
+                <div class="game-card" data-category="logic">
+                    <div class="game-thumbnail">
+                        <span class="game-emoji">🧩</span>
+                    </div>
+                    <div class="game-content">
+                        <h3>Algorithm Puzzles</h3>
+                        <p>Solve programming logic puzzles to unlock new levels. Think like a programmer!</p>
+                        <div class="game-meta">
+                            <span class="difficulty hard">Hard</span>
+                            <span class="xp-reward">+90 XP</span>
+                        </div>
+                        <button class="btn btn-primary" onclick="playGame('algorithm-puzzles')">Play</button>
+                    </div>
+                </div>
+
+                <!-- Game 11: Binary Challenge -->
+                <div class="game-card" data-category="logic">
+                    <div class="game-thumbnail">
+                        <span class="game-emoji">💻</span>
+                    </div>
+                    <div class="game-content">
+                        <h3>Binary Blast</h3>
+                        <p>Convert between binary, decimal, and hexadecimal in this fast-paced game.</p>
+                        <div class="game-meta">
+                            <span class="difficulty medium">Medium</span>
+                            <span class="xp-reward">+40 XP</span>
+                        </div>
+                        <button class="btn btn-primary" onclick="playGame('binary-blast')">Play</button>
+                    </div>
+                </div>
+
+                <!-- Game 12: Code Golf -->
+                <div class="game-card" data-category="javascript">
+                    <div class="game-thumbnail">
+                        <span class="game-emoji">⛳</span>
+                    </div>
+                    <div class="game-content">
+                        <h3>Code Golf</h3>
+                        <p>Write the shortest possible code to solve challenges. Every character counts!</p>
+                        <div class="game-meta">
+                            <span class="difficulty expert">Expert</span>
+                            <span class="xp-reward">+100 XP</span>
+                        </div>
+                        <button class="btn btn-primary" onclick="playGame('code-golf')">Play</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
