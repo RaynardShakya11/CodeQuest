@@ -721,3 +721,176 @@ function showNotification(message, type = "info") {
   setTimeout(() => {
     notification.classList.add("show");
   }, 100);
+    // Hide and remove after 3 seconds
+  setTimeout(() => {
+    notification.classList.remove("show");
+    setTimeout(() => {
+      if (notification.parentNode) {
+        notification.remove();
+      }
+    }, 300);
+  }, 3000);
+}
+
+// Console Functions
+function initializeConsole() {
+  // Listen for messages from iframe
+  window.addEventListener("message", function (e) {
+    if (e.data && e.data.type === "console") {
+      addConsoleMessage(e.data.message, e.data.level);
+    }
+  });
+}
+
+function toggleConsole() {
+  const consolePanel = document.getElementById("consolePanel");
+  consolePanel.classList.toggle("active");
+}
+
+function clearConsole() {
+  const consoleContent = document.getElementById("consoleContent");
+  consoleContent.innerHTML =
+    '<div class="console-line"><span class="console-time">' +
+    getCurrentTime() +
+    '</span><span class="console-message">Console cleared</span></div>';
+}
+
+function addConsoleMessage(message, level = "log") {
+  const consoleContent = document.getElementById("consoleContent");
+  const consoleLine = document.createElement("div");
+  consoleLine.className = "console-line";
+
+  const levelClass =
+    level === "error"
+      ? "console-error"
+      : level === "warn"
+      ? "console-warning"
+      : "console-message";
+
+  consoleLine.innerHTML = `
+        <span class="console-time">${getCurrentTime()}</span>
+        <span class="${levelClass}">${escapeHtml(message)}</span>
+    `;
+
+  consoleContent.appendChild(consoleLine);
+  consoleContent.scrollTop = consoleContent.scrollHeight;
+}
+
+// Utility Functions
+function getCurrentTime() {
+  const now = new Date();
+  return now.toTimeString().split(" ")[0];
+}
+
+function escapeHtml(text) {
+  const div = document.createElement("div");
+  div.textContent = text;
+  return div.innerHTML;
+}
+
+function updateStatus(message, type = "info") {
+  const saveStatus = document.getElementById("saveStatus");
+  if (saveStatus) {
+    saveStatus.textContent = message;
+    setTimeout(() => {
+      saveStatus.textContent = "✓ All changes saved";
+    }, 3000);
+  }
+}
+
+// History Management
+function saveToHistory(editorId) {
+  const content = document.getElementById(editorId).value;
+  const historyKey = editorId.replace("Code", "");
+
+  if (!editorState.history[historyKey]) {
+    editorState.history[historyKey] = [];
+  }
+
+  editorState.history[historyKey].push(content);
+  editorState.historyIndex[historyKey] =
+    editorState.history[historyKey].length - 1;
+
+  // Limit history to 50 entries
+  if (editorState.history[historyKey].length > 50) {
+    editorState.history[historyKey].shift();
+    editorState.historyIndex[historyKey]--;
+  }
+}
+
+function undoAction() {
+  const tab = editorState.currentTab;
+  const history = editorState.history[tab];
+
+  if (history && editorState.historyIndex[tab] > 0) {
+    editorState.historyIndex[tab]--;
+    const content = history[editorState.historyIndex[tab]];
+    document.getElementById(tab + "Code").value = content;
+    updateLineNumbers(tab + "Code");
+  }
+}
+
+function redoAction() {
+  const tab = editorState.currentTab;
+  const history = editorState.history[tab];
+
+  if (history && editorState.historyIndex[tab] < history.length - 1) {
+    editorState.historyIndex[tab]++;
+    const content = history[editorState.historyIndex[tab]];
+    document.getElementById(tab + "Code").value = content;
+    updateLineNumbers(tab + "Code");
+  }
+}
+
+// Snippets
+function insertSnippet(snippetType) {
+  const snippets = {
+    "html-boilerplate": `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>`,
+    "flexbox-center": `.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}`,
+    "fetch-api": `fetch('https://api.example.com/data')
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });`,
+    "event-listener": `document.addEventListener('DOMContentLoaded', function() {
+    // Your code here
+});`,
+  };
+
+  const activeTab = editorState.currentTab;
+  const textarea = document.getElementById(activeTab + "Code");
+
+  if (textarea && snippets[snippetType]) {
+    const start = textarea.selectionStart;
+    const end = textarea.selectionEnd;
+    const text = textarea.value;
+
+    textarea.value =
+      text.substring(0, start) + snippets[snippetType] + text.substring(end);
+    textarea.selectionStart = textarea.selectionEnd =
+      start + snippets[snippetType].length;
+
+    updateLineNumbers(activeTab + "Code");
+    textarea.focus();
+  }
+}
+
+
