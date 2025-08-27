@@ -344,3 +344,30 @@
 .resource-card a:hover {
   color: var(--secondary);
 }
+
+.module-badge,
+.difficulty {
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+}
+
+.module-badge.beginner,
+.difficulty.beginner {
+  background: rgba(16, 185, 129, 0.2);
+  color: var(--success);
+}
+
+.module-badge.intermediate,
+.difficulty.intermediate {
+  background: rgba(245, 158, 11, 0.2);
+  color: var(--warning);
+}
+
+.module-badge.advanced,
+.difficulty.advanced {
+  background: rgba(239, 68, 68, 0.2);
+  color: var(--danger);
+}
