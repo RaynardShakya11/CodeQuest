@@ -249,3 +249,23 @@ function animateStats() {
     }, 16);
   });
 }
+function formatNumber(num) {
+  return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+// Keyboard Shortcuts
+function handleKeyboardShortcuts(e) {
+  // Ctrl/Cmd + K - Focus search
+  if ((e.ctrlKey || e.metaKey) && e.key === "k") {
+    e.preventDefault();
+    const searchInput = document.getElementById("searchInput");
+    if (searchInput) {
+      searchInput.focus();
+    }
+  }
+
+  // Escape - Close modals
+  if (e.key === "Escape") {
+    closeAllModals();
+  }
+}
