@@ -304,3 +304,18 @@ function showNotification(message, type = "info", duration = 3000) {
     setTimeout(() => notification.remove(), 300);
   }, duration);
 }
+
+// Loading Spinner
+function showLoader() {
+  const loader = document.createElement("div");
+  loader.className = "loader-overlay";
+  loader.innerHTML = '<div class="loader"></div>';
+  document.body.appendChild(loader);
+}
+
+function hideLoader() {
+  const loader = document.querySelector(".loader-overlay");
+  if (loader) {
+    loader.remove();
+  }
+}
