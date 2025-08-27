@@ -416,3 +416,297 @@ function closeTab(tab) {
   // In a real implementation, this would handle closing tabs
   console.log("Close tab:", tab);
 }
+// Update Line Numbers
+function updateLineNumbers(editorId) {
+  const map = {
+    htmlCode: "htmlLineNumbers",
+    cssCode: "cssLineNumbers",
+    jsCode: "jsLineNumbers",
+  };
+
+  if (!editorId) {
+    updateAllLineNumbers();
+    return;
+  }
+
+  const textarea = document.getElementById(editorId);
+  const lineNumbers = document.getElementById(map[editorId]);
+
+  if (textarea && lineNumbers) {
+    const lines = textarea.value.split("\n");
+    const numbers = [];
+
+    for (let i = 1; i <= lines.length; i++) {
+      numbers.push(i);
+    }
+
+    lineNumbers.innerHTML = numbers.join("<br>");
+
+    // Update cursor position
+    updateCursorPosition(textarea);
+  }
+}
+
+// Update All Line Numbers
+function updateAllLineNumbers() {
+  updateLineNumbers("htmlCode");
+  updateLineNumbers("cssCode");
+  updateLineNumbers("jsCode");
+}
+
+// Sync Line Number Scroll
+function syncLineNumberScroll(editorId) {
+  const map = {
+    htmlCode: "htmlLineNumbers",
+    cssCode: "cssLineNumbers",
+    jsCode: "jsLineNumbers",
+  };
+
+  const textarea = document.getElementById(editorId);
+  const lineNumbers = document.getElementById(map[editorId]);
+
+  if (textarea && lineNumbers) {
+    lineNumbers.scrollTop = textarea.scrollTop;
+  }
+}
+
+// Update Cursor Position
+function updateCursorPosition(textarea) {
+  const text = textarea.value.substring(0, textarea.selectionStart);
+  const lines = text.split("\n");
+  const currentLine = lines.length;
+  const currentColumn = lines[lines.length - 1].length + 1;
+
+  document.getElementById(
+    "cursorPosition"
+  ).textContent = `Line ${currentLine}, Column ${currentColumn}`;
+}
+
+// Initialize Challenge Mode
+function initializeChallengeMode(challenge) {
+  // Update project name
+  document.getElementById("projectName").value = challenge.title;
+  
+  // Load starter code
+  if (challenge.starterCode) {
+    document.getElementById("htmlCode").value = challenge.starterCode.html || "";
+    document.getElementById("cssCode").value = challenge.starterCode.css || "";
+    document.getElementById("jsCode").value = challenge.starterCode.js || "";
+  }
+  
+  // Add challenge instructions panel
+  addChallengeInstructions(challenge);
+  
+  // Update line numbers
+  updateAllLineNumbers();
+  
+  // Run initial preview
+  runCode();
+}
+
+// Add Challenge Instructions
+function addChallengeInstructions(challenge) {
+  const instructionsPanel = document.createElement("div");
+  instructionsPanel.className = "challenge-instructions";
+  instructionsPanel.innerHTML = `
+    <div class="challenge-header">
+      <h3>🎯 ${challenge.title}</h3>
+      <div class="challenge-meta">
+        <span class="difficulty ${challenge.difficulty}">${challenge.difficulty}</span>
+        <span class="xp-reward">🏆 ${challenge.xp} XP</span>
+      </div>
+    </div>
+    <div class="challenge-description">
+      <p>${challenge.description}</p>
+    </div>
+    <div class="challenge-requirements">
+      <h4>Requirements:</h4>
+      <ul>
+        ${challenge.requirements.map(req => `<li>✓ ${req}</li>`).join('')}
+      </ul>
+    </div>
+    <div class="challenge-actions">
+      <button class="btn btn-success" onclick="submitChallenge('${challenge.id || 'unknown'}')">Submit Solution</button>
+      <button class="btn btn-secondary" onclick="viewSolution()">View Solution</button>
+    </div>
+  `;
+  
+  // Insert at the top of the editor
+  const editorContainer = document.querySelector('.editor-container');
+  editorContainer.insertBefore(instructionsPanel, editorContainer.firstChild);
+  
+  // Add styles
+  addChallengeStyles();
+}
+
+// Submit Challenge
+function submitChallenge(challengeId) {
+  const html = document.getElementById("htmlCode").value;
+  const css = document.getElementById("cssCode").value;
+  const js = document.getElementById("jsCode").value;
+  
+  // Basic validation (in a real app, this would be more sophisticated)
+  if (!html.trim() || !css.trim()) {
+    showNotification("Please complete both HTML and CSS sections", "warning");
+    return;
+  }
+  
+  // Check if user is logged in
+  const user = window.AuthManager?.currentUser;
+  if (!user) {
+    showNotification("Please log in to submit your solution", "warning");
+    return;
+  }
+  
+  // Mark challenge as completed
+  if (window.challengeFunctions && window.challengeFunctions.completeChallenge) {
+    window.challengeFunctions.completeChallenge(challengeId, 100); // Default XP
+  }
+  
+  // Show success message
+  showNotification("🎉 Challenge completed! +100 XP earned", "success");
+  
+  // Remove challenge mode after a delay
+  setTimeout(() => {
+    const instructions = document.querySelector('.challenge-instructions');
+    if (instructions) {
+      instructions.remove();
+    }
+    // Reset to normal editor mode
+    document.getElementById("projectName").value = "My Project";
+  }, 3000);
+}
+
+// View Solution
+function viewSolution() {
+  const challengeData = sessionStorage.getItem("current_challenge");
+  if (challengeData) {
+    const challenge = JSON.parse(challengeData);
+    if (challenge.solution) {
+      // Load solution code
+      document.getElementById("htmlCode").value = challenge.solution.html || "";
+      document.getElementById("cssCode").value = challenge.solution.css || "";
+      document.getElementById("jsCode").value = challenge.solution.js || "";
+      
+      // Update line numbers and preview
+      updateAllLineNumbers();
+      runCode();
+      
+      showNotification("Solution loaded! Study the code to learn", "info");
+    } else {
+      showNotification("No solution available for this challenge", "info");
+    }
+  }
+}
+
+// Add Challenge Styles
+function addChallengeStyles() {
+  const style = document.createElement("style");
+  style.textContent = `
+    .challenge-instructions {
+      background: rgba(15, 23, 42, 0.95);
+      border: 2px solid rgba(99, 102, 241, 0.5);
+      border-radius: 15px;
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+      backdrop-filter: blur(10px);
+    }
+    
+    .challenge-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+    
+    .challenge-header h3 {
+      color: #f8fafc;
+      margin: 0;
+    }
+    
+    .challenge-meta {
+      display: flex;
+      gap: 1rem;
+    }
+    
+    .difficulty {
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      text-transform: capitalize;
+    }
+    
+    .difficulty.beginner { background: #10b981; color: white; }
+    .difficulty.intermediate { background: #f59e0b; color: white; }
+    .difficulty.advanced { background: #ef4444; color: white; }
+    .difficulty.expert { background: #8b5cf6; color: white; }
+    
+    .xp-reward {
+      color: #fbbf24;
+      font-weight: 600;
+    }
+    
+    .challenge-description {
+      color: #cbd5e1;
+      margin-bottom: 1rem;
+      line-height: 1.6;
+    }
+    
+    .challenge-requirements h4 {
+      color: #f8fafc;
+      margin-bottom: 0.5rem;
+    }
+    
+    .challenge-requirements ul {
+      color: #cbd5e1;
+      margin-left: 1.5rem;
+    }
+    
+    .challenge-requirements li {
+      margin-bottom: 0.25rem;
+    }
+    
+    .challenge-actions {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    
+    .notification {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: #333;
+      color: white;
+      padding: 1rem 1.5rem;
+      border-radius: 8px;
+      z-index: 10000;
+      transform: translateX(100%);
+      transition: transform 0.3s ease;
+      max-width: 300px;
+    }
+    
+    .notification.show {
+      transform: translateX(0);
+    }
+    
+    .notification.success {
+      background: #10b981;
+    }
+    
+    .notification.warning {
+      background: #f59e0b;
+    }
+    
+    .notification.error {
+      background: #ef4444;
+    }
+    
+    .notification.info {
+      background: #3b82f6;
+    }
+  `;
+  
+  document.head.appendChild(style);
+}
