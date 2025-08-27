@@ -342,3 +342,24 @@ async function apiCall(endpoint, method = "GET", data = null) {
       return { success: true };
   }
 }
+
+// Mock Data Functions
+function getLessonsData() {
+  return {
+    html: [
+      { id: 1, title: "HTML Basics", completed: false, xp: 10 },
+      { id: 2, title: "Semantic HTML", completed: false, xp: 15 },
+      { id: 3, title: "Forms & Input", completed: false, xp: 20 },
+    ],
+    css: [
+      { id: 4, title: "CSS Fundamentals", completed: false, xp: 10 },
+      { id: 5, title: "Flexbox", completed: false, xp: 20 },
+      { id: 6, title: "CSS Grid", completed: false, xp: 25 },
+    ],
+    javascript: [
+      { id: 7, title: "Variables & Types", completed: false, xp: 15 },
+      { id: 8, title: "Functions", completed: false, xp: 20 },
+      { id: 9, title: "DOM Manipulation", completed: false, xp: 30 },
+    ],
+  };
+}
