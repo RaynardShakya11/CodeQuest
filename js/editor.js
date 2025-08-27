@@ -340,3 +340,52 @@ function saveProject() {
 
   updateStatus("✓ Project saved", "success");
 }
+// Create New Project
+function createNewProject() {
+  if (confirm("Create a new project? Unsaved changes will be lost.")) {
+    document.getElementById("projectName").value = "Untitled Project";
+    document.getElementById("htmlCode").value =
+      '<!DOCTYPE html>\n<html lang="en">\n<head>\n    <meta charset="UTF-8">\n    <meta name="viewport" content="width=device-width, initial-scale=1.0">\n    <title>New Project</title>\n</head>\n<body>\n    <h1>Hello World!</h1>\n</body>\n</html>';
+    document.getElementById("cssCode").value =
+      "* {\n    margin: 0;\n    padding: 0;\n    box-sizing: border-box;\n}\n\nbody {\n    font-family: Arial, sans-serif;\n    padding: 2rem;\n}";
+    document.getElementById("jsCode").value =
+      '// Start coding here\nconsole.log("Hello, CodeQuest!");';
+
+    updateAllLineNumbers();
+    runCode();
+    updateStatus("New project created", "success");
+  }
+}
+
+// Open Project
+function openProject() {
+  const projects = JSON.parse(
+    localStorage.getItem("codequest_projects") || "[]"
+  );
+
+  if (projects.length === 0) {
+    alert("No saved projects found.");
+    return;
+  }
+
+  const projectNames = projects.map((p) => p.name).join("\n");
+  const projectName = prompt(
+    `Enter project name to open:\n\nAvailable projects:\n${projectNames}`
+  );
+
+  if (projectName) {
+    const project = projects.find((p) => p.name === projectName);
+    if (project) {
+      document.getElementById("projectName").value = project.name;
+      document.getElementById("htmlCode").value = project.html || "";
+      document.getElementById("cssCode").value = project.css || "";
+      document.getElementById("jsCode").value = project.js || "";
+
+      updateAllLineNumbers();
+      runCode();
+      updateStatus(`Project "${project.name}" loaded`, "success");
+    } else {
+      alert("Project not found.");
+    }
+  }
+}
