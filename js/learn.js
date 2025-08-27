@@ -276,3 +276,18 @@ function initializeLearnPage() {
     showTrack(hash);
   }
 }
+// Setup Track Selector
+function setupTrackSelector() {
+  const trackButtons = document.querySelectorAll(".track-btn");
+
+  trackButtons.forEach((btn) => {
+    btn.addEventListener("click", function () {
+      trackButtons.forEach((b) => b.classList.remove("active"));
+      this.classList.add("active");
+
+      const track = this.dataset.track;
+      learnState.currentTrack = track;
+      filterCourses(track);
+    });
+  });
+}
