@@ -77,3 +77,90 @@ function initializeEditor() {
   // Initialize console
   initializeConsole();
 }
+// Setup Event Listeners
+function setupEditorEventListeners() {
+  // Code input listeners
+  ["htmlCode", "cssCode", "jsCode"].forEach((id) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.addEventListener("input", () => {
+        updateLineNumbers(id);
+        saveToHistory(id);
+      });
+
+      element.addEventListener("scroll", () => {
+        syncLineNumberScroll(id);
+      });
+
+      element.addEventListener("keydown", handleTabKey);
+    }
+  });
+}
+
+// Tab Key Handler
+function handleTabKey(e) {
+  if (e.key === "Tab") {
+    e.preventDefault();
+    const start = this.selectionStart;
+    const end = this.selectionEnd;
+    const spaces = " ".repeat(editorState.settings.tabSize);
+
+    this.value =
+      this.value.substring(0, start) + spaces + this.value.substring(end);
+    this.selectionStart = this.selectionEnd =
+      start + editorState.settings.tabSize;
+  }
+}
+
+// Keyboard Shortcuts
+function setupKeyboardShortcuts() {
+  document.addEventListener("keydown", function (e) {
+    // Ctrl/Cmd + S - Save
+    if ((e.ctrlKey || e.metaKey) && e.key === "s") {
+      e.preventDefault();
+      saveProject();
+    }
+
+    // Ctrl/Cmd + Enter - Run Code
+    if ((e.ctrlKey || e.metaKey) && e.key === "Enter") {
+      e.preventDefault();
+      runCode();
+    }
+
+    // Ctrl/Cmd + / - Toggle Comment
+    if ((e.ctrlKey || e.metaKey) && e.key === "/") {
+      e.preventDefault();
+      toggleComment();
+    }
+
+    // Ctrl/Cmd + D - Duplicate Line
+    if ((e.ctrlKey || e.metaKey) && e.key === "d") {
+      e.preventDefault();
+      duplicateLine();
+    }
+
+    // Alt + Shift + F - Format Code
+    if (e.altKey && e.shiftKey && e.key === "F") {
+      e.preventDefault();
+      formatCode();
+    }
+
+    // Ctrl/Cmd + Z - Undo
+    if ((e.ctrlKey || e.metaKey) && e.key === "z" && !e.shiftKey) {
+      e.preventDefault();
+      undoAction();
+    }
+
+    // Ctrl/Cmd + Shift + Z - Redo
+    if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === "z") {
+      e.preventDefault();
+      redoAction();
+    }
+
+    // F11 - Fullscreen
+    if (e.key === "F11") {
+      e.preventDefault();
+      toggleFullscreen();
+    }
+  });
+}
