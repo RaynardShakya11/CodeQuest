@@ -276,3 +276,161 @@
             </div>
         </div>
     </section>
+    <!-- Projects Showcase -->
+    <section class="projects-showcase">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">My Projects</h2>
+                <a href="editor.html" class="btn btn-primary">Create New Project</a>
+            </div>
+
+            <div class="projects-grid" id="userProjects">
+                <div class="project-card">
+                    <div class="project-thumbnail">
+                        <span class="project-type">HTML/CSS</span>
+                    </div>
+                    <div class="project-info">
+                        <h3>Portfolio Website</h3>
+                        <p>Personal portfolio with responsive design</p>
+                        <div class="project-meta">
+                            <span>📅 2 days ago</span>
+                            <span>⭐ Featured</span>
+                        </div>
+                        <div class="project-actions">
+                            <button class="btn btn-secondary" onclick="openProject('portfolio')">Edit</button>
+                            <button class="btn btn-primary" onclick="viewProject('portfolio')">View</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <div class="project-thumbnail">
+                        <span class="project-type">JavaScript</span>
+                    </div>
+                    <div class="project-info">
+                        <h3>Todo App</h3>
+                        <p>Interactive todo list with local storage</p>
+                        <div class="project-meta">
+                            <span>📅 5 days ago</span>
+                        </div>
+                        <div class="project-actions">
+                            <button class="btn btn-secondary" onclick="openProject('todo')">Edit</button>
+                            <button class="btn btn-primary" onclick="viewProject('todo')">View</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="empty-project-card">
+                    <a href="editor.html">
+                        <span class="add-icon">+</span>
+                        <p>Create New Project</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Study Plan -->
+    <section class="study-plan">
+        <div class="container">
+            <h2 class="section-title">Today's Study Plan</h2>
+
+            <div class="study-plan-grid">
+                <div class="study-task">
+                    <input type="checkbox" id="task1">
+                    <label for="task1">
+                        <span class="task-icon">📚</span>
+                        <div class="task-content">
+                            <h4>Complete HTML Forms Lesson</h4>
+                            <p>Learn about input types and validation</p>
+                        </div>
+                        <span class="task-xp">+30 XP</span>
+                    </label>
+                </div>
+
+                <div class="study-task">
+                    <input type="checkbox" id="task2">
+                    <label for="task2">
+                        <span class="task-icon">🎯</span>
+                        <div class="task-content">
+                            <h4>Solve Daily Challenge</h4>
+                            <p>CSS Grid Layout Challenge</p>
+                        </div>
+                        <span class="task-xp">+50 XP</span>
+                    </label>
+                </div>
+
+                <div class="study-task">
+                    <input type="checkbox" id="task3">
+                    <label for="task3">
+                        <span class="task-icon">🎮</span>
+                        <div class="task-content">
+                            <h4>Play Flexbox Froggy</h4>
+                            <p>Practice flexbox with fun games</p>
+                        </div>
+                        <span class="task-xp">+25 XP</span>
+                    </label>
+                </div>
+
+                <div class="study-task">
+                    <input type="checkbox" id="task4">
+                    <label for="task4">
+                        <span class="task-icon">💻</span>
+                        <div class="task-content">
+                            <h4>Code for 30 Minutes</h4>
+                            <p>Practice in the code editor</p>
+                        </div>
+                        <span class="task-xp">+20 XP</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>CodeQuest</h3>
+                <p>Learn. Play. Conquer the Web.</p>
+                <div class="social-links">
+                    <a href="#" aria-label="Twitter">🐦</a>
+                    <a href="#" aria-label="GitHub">🐙</a>
+                    <a href="#" aria-label="Discord">💬</a>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <div class="footer-links">
+                    <a href="learn.html">Continue Learning</a>
+                    <a href="challenges.html">Practice Challenges</a>
+                    <a href="editor.html">Code Editor</a>
+                    <a href="leaderboard.html">Leaderboard</a>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h3>Account</h3>
+                <div class="footer-links">
+                    <a href="#" onclick="editProfile()">Profile Settings</a>
+                    <a href="#" onclick="viewCertificates()">My Certificates</a>
+                    <a href="#" onclick="downloadProgress()">Download Progress</a>
+                    <a href="#" onclick="logout()">Logout</a>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h3>Support</h3>
+                <div class="footer-links">
+                    <a href="#">Help Center</a>
+                    <a href="#">Contact Us</a>
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 CodeQuest. All rights reserved.</p>
+        </div>
+    </footer>
