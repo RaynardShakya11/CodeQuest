@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Editor - CodeQuest</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/editor-styles.css">
+</head>
+
+<body>
+    <div class="bg-animation"></div>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="../index.html" class="logo">⚡CodeQuest</a>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="nav-links" id="navLinks">
+                <a href="../index.html" class="nav-link">Home</a>
+                <a href="learn.html" class="nav-link">Learn</a>
+                <a href="editor.html" class="nav-link active">Code Editor</a>
+                <a href="challenges.html" class="nav-link">Challenges</a>
+                <a href="games.html" class="nav-link">Games</a>
+                <a href="leaderboard.html" class="nav-link">Leaderboard</a>
+                <a href="about.html" class="nav-link">About</a>
+                <span id="authButtons">
+                    <button class="btn btn-secondary" onclick="showLogin()">Login</button>
+                    <button class="btn btn-primary" onclick="showSignup()">Sign Up</button>
+                </span>
+                <span id="userMenu" style="display: none;">
+                    <span class="nav-link" id="userGreeting">Welcome!</span>
+                    <a href="dashboard.html" class="btn btn-secondary">Dashboard</a>
+                    <button class="btn btn-danger" onclick="logout()">Logout</button>
+                </span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Editor Container -->
+    <div class="editor-container">
+        <!-- Editor Toolbar -->
+        <div class="editor-toolbar">
+            <div class="toolbar-left">
+                <button class="toolbar-btn" onclick="createNewProject()" title="New Project">
+                    <span>📄</span> New
+                </button>
+                <button class="toolbar-btn" onclick="openProject()" title="Open Project">
+                    <span>📂</span> Open
+                </button>
+                <button class="toolbar-btn" onclick="saveProject()" title="Save Project">
+                    <span>💾</span> Save
+                </button>
+                <div class="toolbar-separator"></div>
+                <button class="toolbar-btn" onclick="undoAction()" title="Undo">
+                    <span>↶</span>
+                </button>
+                <button class="toolbar-btn" onclick="redoAction()" title="Redo">
+                    <span>↷</span>
+                </button>
+            </div>
+
+            <div class="toolbar-center">
+                <input type="text" id="projectName" class="project-name-input" placeholder="Untitled Project"
+                    value="My Awesome Project">
+            </div>
+
+            <div class="toolbar-right">
+                <button class="toolbar-btn" onclick="formatCode()" title="Format Code">
+                    <span>✨</span> Format
+                </button>
+                <button class="toolbar-btn" onclick="toggleConsole()" title="Toggle Console">
+                    <span>📋</span> Console
+                </button>
+                <button class="toolbar-btn" onclick="shareProject()" title="Share Project">
+                    <span>🔗</span> Share
+                </button>
+                <button class="toolbar-btn primary" onclick="runCode()" title="Run Code">
+                    <span>▶</span> Run
+                </button>
+            </div>
+        </div>
+
+        <!-- Main Editor Area -->
+        <div class="editor-main">
+            <!-- Sidebar -->
+            <div class="editor-sidebar">
+                <div class="sidebar-tabs">
+                    <button class="sidebar-tab active" onclick="showSidebarPanel('files')">
+                        <span>📁</span> Files
+                    </button>
+                    <button class="sidebar-tab" onclick="showSidebarPanel('snippets')">
+                        <span>📝</span> Snippets
+                    </button>
+                    <button class="sidebar-tab" onclick="showSidebarPanel('settings')">
+                        <span>⚙️</span> Settings
+                    </button>
+                </div>
