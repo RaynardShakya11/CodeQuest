@@ -434,3 +434,84 @@
             <p>&copy; 2025 CodeQuest. All rights reserved.</p>
         </div>
     </footer>
+ <!-- Profile Edit Modal -->
+    <div id="profileModal" class="modal">
+        <div class="modal-content">
+            <button class="close" onclick="closeModal('profileModal')">&times;</button>
+            <h2>Edit Profile</h2>
+            <form id="profileForm">
+                <div class="form-group">
+                    <label for="profileUsername">Username</label>
+                    <input type="text" id="profileUsername" required>
+                </div>
+                <div class="form-group">
+                    <label for="profileEmail">Email</label>
+                    <input type="email" id="profileEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="profileBio">Bio</label>
+                    <textarea id="profileBio" rows="4" placeholder="Tell us about yourself..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="profileGoals">Learning Goals</label>
+                    <textarea id="profileGoals" rows="3" placeholder="What do you want to achieve?"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Save Changes</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <button class="close" onclick="closeModal('loginModal')">&times;</button>
+            <h2>Login to CodeQuest</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail">Email</label>
+                    <input type="email" id="loginEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Login</button>
+            </form>
+            <p class="form-footer">
+                Don't have an account? <a href="#" onclick="showSignup(); closeModal('loginModal')">Sign up</a>
+            </p>
+        </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div id="signupModal" class="modal">
+        <div class="modal-content">
+            <button class="close" onclick="closeModal('signupModal')">&times;</button>
+            <h2>Join CodeQuest</h2>
+            <form id="signupForm">
+                <div class="form-group">
+                    <label for="signupUsername">Username</label>
+                    <input type="text" id="signupUsername" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupEmail">Email</label>
+                    <input type="email" id="signupEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="signupPassword">Password</label>
+                    <input type="password" id="signupPassword" required>
+                </div>
+                <button type="submit" class="btn btn-primary">Create Account</button>
+            </form>
+            <p class="form-footer">
+                Already have an account? <a href="#" onclick="showLogin(); closeModal('signupModal')">Login</a>
+            </p>
+        </div>
+    </div>
+
+    <script src="../js/main.js"></script>
+    <script src="../js/auth.js"></script>
+    <script src="../js/dashboard.js"></script>
+</body>
+
+</html>
