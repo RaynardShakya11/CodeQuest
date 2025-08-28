@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - CodeQuest</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/dashboard-styles.css">
+</head>
+
+<body>
+    <div class="bg-animation"></div>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="../index.html" class="logo">⚡CodeQuest</a>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="nav-links" id="navLinks">
+                <a href="../index.html" class="nav-link">Home</a>
+                <a href="learn.html" class="nav-link">Learn</a>
+                <a href="editor.html" class="nav-link">Code Editor</a>
+                <a href="challenges.html" class="nav-link">Challenges</a>
+                <a href="games.html" class="nav-link">Games</a>
+                <a href="leaderboard.html" class="nav-link">Leaderboard</a>
+                <a href="about.html" class="nav-link">About</a>
+                <span id="userMenu">
+                    <span class="nav-link" id="userGreeting">Welcome!</span>
+                    <a href="dashboard.html" class="btn btn-secondary active">Dashboard</a>
+                    <button class="btn btn-danger" onclick="logout()">Logout</button>
+                </span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Dashboard Header -->
+    <section class="dashboard-header">
+        <div class="container">
+            <div class="user-profile">
+                <div class="user-avatar" id="userAvatar">
+                    <span id="avatarInitials">U</span>
+                </div>
+                <div class="user-info">
+                    <h1 id="userName">Welcome back!</h1>
+                    <div class="user-badges">
+                        <span class="level-badge" id="userLevel">Level 1 - Beginner</span>
+                        <span class="streak-badge" id="userStreak">🔥 0 Day Streak</span>
+                        <span class="xp-badge" id="userXP">0 XP</span>
+                    </div>
+                </div>
+                <button class="btn btn-primary" onclick="editProfile()">Edit Profile</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Progress Overview -->
+    <section class="progress-overview-section">
+        <div class="container">
+            <div class="progress-cards">
+                <div class="progress-card">
+                    <div class="progress-icon">📚</div>
+                    <div class="progress-value" id="completedLessons">0</div>
+                    <div class="progress-label">Lessons Completed</div>
+                </div>
+                <div class="progress-card">
+                    <div class="progress-icon">🎯</div>
+                    <div class="progress-value" id="completedChallenges">0</div>
+                    <div class="progress-label">Challenges Solved</div>
+                </div>
+                <div class="progress-card">
+                    <div class="progress-icon">🏆</div>
+                    <div class="progress-value" id="earnedBadges">0</div>
+                    <div class="progress-label">Badges Earned</div>
+                </div>
+                <div class="progress-card">
+                    <div class="progress-icon">💻</div>
+                    <div class="progress-value" id="projectsCreated">0</div>
+                    <div class="progress-label">Projects Created</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Learning Progress -->
+    <section class="learning-progress">
+        <div class="container">
+            <h2 class="section-title">Learning Progress</h2>
+
+            <div class="tracks-progress">
+                <!-- HTML Track -->
+                <div class="track-progress-card">
+                    <div class="track-header">
+                        <div class="track-info">
+                            <span class="track-icon">🌐</span>
+                            <div>
+                                <h3>HTML Fundamentals</h3>
+                                <p>Master the structure of web pages</p>
+                            </div>
+                        </div>
+                        <div class="track-xp">
+                            <span id="htmlXP">0 XP</span>
+                        </div>
+                    </div>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar">
+                            <div class="progress-fill html-progress" id="htmlProgress" style="width: 0%"></div>
+                        </div>
+                        <div class="progress-text">
+                            <span id="htmlLessons">0/45 Lessons</span>
+                            <span id="htmlPercent">0%</span>
+                        </div>
+                    </div>
+                    <div class="track-actions">
+                        <a href="learn.html#html" class="btn btn-primary">Continue Learning</a>
+                        <button class="btn btn-secondary" onclick="viewCertificate('html')">View Certificate</button>
+                    </div>
+                </div>
