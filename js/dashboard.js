@@ -411,3 +411,209 @@ function loadStudyPlan() {
     });
   });
 }
+// Handle Task Complete
+function handleTaskComplete(checkbox, index) {
+  const savedTasks = JSON.parse(
+    localStorage.getItem("codequest_daily_tasks") || "{}"
+  );
+
+  if (!savedTasks.tasks) {
+    savedTasks.tasks = {};
+  }
+
+  savedTasks.tasks[index] = checkbox.checked;
+  localStorage.setItem("codequest_daily_tasks", JSON.stringify(savedTasks));
+
+  if (checkbox.checked) {
+    // Add XP for completing task
+    const xpReward = parseInt(
+      checkbox.parentElement
+        .querySelector(".task-xp")
+        .textContent.replace("+", "")
+        .replace(" XP", "")
+    );
+    window.AuthManager.addXP(xpReward);
+
+    // Show notification
+    showNotification(`Task completed! +${xpReward} XP earned`, "success");
+
+    // Update dashboard
+    loadUserData();
+  }
+}
+
+// Setup Event Listeners
+function setupEventListeners() {
+  // Profile form
+  const profileForm = document.getElementById("profileForm");
+  if (profileForm) {
+    profileForm.addEventListener("submit", handleProfileUpdate);
+  }
+}
+
+// Edit Profile
+function editProfile() {
+  const modal = document.getElementById("profileModal");
+  if (modal) {
+    modal.style.display = "block";
+
+    // Pre-fill form with current data
+    const user = window.AuthManager.currentUser;
+    document.getElementById("profileUsername").value = user.username;
+    document.getElementById("profileEmail").value = user.email;
+  }
+}
+
+// Handle Profile Update
+function handleProfileUpdate(e) {
+  e.preventDefault();
+
+  const username = document.getElementById("profileUsername").value;
+  const email = document.getElementById("profileEmail").value;
+  const bio = document.getElementById("profileBio").value;
+  const goals = document.getElementById("profileGoals").value;
+
+  // Update user data
+  const user = window.AuthManager.currentUser;
+  user.username = username;
+  user.email = email;
+  user.bio = bio;
+  user.goals = goals;
+
+  // Save to localStorage
+  localStorage.setItem("codequest_user", JSON.stringify(user));
+
+  // Update UI
+  initializeDashboard();
+
+  // Close modal
+  closeModal("profileModal");
+
+  showNotification("Profile updated successfully!", "success");
+}
+
+// View Certificate
+function viewCertificate(track) {
+  const progress = window.AuthManager.userProgress;
+  const completion = calculateProgress(track);
+
+  if (completion < 100) {
+    showNotification(
+      `Complete all ${track.toUpperCase()} lessons to earn your certificate!`,
+      "info"
+    );
+    return;
+  }
+
+  // Generate certificate (in a real app, this would generate a PDF)
+  const certificateHTML = `
+        <div style="text-align: center; padding: 3rem; background: white; color: #333;">
+            <h1 style="color: #6366f1;">Certificate of Completion</h1>
+            <p style="font-size: 1.2rem; margin: 2rem 0;">This is to certify that</p>
+            <h2 style="font-size: 2rem; color: #333;">${
+              window.AuthManager.currentUser.username
+            }</h2>
+            <p style="font-size: 1.2rem; margin: 2rem 0;">has successfully completed the</p>
+            <h3 style="font-size: 1.5rem; color: #6366f1;">${track.toUpperCase()} Course</h3>
+            <p style="margin-top: 3rem;">Date: ${new Date().toLocaleDateString()}</p>
+        </div>
+    `;
+
+  const certificateWindow = window.open("", "_blank");
+  certificateWindow.document.write(certificateHTML);
+}
+
+// View Certificates
+function viewCertificates() {
+  showNotification("Certificates page coming soon!", "info");
+}
+
+// Download Progress
+function downloadProgress() {
+  const progress = window.AuthManager.userProgress;
+  const data = JSON.stringify(progress, null, 2);
+
+  const blob = new Blob([data], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "codequest-progress.json";
+  a.click();
+
+  showNotification("Progress data downloaded!", "success");
+}
+
+// Project Functions
+function editProject(projectName) {
+  // Load project in editor
+  const projects = JSON.parse(
+    localStorage.getItem("codequest_projects") || "[]"
+  );
+  const project = projects.find((p) => p.name === projectName);
+
+  if (project) {
+    localStorage.setItem("codequest_current_project", JSON.stringify(project));
+    window.location.href = "editor.html";
+  }
+}
+
+function viewProject(projectName) {
+  // Open project preview
+  const projects = JSON.parse(
+    localStorage.getItem("codequest_projects") || "[]"
+  );
+  const project = projects.find((p) => p.name === projectName);
+
+  if (project) {
+    const previewWindow = window.open("", "_blank");
+    previewWindow.document.write(`
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <title>${project.name}</title>
+                <style>${project.css || ""}</style>
+            </head>
+            <body>
+                ${project.html || ""}
+                <script>${project.js || ""}<\/script>
+            </body>
+            </html>
+        `);
+  }
+}
+
+function openProject(projectId) {
+  editProject(projectId);
+}
+
+// Utility Functions
+function animateNumber(elementId, target) {
+  const element = document.getElementById(elementId);
+  if (!element) return;
+
+  const duration = 1000;
+  const increment = target / (duration / 16);
+  let current = 0;
+
+  const timer = setInterval(() => {
+    current += increment;
+    if (current >= target) {
+      current = target;
+      clearInterval(timer);
+    }
+    element.textContent = Math.floor(current);
+  }, 16);
+}
+
+function showNotification(message, type = "info") {
+  if (window.CodeQuest && window.CodeQuest.showNotification) {
+    window.CodeQuest.showNotification(message, type);
+  }
+}
+
+function closeModal(modalId) {
+  const modal = document.getElementById(modalId);
+  if (modal) {
+    modal.style.display = "none";
+  }
+}
