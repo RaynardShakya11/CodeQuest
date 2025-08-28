@@ -184,3 +184,230 @@ function createProjectCard(project) {
 
   return card;
 }
+// Load Recent Activity
+function loadRecentActivity() {
+  const timeline = document.getElementById("activityTimeline");
+  if (!timeline) return;
+
+  const activities = getRecentActivities();
+
+  timeline.innerHTML = activities
+    .map(
+      (activity) => `
+        <div class="activity-item">
+            <div class="activity-icon">${activity.icon}</div>
+            <div class="activity-content">
+                <h4>${activity.title}</h4>
+                <p>${activity.description}</p>
+                <span class="activity-time">${activity.time}</span>
+            </div>
+        </div>
+    `
+    )
+    .join("");
+}
+
+// Get Recent Activities
+function getRecentActivities() {
+  const activities = [];
+  const progress = window.AuthManager.userProgress;
+
+  // Add completed lessons
+  progress.completedLessons.slice(-3).forEach((lessonId) => {
+    activities.push({
+      icon: "📚",
+      title: `Completed Lesson #${lessonId}`,
+      description: "Earned XP and made progress",
+      time: "Recently",
+    });
+  });
+
+  // Add completed challenges
+  progress.completedChallenges.slice(-2).forEach((challengeId) => {
+    activities.push({
+      icon: "🎯",
+      title: `Solved Challenge`,
+      description: "Successfully completed a coding challenge",
+      time: "Recently",
+    });
+  });
+
+  // Add achievements
+  progress.achievements.slice(-2).forEach((achievement) => {
+    activities.push({
+      icon: "🏆",
+      title: `Earned Achievement`,
+      description: getAchievementName(achievement),
+      time: "Recently",
+    });
+  });
+
+  // Add default activity if empty
+  if (activities.length === 0) {
+    activities.push({
+      icon: "👋",
+      title: "Welcome to CodeQuest!",
+      description: "Start your learning journey today",
+      time: "Just now",
+    });
+  }
+
+  return activities;
+}
+
+// Load Achievements
+function loadAchievements() {
+  const grid = document.getElementById("achievementsGrid");
+  if (!grid) return;
+
+  const achievements = [
+    {
+      id: "first-steps",
+      icon: "🎯",
+      title: "First Steps",
+      description: "Complete your first lesson",
+      requirement: 1,
+      type: "lessons",
+    },
+    {
+      id: "knowledge-seeker",
+      icon: "📚",
+      title: "Knowledge Seeker",
+      description: "Complete 10 lessons",
+      requirement: 10,
+      type: "lessons",
+    },
+    {
+      id: "on-fire",
+      icon: "🔥",
+      title: "On Fire",
+      description: "Maintain a 7-day streak",
+      requirement: 7,
+      type: "streak",
+    },
+    {
+      id: "challenge-master",
+      icon: "🏆",
+      title: "Challenge Master",
+      description: "Complete 25 challenges",
+      requirement: 25,
+      type: "challenges",
+    },
+    {
+      id: "code-warrior",
+      icon: "⭐",
+      title: "Code Warrior",
+      description: "Reach Level 10",
+      requirement: 10,
+      type: "level",
+    },
+    {
+      id: "expert-developer",
+      icon: "💎",
+      title: "Expert Developer",
+      description: "Complete all courses",
+      requirement: 100,
+      type: "completion",
+    },
+  ];
+
+  const progress = window.AuthManager.userProgress;
+
+  grid.innerHTML = achievements
+    .map((achievement) => {
+      const isEarned = progress.achievements.includes(achievement.id);
+      const currentProgress = getAchievementProgress(achievement, progress);
+      const percentage = (currentProgress / achievement.requirement) * 100;
+
+      return `
+            <div class="achievement-card ${isEarned ? "earned" : ""} ${
+        percentage === 0 ? "locked" : ""
+      }">
+                <div class="achievement-icon">${achievement.icon}</div>
+                <h4>${achievement.title}</h4>
+                <p>${achievement.description}</p>
+                <div class="achievement-progress">
+                    ${
+                      isEarned
+                        ? "✅ Earned"
+                        : percentage === 0
+                        ? "🔒 Locked"
+                        : `
+                        <div class="mini-progress">
+                            <div class="mini-progress-fill" style="width: ${percentage}%"></div>
+                        </div>
+                        <span>${currentProgress}/${achievement.requirement}</span>
+                    `
+                    }
+                </div>
+            </div>
+        `;
+    })
+    .join("");
+}
+
+// Get Achievement Progress
+function getAchievementProgress(achievement, progress) {
+  switch (achievement.type) {
+    case "lessons":
+      return progress.completedLessons.length;
+    case "challenges":
+      return progress.completedChallenges.length;
+    case "streak":
+      return progress.streak;
+    case "level":
+      return progress.level;
+    case "completion":
+      const totalLessons = 45 + 52 + 68; // HTML + CSS + JS
+      return Math.round(
+        (progress.completedLessons.length / totalLessons) * 100
+      );
+    default:
+      return 0;
+  }
+}
+
+// Get Achievement Name
+function getAchievementName(achievementId) {
+  const names = {
+    "first-steps": "First Steps - Completed first lesson",
+    "dedicated-learner": "Dedicated Learner - 10 lessons completed",
+    challenger: "Challenger - First challenge solved",
+    "week-warrior": "Week Warrior - 7-day streak achieved",
+  };
+
+  return names[achievementId] || "New Achievement";
+}
+
+// Load Study Plan
+function loadStudyPlan() {
+  const tasks = document.querySelectorAll('.study-task input[type="checkbox"]');
+
+  // Load saved task states
+  const savedTasks = JSON.parse(
+    localStorage.getItem("codequest_daily_tasks") || "{}"
+  );
+  const today = new Date().toDateString();
+
+  if (savedTasks.date === today) {
+    tasks.forEach((task, index) => {
+      task.checked = savedTasks.tasks?.[index] || false;
+    });
+  } else {
+    // New day, reset tasks
+    localStorage.setItem(
+      "codequest_daily_tasks",
+      JSON.stringify({
+        date: today,
+        tasks: {},
+      })
+    );
+  }
+
+  // Add event listeners
+  tasks.forEach((task, index) => {
+    task.addEventListener("change", function () {
+      handleTaskComplete(this, index);
+    });
+  });
+}
