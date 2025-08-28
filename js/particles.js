@@ -250,3 +250,223 @@ class ParticleSystem {
     }
   }
 }
+// Advanced Particle Effects
+class AdvancedParticleEffects {
+  constructor() {
+    this.init();
+  }
+
+  init() {
+    // Mouse trail effect
+    this.setupMouseTrail();
+
+    // Click burst effect
+    this.setupClickBurst();
+
+    // Scroll parallax
+    this.setupScrollParallax();
+  }
+
+  setupMouseTrail() {
+    let mouseX = 0;
+    let mouseY = 0;
+    let trailActive = false;
+
+    document.addEventListener("mousemove", (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+
+      if (!trailActive && Math.random() > 0.98) {
+        trailActive = true;
+        this.createTrailParticle(mouseX, mouseY);
+        setTimeout(() => {
+          trailActive = false;
+        }, 100);
+      }
+    });
+  }
+
+  createTrailParticle(x, y) {
+    const particle = document.createElement("div");
+    particle.style.cssText = `
+            position: fixed;
+            left: ${x}px;
+            top: ${y}px;
+            width: 4px;
+            height: 4px;
+            background: ${
+              particleConfig.colors[
+                Math.floor(Math.random() * particleConfig.colors.length)
+              ]
+            };
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            animation: trailFade 1s ease-out forwards;
+        `;
+
+    document.body.appendChild(particle);
+
+    setTimeout(() => {
+      particle.remove();
+    }, 1000);
+  }
+
+  setupClickBurst() {
+    document.addEventListener("click", (e) => {
+      // Don't create burst on button clicks
+      if (e.target.tagName === "BUTTON" || e.target.tagName === "A") {
+        return;
+      }
+
+      this.createBurst(e.clientX, e.clientY);
+    });
+  }
+
+  createBurst(x, y) {
+    const particleCount = 8;
+    const symbols = ["*", "+", "•"];
+
+    for (let i = 0; i < particleCount; i++) {
+      const angle = (Math.PI * 2 * i) / particleCount;
+      const velocity = 50 + Math.random() * 50;
+
+      const particle = document.createElement("div");
+      particle.innerHTML = symbols[Math.floor(Math.random() * symbols.length)];
+      particle.style.cssText = `
+                position: fixed;
+                left: ${x}px;
+                top: ${y}px;
+                color: ${
+                  particleConfig.colors[
+                    Math.floor(Math.random() * particleConfig.colors.length)
+                  ]
+                };
+                font-size: ${10 + Math.random() * 10}px;
+                font-weight: bold;
+                pointer-events: none;
+                z-index: 9999;
+                animation: burstParticle 0.6s ease-out forwards;
+                --dx: ${Math.cos(angle) * velocity}px;
+                --dy: ${Math.sin(angle) * velocity}px;
+            `;
+
+      document.body.appendChild(particle);
+
+      setTimeout(() => {
+        particle.remove();
+      }, 600);
+    }
+  }
+
+  setupScrollParallax() {
+    let ticking = false;
+
+    const updateParallax = () => {
+      const scrolled = window.pageYOffset;
+      const particles = document.querySelectorAll(".particle");
+
+      particles.forEach((particle, index) => {
+        const speed = 0.5 + (index % 3) * 0.2;
+        particle.style.transform += ` translateY(${scrolled * speed}px)`;
+      });
+
+      ticking = false;
+    };
+
+    window.addEventListener("scroll", () => {
+      if (!ticking) {
+        requestAnimationFrame(updateParallax);
+        ticking = true;
+      }
+    });
+  }
+}
+
+// Initialize Particle System
+let particleSystem = null;
+let advancedEffects = null;
+
+document.addEventListener("DOMContentLoaded", () => {
+  // Check if user prefers reduced motion
+  const prefersReducedMotion = window.matchMedia(
+    "(prefers-reduced-motion: reduce)"
+  ).matches;
+
+  if (!prefersReducedMotion) {
+    // Initialize particle system
+    particleSystem = new ParticleSystem();
+
+    // Initialize advanced effects on desktop only
+    if (window.innerWidth > 768) {
+      advancedEffects = new AdvancedParticleEffects();
+    }
+  }
+
+  // Add CSS for particle animations
+  const style = document.createElement("style");
+  style.textContent = `
+        @keyframes trailFade {
+            0% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(0);
+            }
+        }
+        
+        @keyframes burstParticle {
+            0% {
+                opacity: 1;
+                transform: translate(0, 0) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translate(var(--dx), var(--dy)) scale(0);
+            }
+        }
+        
+        .particle {
+            will-change: transform, opacity;
+        }
+    `;
+  document.head.appendChild(style);
+});
+
+// Cleanup on page unload
+window.addEventListener("beforeunload", () => {
+  if (particleSystem) {
+    particleSystem.destroy();
+  }
+});
+
+// Performance optimization
+const checkPerformance = () => {
+  // Reduce particles on low-end devices
+  if (navigator.hardwareConcurrency && navigator.hardwareConcurrency < 4) {
+    particleConfig.particleCount = Math.floor(particleConfig.particleCount / 2);
+  }
+
+  // Check available memory (if API is available)
+  if (navigator.deviceMemory && navigator.deviceMemory < 4) {
+    particleConfig.particleCount = Math.floor(particleConfig.particleCount / 2);
+  }
+};
+
+checkPerformance();
+
+// Export for external control
+window.ParticleSystem = {
+  pause: () => particleSystem?.pause(),
+  resume: () => particleSystem?.resume(),
+  destroy: () => particleSystem?.destroy(),
+  setParticleCount: (count) => {
+    particleConfig.particleCount = count;
+    if (particleSystem) {
+      particleSystem.destroy();
+      particleSystem = new ParticleSystem();
+    }
+  },
+};
