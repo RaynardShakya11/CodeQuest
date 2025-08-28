@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About - CodeQuest</title>
-    <link rel="stylesheet" href="../css/styles.css">
-    <link rel="stylesheet" href="../css/animations.css">
+    <title>About Us - CodeQuest</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="animations.css">
 </head>
 
 <body>
@@ -15,14 +15,14 @@
     <!-- Navigation -->
     <nav id="navbar">
         <div class="nav-container">
-            <a href="../index.html" class="logo">⚡CodeQuest</a>
+            <a href="index.html" class="logo">⚡CodeQuest</a>
             <div class="hamburger" id="hamburger">
                 <span></span>
                 <span></span>
                 <span></span>
             </div>
             <div class="nav-links" id="navLinks">
-                <a href="../index.html" class="nav-link">Home</a>
+                <a href="index.html" class="nav-link">Home</a>
                 <a href="learn.html" class="nav-link">Learn</a>
                 <a href="editor.html" class="nav-link">Code Editor</a>
                 <a href="challenges.html" class="nav-link">Challenges</a>
@@ -33,241 +33,264 @@
                     <button class="btn btn-secondary" onclick="showLogin()">Login</button>
                     <button class="btn btn-primary" onclick="showSignup()">Sign Up</button>
                 </span>
-                <span id="userMenu" style="display: none;">
-                    <span class="nav-link" id="userGreeting">Welcome!</span>
-                    <a href="dashboard.html" class="btn btn-secondary">Dashboard</a>
-                    <button class="btn btn-danger" onclick="logout()">Logout</button>
-                </span>
             </div>
         </div>
     </nav>
-    <!-- About Hero -->
-    <section class="hero" style="min-height: 60vh;">
-        <div class="container">
-            <h1 class="page-title">About CodeQuest</h1>
-            <p class="page-subtitle">Revolutionizing web development education through gamification</p>
+
+    <!-- Hero Section -->
+    <section class="hero about-hero">
+        <div class="hero-content">
+            <div class="hero-text" style="text-align: center; grid-column: 1/-1;">
+                <h1 class="hero-title">The Future of Coding Education</h1>
+                <p class="hero-subtitle">Meet the innovators revolutionizing how the world learns web development
+                    through gamification and cutting-edge technology.</p>
+
+                <div class="about-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">2025</span>
+                        <span class="stat-label">Founded</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">5</span>
+                        <span class="stat-label">Team Members</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">∞</span>
+                        <span class="stat-label">Possibilities</span>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
+
     <!-- Mission Section -->
     <section class="mission-section">
         <div class="container">
-            <div class="mission-content">
-                <div class="mission-text">
-                    <h2>Our Mission</h2>
-                    <p>At CodeQuest, we believe that learning to code should be an adventure. Our mission is to make web
-                        development education accessible, engaging, and fun for everyone, regardless of their background
-                        or experience level.</p>
-                    <p>We combine cutting-edge educational techniques with game design principles to create an immersive
-                        learning experience that keeps you motivated and excited to learn more.</p>
-                    <div class="mission-values">
-                        <div class="value-item">
-                            <span class="value-icon">🎯</span>
-                            <h3>Goal-Oriented</h3>
-                            <p>Clear learning objectives and progress tracking</p>
-                        </div>
-                        <div class="value-item">
-                            <span class="value-icon">🤝</span>
-                            <h3>Community-Driven</h3>
-                            <p>Learn together with a supportive community</p>
-                        </div>
-                        <div class="value-item">
-                            <span class="value-icon">🚀</span>
-                            <h3>Innovation</h3>
-                            <p>Always improving with the latest technologies</p>
-                        </div>
-                    </div>
+            <div class="mission-grid">
+                <div class="mission-card">
+                    <div class="mission-icon">🚀</div>
+                    <h3>Our Mission</h3>
+                    <p>To democratize coding education by making it engaging, interactive, and accessible to everyone.
+                        We believe learning should be an adventure, not a chore.</p>
                 </div>
-                <div class="mission-image">
-                    <div class="mission-graphic">
-                        <div class="floating-icon" style="animation-delay: 0s;">🌐</div>
-                        <div class="floating-icon" style="animation-delay: 1s;">🎨</div>
-                        <div class="floating-icon" style="animation-delay: 2s;">⚡</div>
-                    </div>
+                <div class="mission-card">
+                    <div class="mission-icon">🔮</div>
+                    <h3>Our Vision</h3>
+                    <p>A world where coding literacy is as fundamental as reading and writing, where every individual
+                        can harness the power of technology to shape the future.</p>
+                </div>
+                <div class="mission-card">
+                    <div class="mission-icon">⚡</div>
+                    <h3>Our Values</h3>
+                    <p>Innovation, accessibility, community, and continuous learning. We push boundaries while ensuring
+                        no one is left behind in the digital revolution.</p>
                 </div>
             </div>
         </div>
     </section>
-        <!-- Team Section -->
+
+    <!-- Team Section -->
     <section class="team-section">
         <div class="container">
-            <h2 class="section-title">Meet Our Team</h2>
-            <p class="section-subtitle">Passionate educators and developers dedicated to your success</p>
+            <h2 class="section-title">Meet Our Futuristic Team</h2>
+            <p class="section-subtitle">The minds behind the revolution</p>
 
             <div class="team-grid">
-                <div class="team-member">
-                    <div class="member-avatar">👨‍💻</div>
-                    <h3>Raynard Shakya</h3>
-                    <p class="member-role">Founder & CEO</p>
-                    <p>Full-stack developer with 10+ years of experience and a passion for education technology.</p>
-                    <div class="member-socials">
-                        <a href="#" aria-label="LinkedIn">💼</a>
-                        <a href="#" aria-label="GitHub">🐙</a>
-                        <a href="#" aria-label="Personal Website">🌐</a>
-                    </div>
-                </div>
-
-                <div class="team-member">
-                    <div class="member-avatar">👩‍🎨</div>
-                    <h3>Khrishman Khadka</h3>
-                    <p class="member-role">Head of Design</p>
-                    <p>UX/UI expert focused on creating intuitive and beautiful learning experiences.</p>
-                    <div class="member-socials">
-                        <a href="#" aria-label="LinkedIn">💼</a>
-                        <a href="#" aria-label="GitHub">🐙</a>
-                        <a href="#" aria-label="Personal Website">🌐</a>
-                    </div>
-                </div>
-
-                <div class="team-member">
-                    <div class="member-avatar">👨‍🏫</div>
-                    <h3>Pravesh Khanal</h3>
-                    <p class="member-role">Lead Educator</p>
-                    <p>Former CS professor with expertise in curriculum development and pedagogy.</p>
-                    <div class="member-socials">
-                        <a href="#" aria-label="LinkedIn">💼</a>
-                        <a href="#" aria-label="GitHub">🐙</a>
-                        <a href="#" aria-label="Personal Website">🌐</a>
-                    </div>
-                </div>
-
-                <div class="team-member">
-                    <div class="member-avatar">👩‍💻</div>
-                    <h3>Sharansh Shrestha</h3>
-                    <p class="member-role">Senior Developer</p>
-                    <p>Frontend specialist passionate about creating interactive learning tools.</p>
-                    <div class="member-socials">
-                        <a href="#" aria-label="LinkedIn">💼</a>
-                        <a href="#" aria-label="GitHub">🐙</a>
-                        <a href="#" aria-label="Personal Website">🌐</a>
-                    </div>
-                </div>
-
-                <div class="team-member">
-                    <div class="member-avatar">👨‍🎮</div>
-                    <h3>Naitik Rijal</h3>
-                    <p class="member-role">Game Designer</p>
-                    <p>Creates engaging gamification elements that make learning addictive.</p>
-                    <div class="member-socials">
-                        <a href="#" aria-label="LinkedIn">💼</a>
-                        <a href="#" aria-label="GitHub">🐙</a>
-                        <a href="#" aria-label="Personal Website">🌐</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Platform Stats -->
-    <section class="platform-stats">
-        <div class="container">
-            <h2 class="section-title">Our Impact</h2>
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <span class="stat-number" data-target="50000">0</span>
-                    <span class="stat-label">Active Learners</span>
-                </div>
-                <div class="stat-card">
-                    <span class="stat-number" data-target="165">0</span>
-                    <span class="stat-label">Lessons Available</span>
-                </div>
-                <div class="stat-card">
-                    <span class="stat-number" data-target="1000000">0</span>
-                    <span class="stat-label">Lines of Code Written</span>
-                </div>
-                <div class="stat-card">
-                    <span class="stat-number" data-target="98">0</span>
-                    <span class="stat-label">% Satisfaction Rate</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-<!-- Why CodeQuest -->
-    <section class="why-section">
-        <div class="container">
-            <h2 class="section-title">Why Choose CodeQuest?</h2>
-
-            <div class="why-grid">
-                <div class="why-card">
-                    <span class="why-icon">🎮</span>
-                    <h3>Gamified Learning</h3>
-                    <p>Turn coding education into an exciting adventure with points, badges, and leaderboards.</p>
-                </div>
-                <div class="why-card">
-                    <span class="why-icon">⚡</span>
-                    <h3>Real-Time Feedback</h3>
-                    <p>Get instant feedback on your code with our live preview and error detection system.</p>
-                </div>
-                <div class="why-card">
-                    <span class="why-icon">📱</span>
-                    <h3>Learn Anywhere</h3>
-                    <p>Access your courses and projects from any device, anytime, anywhere.</p>
-                </div>
-                <div class="why-card">
-                    <span class="why-icon">👥</span>
-                    <h3>Community Support</h3>
-                    <p>Join a vibrant community of learners and get help when you need it.</p>
-                </div>
-                <div class="why-card">
-                    <span class="why-icon">🏆</span>
-                    <h3>Certificates</h3>
-                    <p>Earn verified certificates to showcase your skills to employers.</p>
-                </div>
-                <div class="why-card">
-                    <span class="why-icon">💡</span>
-                    <h3>Project-Based</h3>
-                    <p>Build real-world projects that you can add to your portfolio.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-<!-- Contact Section -->
-    <section class="contact-section">
-        <div class="container">
-            <h2 class="section-title">Get In Touch</h2>
-            <p class="section-subtitle">Have questions? We'd love to hear from you!</p>
-
-            <div class="contact-grid">
-                <div class="contact-info">
-                    <div class="contact-item">
-                        <span class="contact-icon">📧</span>
-                        <div>
-                            <h4>Email</h4>
-                            <p>hello@codequest.com</p>
+                <!-- Raynard Shakya -->
+                <div class="team-card founder-card">
+                    <div class="team-card-inner">
+                        <div class="team-avatar">
+                            <div class="avatar-placeholder">RS</div>
+                            <div class="avatar-glow"></div>
                         </div>
-                    </div>
-                    <div class="contact-item">
-                        <span class="contact-icon">💬</span>
-                        <div>
-                            <h4>Discord</h4>
-                            <p>Join our community server</p>
-                        </div>
-                    </div>
-                    <div class="contact-item">
-                        <span class="contact-icon">🐦</span>
-                        <div>
-                            <h4>Twitter</h4>
-                            <p>@CodeQuestLearn</p>
+                        <div class="team-info">
+                            <h3>Raynard Shakya</h3>
+                            <p class="team-role">Founder & Visionary</p>
+                            <p class="team-description">The mastermind behind CodeQuest's revolutionary concept. Raynard
+                                envisioned a world where coding education transcends traditional boundaries, combining
+                                gamification with cutting-edge learning methodologies.</p>
+                            <div class="team-skills">
+                                <span class="skill-tag">Vision</span>
+                                <span class="skill-tag">Leadership</span>
+                                <span class="skill-tag">Innovation</span>
+                            </div>
+                            <div class="social-links">
+                                <a href="https://github.com/RaynardShakya11" target="_blank" class="social-link github">
+                                    <span class="social-icon">🔗</span> GitHub
+                                </a>
+                                <a href="https://www.linkedin.com/in/raynard-shakya-63a96b371/" target="_blank"
+                                    class="social-link linkedin">
+                                    <span class="social-icon">💼</span> LinkedIn
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <form class="contact-form">
-                    <div class="form-group">
-                        <input type="text" placeholder="Your Name" required>
+                <!-- Khrishman Khadka -->
+                <div class="team-card developer-card">
+                    <div class="team-card-inner">
+                        <div class="team-avatar">
+                            <div class="avatar-placeholder">KK</div>
+                            <div class="avatar-glow"></div>
+                        </div>
+                        <div class="team-info">
+                            <h3>Khrishman Khadka</h3>
+                            <p class="team-role">Lead Developer & Architect</p>
+                            <p class="team-description">The technical genius transforming ideas into reality. Khrishman
+                                crafts the core experiences that make CodeQuest's interactive challenges and learning
+                                modules possible.</p>
+                            <div class="team-skills">
+                                <span class="skill-tag">HTML</span>
+                                <span class="skill-tag">CSS</span>
+                                <span class="skill-tag">JavaScript</span>
+                                <span class="skill-tag">PHP</span>
+                                <span class="skill-tag">MySQL</span>
+                            </div>
+                            <div class="social-links">
+                                <a href="https://khrishman.com.np/" target="_blank" class="social-link website">
+                                    <span class="social-icon">🌐</span> Website
+                                </a>
+                                <a href="https://github.com/khrishman" target="_blank" class="social-link github">
+                                    <span class="social-icon">🔗</span> GitHub
+                                </a>
+                                <a href="https://www.linkedin.com/in/khrishman-khadka-7078a82bb/" target="_blank"
+                                    class="social-link linkedin">
+                                    <span class="social-icon">💼</span> LinkedIn
+                                </a>
+                            </div>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <input type="email" placeholder="Your Email" required>
+                </div>
+
+                <!-- Pravesh Khanal -->
+                <div class="team-card designer-card">
+                    <div class="team-card-inner">
+                        <div class="team-avatar">
+                            <div class="avatar-placeholder">PK</div>
+                            <div class="avatar-glow"></div>
+                        </div>
+                        <div class="team-info">
+                            <h3>Pravesh Khanal</h3>
+                            <p class="team-role">Lead Designer & UX Architect</p>
+                            <p class="team-description">The creative force behind CodeQuest's stunning visual identity.
+                                Pravesh designs experiences that are not just beautiful, but intuitive and engaging for
+                                learners of all levels.</p>
+                            <div class="team-skills">
+                                <span class="skill-tag">UI/UX Design</span>
+                                <span class="skill-tag">Visual Design</span>
+                                <span class="skill-tag">User Research</span>
+                            </div>
+                            <div class="social-links">
+                                <a href="https://github.com/PRABESH-21" target="_blank" class="social-link github">
+                                    <span class="social-icon">🔗</span> GitHub
+                                </a>
+                                <a href="https://www.linkedin.com/in/prabesh-khanal-116097371/" target="_blank"
+                                    class="social-link linkedin">
+                                    <span class="social-icon">💼</span> LinkedIn
+                                </a>
+                            </div>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <textarea rows="5" placeholder="Your Message" required></textarea>
+                </div>
+
+                <!-- Saransh Shrestha -->
+                <div class="team-card tester-card">
+                    <div class="team-card-inner">
+                        <div class="team-avatar">
+                            <div class="avatar-placeholder">SS</div>
+                            <div class="avatar-glow"></div>
+                        </div>
+                        <div class="team-info">
+                            <h3>Saransh Shrestha</h3>
+                            <p class="team-role">Quality Engineer & Developer</p>
+                            <p class="team-description">The guardian of excellence who ensures every feature works
+                                flawlessly. Saransh combines development skills with rigorous testing to deliver
+                                bug-free, polished experiences.</p>
+                            <div class="team-skills">
+                                <span class="skill-tag">Quality Assurance</span>
+                                <span class="skill-tag">Testing</span>
+                                <span class="skill-tag">Development</span>
+                            </div>
+                            <div class="social-links">
+                                <a href="https://github.com/Srnsh-shsh" target="_blank" class="social-link github">
+                                    <span class="social-icon">🔗</span> GitHub
+                                </a>
+                                <a href="https://www.linkedin.com/in/saransh-shrestha-b70921370/" target="_blank"
+                                    class="social-link linkedin">
+                                    <span class="social-icon">💼</span> LinkedIn
+                                </a>
+                            </div>
+                        </div>
                     </div>
-                    <button type="submit" class="btn btn-primary">Send Message</button>
-                </form>
+                </div>
+
+                <!-- Naitik Rijal -->
+                <div class="team-card logic-card">
+                    <div class="team-card-inner">
+                        <div class="team-avatar">
+                            <div class="avatar-placeholder">NR</div>
+                            <div class="avatar-glow mystery-glow"></div>
+                        </div>
+                        <div class="team-info">
+                            <h3>Naitik Rijal</h3>
+                            <p class="team-role">Logic Specialist & Moral Support</p>
+                            <p class="team-description">The enigmatic "logic person" whose contributions remain a
+                                mystery to this day.</p>
+                            <div class="team-skills">
+                                <span class="skill-tag mystery-skill">Mysterious Logic</span>
+                                <span class="skill-tag mystery-skill">Tea Expertise</span>
+                                <span class="skill-tag mystery-skill">Moral Support</span>
+                            </div>
+                            <div class="social-links">
+                                <a href="https://www.linkedin.com/in/naitik-rijal-74bb70370/" target="_blank"
+                                    class="social-link linkedin">
+                                    <span class="social-icon">💼</span> LinkedIn
+                                </a>
+                                <div class="mystery-note">
+                                    <small>* Contributions classified as "highly logical" 🤫</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
- <!-- Footer -->
+
+    <!-- Story Section -->
+    <section class="story-section">
+        <div class="container">
+            <h2 class="section-title">Our Origin Story</h2>
+            <div class="story-content">
+                <p>In 2025, a group of passionate technologists came together with a shared vision: to transform how the
+                    world learns coding. Frustrated by traditional, monotonous programming courses, we set out to create
+                    something revolutionary.</p>
+
+                <p>CodeQuest was born from the belief that learning should be engaging, interactive, and fun. We
+                    combined cutting-edge gamification techniques with proven educational methodologies to create a
+                    platform that doesn't just teach code—it inspires a new generation of digital creators.</p>
+
+                <p>Today, we're not just building a learning platform; we're crafting the future of education itself.
+                    Every line of code, every design element, and every learning module is designed to push the
+                    boundaries of what's possible in digital education.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>Ready to Join Our Mission?</h2>
+            <p>Be part of the coding revolution and help shape the future of digital education!</p>
+            <div class="cta-buttons">
+                <button class="btn btn-primary btn-large" onclick="showSignup()">Start Your Journey</button>
+                <a href="learn.html" class="btn btn-secondary btn-large">Explore Learning Paths</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
     <footer>
         <div class="footer-content">
             <div class="footer-section">
@@ -275,7 +298,7 @@
                 <p>Learn. Play. Conquer the Web.</p>
                 <div class="social-links">
                     <a href="#" aria-label="Twitter">🐦</a>
-                    <a href="#" aria-label="GitHub">🐙</a>
+                    <a href="#" aria-label="GitHub">🙈</a>
                     <a href="#" aria-label="Discord">💬</a>
                 </div>
             </div>
@@ -283,10 +306,11 @@
             <div class="footer-section">
                 <h3>Learn</h3>
                 <div class="footer-links">
-                    <a href="learn.html">Courses</a>
+                    <a href="learn.html#html">HTML Course</a>
+                    <a href="learn.html#css">CSS Course</a>
+                    <a href="learn.html#javascript">JavaScript Course</a>
                     <a href="challenges.html">Challenges</a>
-                    <a href="games.html">Games</a>
-                    <a href="editor.html">Code Editor</a>
+                    <a href="games.html">Coding Games</a>
                 </div>
             </div>
 
@@ -314,91 +338,319 @@
             <p>&copy; 2025 CodeQuest. All rights reserved.</p>
         </div>
     </footer>
-    <!-- Login Modal -->
-    <div id="loginModal" class="modal">
-        <div class="modal-content">
-            <button class="close" onclick="closeModal('loginModal')">&times;</button>
-            <h2>Login to CodeQuest</h2>
-            <form id="loginForm">
-                <div class="form-group">
-                    <label for="loginEmail">Email</label>
-                    <input type="email" id="loginEmail" required>
-                </div>
-                <div class="form-group">
-                    <label for="loginPassword">Password</label>
-                    <input type="password" id="loginPassword" required>
-                </div>
-                <button type="submit" class="btn btn-primary">Login</button>
-            </form>
-            <p class="form-footer">
-                Don't have an account? <a href="#" onclick="showSignup(); closeModal('loginModal')">Sign up</a>
-            </p>
-        </div>
-    </div>
 
-    <!-- Signup Modal -->
-    <div id="signupModal" class="modal">
-        <div class="modal-content">
-            <button class="close" onclick="closeModal('signupModal')">&times;</button>
-            <h2>Join CodeQuest</h2>
-            <form id="signupForm">
-                <div class="form-group">
-                    <label for="signupUsername">Username</label>
-                    <input type="text" id="signupUsername" required>
-                </div>
-                <div class="form-group">
-                    <label for="signupEmail">Email</label>
-                    <input type="email" id="signupEmail" required>
-                </div>
-                <div class="form-group">
-                    <label for="signupPassword">Password</label>
-                    <input type="password" id="signupPassword" required>
-                </div>
-                <button type="submit" class="btn btn-primary">Create Account</button>
-            </form>
-            <p class="form-footer">
-                Already have an account? <a href="#" onclick="showLogin(); closeModal('signupModal')">Login</a>
-            </p>
-        </div>
-    </div>
+    <script src="main.js"></script>
 
-    <script src="../js/main.js"></script>
-    <script src="../js/auth.js"></script>
-    <script>
-        // Animate stats on scroll
-        const animateStats = () => {
-            const stats = document.querySelectorAll('.stat-number');
-            stats.forEach(stat => {
-                const target = parseInt(stat.dataset.target);
-                const increment = target / 100;
-                let current = 0;
-
-                const timer = setInterval(() => {
-                    current += increment;
-                    if (current >= target) {
-                        current = target;
-                        clearInterval(timer);
-                    }
-                    stat.textContent = Math.floor(current).toLocaleString();
-                }, 20);
-            });
-        };
-
-        // Trigger animation when stats section is in view
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    animateStats();
-                    observer.unobserve(entry.target);
-                }
-            });
-        });
-
-        const statsSection = document.querySelector('.platform-stats');
-        if (statsSection) {
-            observer.observe(statsSection);
+    <style>
+        /* About Page Specific Styles */
+        .about-hero {
+            padding: 8rem 2rem 4rem;
         }
-    </script>
+
+        .about-stats {
+            display: flex;
+            gap: 3rem;
+            justify-content: center;
+            margin-top: 3rem;
+        }
+
+        /* Mission Section */
+        .mission-section {
+            background: rgba(30, 41, 59, 0.2);
+            padding: 4rem 2rem;
+        }
+
+        .mission-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .mission-card {
+            background: rgba(30, 41, 59, 0.8);
+            border: 2px solid rgba(99, 102, 241, 0.3);
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mission-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+            box-shadow: 0 20px 40px rgba(99, 102, 241, 0.3);
+        }
+
+        .mission-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Team Section */
+        .team-section {
+            padding: 6rem 2rem;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .team-card {
+            background: rgba(30, 41, 59, 0.8);
+            border: 2px solid rgba(99, 102, 241, 0.3);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .team-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 25px 50px rgba(99, 102, 241, 0.4);
+        }
+
+        .team-card-inner {
+            padding: 2rem;
+        }
+
+        .team-avatar {
+            position: relative;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .avatar-placeholder {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: bold;
+            color: white;
+            position: relative;
+            z-index: 2;
+        }
+
+        .avatar-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 50%;
+            opacity: 0.3;
+            filter: blur(15px);
+            z-index: 1;
+        }
+
+        .mystery-glow {
+            animation: mysteryPulse 3s ease-in-out infinite;
+        }
+
+        @keyframes mysteryPulse {
+
+            0%,
+            100% {
+                opacity: 0.3;
+                transform: translate(-50%, -50%) scale(1);
+            }
+
+            50% {
+                opacity: 0.6;
+                transform: translate(-50%, -50%) scale(1.1);
+            }
+        }
+
+        .team-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, var(--light), var(--primary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .team-role {
+            color: var(--secondary);
+            font-weight: 600;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+
+        .team-description {
+            color: rgba(248, 250, 252, 0.8);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .team-skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .skill-tag {
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            color: var(--primary);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .mystery-skill {
+            background: rgba(236, 72, 153, 0.1);
+            border-color: rgba(236, 72, 153, 0.3);
+            color: var(--accent);
+            animation: mysteryGlow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes mysteryGlow {
+            from {
+                box-shadow: 0 0 5px rgba(236, 72, 153, 0.3);
+            }
+
+            to {
+                box-shadow: 0 0 15px rgba(236, 72, 153, 0.6);
+            }
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(99, 102, 241, 0.1);
+            border: 1px solid rgba(99, 102, 241, 0.3);
+            border-radius: 25px;
+            color: var(--primary);
+            font-size: 0.9rem;
+            transition: var(--transition);
+            text-decoration: none;
+        }
+
+        .social-link:hover {
+            background: rgba(99, 102, 241, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .social-link.github {
+            border-color: rgba(255, 255, 255, 0.3);
+            color: var(--light);
+        }
+
+        .social-link.linkedin {
+            border-color: rgba(0, 119, 181, 0.5);
+            color: #0077b5;
+        }
+
+        .social-link.website {
+            border-color: rgba(16, 185, 129, 0.5);
+            color: var(--success);
+        }
+
+        .mystery-note {
+            margin-top: 0.5rem;
+            text-align: center;
+        }
+
+        .mystery-note small {
+            color: rgba(248, 250, 252, 0.6);
+            font-style: italic;
+        }
+
+        /* Card Variants */
+        .founder-card {
+            border-color: var(--accent);
+        }
+
+        .developer-card {
+            border-color: var(--success);
+        }
+
+        .designer-card {
+            border-color: var(--warning);
+        }
+
+        .tester-card {
+            border-color: var(--info);
+        }
+
+        .logic-card {
+            border-color: var(--accent);
+            position: relative;
+        }
+
+        .logic-card::before {
+            content: "🤔";
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
+            opacity: 0.5;
+        }
+
+        /* Story Section */
+        .story-section {
+            background: rgba(99, 102, 241, 0.05);
+            padding: 4rem 2rem;
+        }
+
+        .story-content {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: rgba(248, 250, 252, 0.9);
+        }
+
+        .story-content p {
+            margin-bottom: 2rem;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .about-stats {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .team-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .social-links {
+                justify-content: center;
+            }
+
+            .mission-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </body>
 
 </html>
