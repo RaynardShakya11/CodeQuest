@@ -101,3 +101,268 @@
                         <span>⚙️</span> Settings
                     </button>
                 </div>
+                <!-- Files Panel -->
+                <div class="sidebar-panel active" id="filesPanel">
+                    <div class="file-tree">
+                        <div class="file-item active" onclick="openFile('index.html')">
+                            <span>📄</span> index.html
+                        </div>
+                        <div class="file-item" onclick="openFile('styles.css')">
+                            <span>🎨</span> styles.css
+                        </div>
+                        <div class="file-item" onclick="openFile('script.js')">
+                            <span>⚡</span> script.js
+                        </div>
+                    </div>
+                    <button class="add-file-btn" onclick="addNewFile()">+ Add File</button>
+                </div>
+
+                <!-- Snippets Panel -->
+                <div class="sidebar-panel" id="snippetsPanel">
+                    <div class="snippets-list">
+                        <div class="snippet-item" onclick="insertSnippet('html-boilerplate')">
+                            <h4>HTML Boilerplate</h4>
+                            <p>Basic HTML5 structure</p>
+                        </div>
+                        <div class="snippet-item" onclick="insertSnippet('flexbox-center')">
+                            <h4>Flexbox Center</h4>
+                            <p>Center content with flexbox</p>
+                        </div>
+                        <div class="snippet-item" onclick="insertSnippet('fetch-api')">
+                            <h4>Fetch API</h4>
+                            <p>Basic fetch request</p>
+                        </div>
+                        <div class="snippet-item" onclick="insertSnippet('event-listener')">
+                            <h4>Event Listener</h4>
+                            <p>Add event listener</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Settings Panel -->
+                <div class="sidebar-panel" id="settingsPanel">
+                    <div class="settings-list">
+                        <div class="setting-item">
+                            <label>Theme</label>
+                            <select id="themeSelect" onchange="changeTheme(this.value)">
+                                <option value="dark">Dark</option>
+                                <option value="light">Light</option>
+                                <option value="dracula">Dracula</option>
+                                <option value="monokai">Monokai</option>
+                            </select>
+                        </div>
+                        <div class="setting-item">
+                            <label>Font Size</label>
+                            <input type="range" min="12" max="24" value="14" onchange="changeFontSize(this.value)">
+                        </div>
+                        <div class="setting-item">
+                            <label>Tab Size</label>
+                            <select id="tabSize" onchange="changeTabSize(this.value)">
+                                <option value="2">2 spaces</option>
+                                <option value="4" selected>4 spaces</option>
+                            </select>
+                        </div>
+                        <div class="setting-item">
+                            <label>
+                                <input type="checkbox" id="wordWrap" onchange="toggleWordWrap()">
+                                Word Wrap
+                            </label>
+                        </div>
+                        <div class="setting-item">
+                            <label>
+                                <input type="checkbox" id="lineNumbers" checked onchange="toggleLineNumbers()">
+                                Line Numbers
+                            </label>
+                        </div>
+                        <div class="setting-item">
+                            <label>
+                                <input type="checkbox" id="autoSave" onchange="toggleAutoSave()">
+                                Auto Save
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Code Editor Area -->
+            <div class="code-area">
+                <div class="editor-tabs">
+                    <div class="editor-tab active" onclick="switchTab('html')">
+                        <span>📄</span> HTML
+                        <button class="tab-close" onclick="closeTab('html')">×</button>
+                    </div>
+                    <div class="editor-tab" onclick="switchTab('css')">
+                        <span>🎨</span> CSS
+                        <button class="tab-close" onclick="closeTab('css')">×</button>
+                    </div>
+                    <div class="editor-tab" onclick="switchTab('js')">
+                        <span>⚡</span> JavaScript
+                        <button class="tab-close" onclick="closeTab('js')">×</button>
+                    </div>
+                </div>
+
+                <div class="editor-content">
+                    <div class="editor-wrapper active" id="htmlEditor">
+                        <div class="line-numbers" id="htmlLineNumbers"></div>
+                        <textarea class="code-input" id="htmlCode" placeholder="<!-- Write your HTML here -->"
+                            spellcheck="false"><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My CodeQuest Project</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to CodeQuest!</h1>
+        <p>Start building something amazing...</p>
+        <button id="myButton">Click Me!</button>
+    </div>
+</body>
+</html></textarea>
+                    </div>
+
+                    <div class="editor-wrapper" id="cssEditor">
+                        <div class="line-numbers" id="cssLineNumbers"></div>
+                        <textarea class="code-input" id="cssCode" placeholder="/* Write your CSS here */"
+                            spellcheck="false">* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    background: white;
+    padding: 3rem;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    animation: fadeIn 0.5s ease-in;
+}
+
+h1 {
+    color: #333;
+    margin-bottom: 1rem;
+    font-size: 2.5rem;
+}
+
+p {
+    color: #666;
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+}
+
+button {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    font-size: 1rem;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+button:hover {
+    transform: translateY(-2px);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}</textarea>
+                    </div>
+
+                    <div class="editor-wrapper" id="jsEditor">
+                        <div class="line-numbers" id="jsLineNumbers"></div>
+                        <textarea class="code-input" id="jsCode" placeholder="// Write your JavaScript here"
+                            spellcheck="false">// Welcome to CodeQuest Code Editor!
+console.log('Hello, CodeQuest!');
+
+// Add interactivity to the button
+document.addEventListener('DOMContentLoaded', function() {
+    const button = document.getElementById('myButton');
+    let clickCount = 0;
+    
+    if (button) {
+        button.addEventListener('click', function() {
+            clickCount++;
+            console.log(`Button clicked ${clickCount} time(s)!`);
+            
+            // Change button text
+            this.textContent = `Clicked ${clickCount} time(s)!`;
+            
+            // Add some animation
+            this.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                this.style.transform = 'scale(1)';
+            }, 100);
+            
+            // Change background color randomly
+            const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#f9ca24', '#f0932b'];
+            const randomColor = colors[Math.floor(Math.random() * colors.length)];
+            document.querySelector('.container').style.background = randomColor;
+        });
+    }
+});
+
+// Add a fun message
+setTimeout(() => {
+    console.log('🚀 Keep coding and have fun!');
+}, 2000);</textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Preview Area -->
+            <div class="preview-area">
+                <div class="preview-header">
+                    <div class="preview-controls">
+                        <button class="preview-btn" onclick="refreshPreview()" title="Refresh">🔄</button>
+                        <button class="preview-btn" onclick="toggleFullscreen()" title="Fullscreen">⛶</button>
+                        <button class="preview-btn" onclick="openInNewTab()" title="Open in New Tab">↗</button>
+                    </div>
+                    <div class="preview-device-selector">
+                        <button class="device-btn active" onclick="setDevice('desktop')">💻</button>
+                        <button class="device-btn" onclick="setDevice('tablet')">📱</button>
+                        <button class="device-btn" onclick="setDevice('mobile')">📱</button>
+                    </div>
+                </div>
+                <div class="preview-frame" id="previewFrame">
+                    <iframe id="preview" class="preview-iframe"></iframe>
+                </div>
+            </div>
+        </div>
+
+        <!-- Console Panel -->
+        <div class="console-panel" id="consolePanel">
+            <div class="console-header">
+                <span>Console</span>
+                <div class="console-actions">
+                    <button onclick="clearConsole()" title="Clear Console">🗑️</button>
+                    <button onclick="toggleConsole()" title="Close Console">×</button>
+                </div>
+            </div>
+            <div class="console-content" id="consoleContent">
+                <div class="console-line">
+                    <span class="console-time">12:34:56</span>
+                    <span class="console-message">Console initialized...</span>
+                </div>
+            </div>
+        </div>
+    </div>
